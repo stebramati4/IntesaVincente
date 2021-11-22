@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_menu_fragment"
+    app:startDestination="@id/profilo_menu">
+
+    <fragment
+        android:id="@+id/profilo_menu"
+        android:name="com.example.intesavincente.ProfiloFragment"
+        android:label="fragment_profilo"
+        tools:layout="@layout/fragment_profilo" />
+    <fragment
+        android:id="@+id/statistiche_menu"
+        android:name="com.example.intesavincente.StatisticheFragment"
+        android:label="fragment_statistiche"
+        tools:layout="@layout/fragment_statistiche" />
+    <fragment
+        android:id="@+id/amici_menu"
+        android:name="com.example.intesavincente.AmiciFragment"
+        android:label="fragment_amici"
+        tools:layout="@layout/fragment_amici" />
+</navigation>

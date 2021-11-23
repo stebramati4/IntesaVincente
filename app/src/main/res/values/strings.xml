@@ -4,4 +4,10 @@
 
     <string name="giocaSquadre">GIOCA A SQUADRE</string>
     <string name="allenamento">ALLENAMENTO</string>
+    <string name="crea_gruppo">CREA GRUPPO</string>
+    <string name="unisciti_a_gruppo">UNISCITI A GRUPPO</string>
+    <string name="indovinatore">INDOVINATORE</string>
+    <string name="suggeritore">SUGGERITORE</string>
+    <string name="unisciti_come">Unisciti come</string>
+    <string name="avanti">Avanti</string>
 </resources>

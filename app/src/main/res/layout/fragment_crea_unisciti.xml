@@ -4,56 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfiloFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".CreaUniscitiFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/button_giocaSquadre"
+            android:id="@+id/crea_gruppo_button"
             android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/custom_button"
-            android:text="@string/giocaSquadre"
-            android:textAlignment="center"
-            android:textAllCaps="false"
+            android:backgroundTint="@color/orange"
+            android:elevation="8dp"
+            android:text="@string/crea_gruppo"
             android:textColor="@color/white"
             android:textSize="20sp"
+            app:cornerRadius="50sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.151" />
+            app:layout_constraintVertical_bias="0.151"
+            tools:ignore="TextContrastCheck" />
 
         <Button
-            android:id="@+id/button_allenamento"
+            android:id="@+id/unisciti_button"
             android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/custom_button"
             android:backgroundTint="@color/blue"
-            android:text="@string/allenamento"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:elevation="8dp"
+            android:text="@string/unisciti_a_gruppo"
             android:textSize="20sp"
+            app:cornerRadius="50sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_giocaSquadre"
+            app:layout_constraintTop_toBottomOf="@+id/crea_gruppo_button"
             app:layout_constraintVertical_bias="0.167" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>

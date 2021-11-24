@@ -6,6 +6,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,9 +34,34 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_logo);
         setSupportActionBar(toolbar);
 
-        ImageButton imageButtonSettings = findViewById(R.id.imageButton_settings);
+        ImageButton imageButtonSettings = findViewById(R.id.tastoBack);
         imageButtonSettings.setOnClickListener(view -> {
             Log.d(TAG, "Bottone IMPOSTAZIONI premuto");
         });
+
+
+    ImageButton tasto= (ImageButton) findViewById(R.id.tastoBack);
+        tasto.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View arg0) {
+            // definisco l'intenzione
+            Intent modificaProfilo = new Intent(MainActivity.this,modificaProfilo.class);
+            // passo all'attivazione dell'activity Pagina.java
+            startActivity(modificaProfilo);
+        }
+    });
+        ImageButton crea= (ImageButton) findViewById(R.id.tastoBack);
+        tasto.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View arg0) {
+                // definisco l'intenzione
+                Intent modificaProfilo = new Intent(MainActivity.this,modificaProfilo.class);
+                // passo all'attivazione dell'activity Pagina.java
+                startActivity(modificaProfilo);
+            }
+        });
+
+
+
     }
 }

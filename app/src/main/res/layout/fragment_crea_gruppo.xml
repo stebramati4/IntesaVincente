@@ -11,15 +11,43 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/nomeGruppo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="208dp"
-            android:text="TextView"
+            android:text="inserisci nome gruppo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/campoNick"
+            android:layout_width="345dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginEnd="33dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomeGruppo"
+            tools:ignore="SpeakableTextPresentCheck">
+
+            <requestFocus></requestFocus>
+        </EditText>
+
+        <Button
+            android:id="@+id/crea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:text="crea gruppo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/campoNick" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

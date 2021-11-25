@@ -26,10 +26,10 @@ public class CreaUniscitiFragment extends Fragment {
 
         Button creaGruppo = v.findViewById(R.id.crea_gruppo_button);
         creaGruppo.setOnClickListener(view -> {
-            CreaCreaGruppoFragment creaGruppoFragment = new CreaCreaGruppoFragment();
+            CreaGruppoFragment creaGruppoFragment = new CreaGruppoFragment();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.NavigationFragmentContainerView, CreaCreaGruppoFragment);
+            fragmentTransaction.replace(R.id.NavigationFragmentContainerView, CreaGruppoFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });

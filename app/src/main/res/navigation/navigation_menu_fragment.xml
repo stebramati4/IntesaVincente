@@ -9,7 +9,11 @@
         android:id="@+id/profilo_menu"
         android:name="com.example.intesavincente.ProfiloFragment"
         android:label="fragment_profilo"
-        tools:layout="@layout/fragment_profilo" />
+        tools:layout="@layout/fragment_profilo" >
+        <action
+            android:id="@+id/action_profilo_menu_to_creaUniscitiFragment2"
+            app:destination="@id/creaUniscitiFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/statistiche_menu"
         android:name="com.example.intesavincente.StatisticheFragment"
@@ -20,4 +24,9 @@
         android:name="com.example.intesavincente.AmiciFragment"
         android:label="fragment_amici"
         tools:layout="@layout/fragment_amici" />
+    <fragment
+        android:id="@+id/creaUniscitiFragment2"
+        android:name="com.example.intesavincente.CreaUniscitiFragment"
+        android:label="fragment_crea_unisciti"
+        tools:layout="@layout/fragment_crea_unisciti" />
 </navigation>

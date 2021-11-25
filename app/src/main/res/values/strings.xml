@@ -10,4 +10,8 @@
     <string name="suggeritore">SUGGERITORE</string>
     <string name="unisciti_come">Unisciti come</string>
     <string name="avanti">Avanti</string>
+
+    <string name="inserisciParpla">INSERISCI PAROLA</string>
+    <string name="suggerimento">Parola intuita</string>
+    <string name="conferma">CONFERMA</string>
 </resources>

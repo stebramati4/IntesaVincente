@@ -3,6 +3,8 @@ package com.example.intesavincente;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,12 +28,22 @@ public class ProfiloFragment extends Fragment {
 
         Button buttonGiocaSquadre = v.findViewById(R.id.button_giocaSquadre);
         buttonGiocaSquadre.setOnClickListener(view -> {
-            Log.d(TAG, "Bottone GIOCA A SQUADRE premuto");
+            CreaUniscitiFragment creaUniscitiFragment = new CreaUniscitiFragment();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.NavigationFragmentContainerView, creaUniscitiFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         });
 
         Button buttonAllenamento = v.findViewById(R.id.button_allenamento);
         buttonAllenamento.setOnClickListener(view -> {
-            Log.d(TAG, "Bottone ALLENAMENTO premuto");
+            CreaUniscitiFragment creaUniscitiFragment = new CreaUniscitiFragment();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.NavigationFragmentContainerView, creaUniscitiFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         });
 
         return v;

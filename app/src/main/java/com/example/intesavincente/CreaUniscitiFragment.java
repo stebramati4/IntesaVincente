@@ -22,14 +22,14 @@ public class CreaUniscitiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_profilo, container, false);
+        View v = inflater.inflate(R.layout.fragment_crea_unisciti, container, false);
 
         Button creaGruppo = v.findViewById(R.id.crea_gruppo_button);
         creaGruppo.setOnClickListener(view -> {
             CreaGruppoFragment creaGruppoFragment = new CreaGruppoFragment();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.NavigationFragmentContainerView, CreaGruppoFragment);
+            fragmentTransaction.replace(R.id.NavigationFragmentContainerView, creaGruppoFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });

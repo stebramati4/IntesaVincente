@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,22 +31,12 @@ public class ProfiloFragment extends Fragment {
 
         Button buttonGiocaSquadre = v.findViewById(R.id.button_giocaSquadre);
         buttonGiocaSquadre.setOnClickListener(view -> {
-            CreaUniscitiFragment creaUniscitiFragment = new CreaUniscitiFragment();
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.NavigationFragmentContainerView, creaUniscitiFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            Navigation.findNavController(v).navigate(R.id.action_profilo_menu_to_creaUniscitiFragment2);
         });
 
         Button buttonAllenamento = v.findViewById(R.id.button_allenamento);
         buttonAllenamento.setOnClickListener(view -> {
-            CreaUniscitiFragment creaUniscitiFragment = new CreaUniscitiFragment();
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.NavigationFragmentContainerView, creaUniscitiFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            Navigation.findNavController(v).navigate(R.id.action_profilo_menu_to_creaUniscitiFragment2);
         });
 
         return v;

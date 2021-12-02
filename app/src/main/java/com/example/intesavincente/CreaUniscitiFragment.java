@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,12 +27,12 @@ public class CreaUniscitiFragment extends Fragment {
 
         Button creaGruppo = v.findViewById(R.id.crea_gruppo_button);
         creaGruppo.setOnClickListener(view -> {
-            CreaGruppoFragment creaGruppoFragment = new CreaGruppoFragment();
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.NavigationFragmentContainerView, creaGruppoFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            Navigation.findNavController(v).navigate(R.id.action_creaUniscitiFragment2_to_creaGruppoFragment);
+        });
+
+        Button unisciti = v.findViewById(R.id.unisciti_button);
+        unisciti.setOnClickListener(view -> {
+            Navigation.findNavController(v).navigate(R.id.action_creaUniscitiFragment2_to_scegliRuoloFragment);
         });
         return v;
     }

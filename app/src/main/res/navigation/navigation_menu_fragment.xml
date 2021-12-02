@@ -28,5 +28,22 @@
         android:id="@+id/creaUniscitiFragment2"
         android:name="com.example.intesavincente.CreaUniscitiFragment"
         android:label="fragment_crea_unisciti"
-        tools:layout="@layout/fragment_crea_unisciti" />
+        tools:layout="@layout/fragment_crea_unisciti" >
+        <action
+            android:id="@+id/action_creaUniscitiFragment2_to_creaGruppoFragment"
+            app:destination="@id/creaGruppoFragment" />
+        <action
+            android:id="@+id/action_creaUniscitiFragment2_to_scegliRuoloFragment"
+            app:destination="@id/scegliRuoloFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scegliRuoloFragment"
+        android:name="com.example.intesavincente.ScegliRuoloFragment"
+        android:label="fragment_scegli_ruolo"
+        tools:layout="@layout/fragment_scegli_ruolo" />
+    <fragment
+        android:id="@+id/creaGruppoFragment"
+        android:name="com.example.intesavincente.CreaGruppoFragment"
+        android:label="fragment_crea_gruppo"
+        tools:layout="@layout/fragment_crea_gruppo" />
 </navigation>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue"
     tools:context=".ScegliRuoloFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +26,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/suggeritore"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/orange"
+                android:textColorLink="@color/orange"
                 android:textSize="24sp" />
 
             <RadioButton
@@ -32,6 +36,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/indovinatore"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/orange"
+                android:textColorLink="@color/orange"
                 android:textSize="24sp" />
         </RadioGroup>
 
@@ -39,7 +46,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            android:outlineProvider="none"
             android:text="@string/unisciti_come"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,8 +59,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/orange"
             android:text="@string/avanti"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup2"

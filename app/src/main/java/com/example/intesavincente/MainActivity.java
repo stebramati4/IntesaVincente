@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_logo);
         setSupportActionBar(toolbar);
 
-        ImageButton imageButtonSettings = findViewById(R.id.tastoBack);
+        ImageButton imageButtonSettings = findViewById(R.id.tastoSettings);
         imageButtonSettings.setOnClickListener(view -> {
             Log.d(TAG, "Bottone IMPOSTAZIONI premuto");
         });
 
 
-    ImageButton tasto= (ImageButton) findViewById(R.id.tastoBack);
+    ImageButton tasto= (ImageButton) findViewById(R.id.tastoSettings);
         tasto.setOnClickListener(new View.OnClickListener(){
         @Override
         public void onClick(View arg0) {
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(modificaProfilo);
         }
     });
-        ImageButton crea= (ImageButton) findViewById(R.id.tastoBack);
+        ImageButton crea= (ImageButton) findViewById(R.id.tastoSettings);
         tasto.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {

@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#1a75ff</color>
     <color name="orange">#ff8533</color>
+    <color name="red">#FF0000</color>
+    <color name="red_passo">#FF3333</color>
 </resources>

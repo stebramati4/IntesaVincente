@@ -3,5 +3,177 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Indovinatore"/>
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_parole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="600dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginStart="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/cerchio_parole"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/numbers_square" />
+
+        <TextView
+            android:id="@+id/parole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView_parole"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginStart="250dp"
+        android:text="PAROLE"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout_parole"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buzz"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/buzz_button"
+        android:onClick="startChronometer"
+        app:backgroundTint="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.341"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/button_passo"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:onClick="pauseChronometer"
+        android:text="PASSO"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:backgroundTint="@color/red_passo"
+        app:cornerRadius="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buzz"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/cerchio_timer"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/numbers_square" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="60"
+            android:textColor="@color/black"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView_tempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginStart="250dp"
+        android:text="TEMPO"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout_timer"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_passo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="250dp"
+        android:layout_marginRight="250dp"
+        android:layout_marginTop="500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/cerchio_passo"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/numbers_square" />
+
+        <TextView
+            android:id="@+id/passo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="3"
+            android:textColor="@color/black"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView_passo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginRight="250dp"
+        android:text="PASSO"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout_passo"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

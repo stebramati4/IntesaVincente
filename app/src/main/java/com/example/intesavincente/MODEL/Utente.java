@@ -5,6 +5,7 @@ public class Utente {
     private String mail;
     public String image;
     private String password;
+    public Statistica statistica;
 
     public Utente(String nickname, String mail, String image, String password) {
         this.nickname = nickname;

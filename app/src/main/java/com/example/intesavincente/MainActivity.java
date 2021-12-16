@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://intesavincente-e720b-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference myRef = database.getReference("message");
         myRef.setValue("Hello, World!");
+
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
         //setContentView(R.layout.activity_login);

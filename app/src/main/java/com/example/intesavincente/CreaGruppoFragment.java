@@ -69,9 +69,9 @@ public class CreaGruppoFragment extends Fragment {
 
     }
     // Write a message to the database
-/*
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
+
+   /* FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = mdatabase.getReference("message");
     public void writeNewUser(String gruppoId, String nomeGruppo) {
 
 

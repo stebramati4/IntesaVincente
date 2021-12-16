@@ -19,14 +19,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    // Write a message to the database
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
-
-    myRef.setValue("Hello, World!");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -44,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         imageButtonSettings.setOnClickListener(view -> {
             Log.d(TAG, "Bottone IMPOSTAZIONI premuto");
         });
+
+
 
 
     ImageButton tasto= (ImageButton) findViewById(R.id.tastoSettings);
@@ -66,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(modificaProfilo);
             }
         });
+
 
 
 

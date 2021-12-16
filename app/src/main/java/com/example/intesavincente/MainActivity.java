@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("message");
         myRef.setValue("Hello, World!");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        //setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_login);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.NavigationFragmentContainerView);
         NavController navController = navHostFragment.getNavController();
 

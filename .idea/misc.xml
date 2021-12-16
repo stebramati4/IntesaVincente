@@ -17,7 +17,7 @@
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/activity_modifica_profilo.xml" value="0.264" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_amici.xml" value="0.20833333333333334" />
-        <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_crea_gruppo.xml" value="0.3508500772797527" />
+        <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_crea_gruppo.xml" value="0.1" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_crea_unisciti.xml" value="0.176" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_inserisci_nome_gruppo.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_profilo.xml" value="0.264" />
@@ -33,11 +33,13 @@
         <entry key="..\:/Users/ricki/OneDrive/Documenti/GitHub/IntesaVincente/app/src/main/res/layout/fragment_scegli_ruolo.xml" value="0.18" />
         <entry key="..\:/Users/ricki/OneDrive/Documenti/GitHub/IntesaVincente/app/src/main/res/layout/fragment_statistiche.xml" value="0.1" />
         <entry key="..\:/Users/ricki/OneDrive/Documenti/GitHub/IntesaVincente/app/src/main/res/menu/navigation_menu.xml" value="0.20833333333333334" />
-        <entry key="..\:/Users/ricki/OneDrive/Documenti/GitHub/intesaVincente/app/src/main/res/layout/fragment_crea_gruppo.xml" value="0.1068840579710145" />
-        <entry key="..\:/Users/ricki/OneDrive/Documenti/GitHub/intesaVincente/app/src/main/res/layout/fragment_crea_unisciti.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/buzz_button.xml" value="0.3394871794871795" />
         <entry key="app/src/main/res/drawable/custom_button.xml" value="0.34479166666666666" />
+        <entry key="app/src/main/res/drawable/numbers_square.xml" value="0.3394871794871795" />
+        <entry key="app/src/main/res/layout/activity_indovinatore.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_amici.xml" value="0.3229166666666667" />
+        <entry key="app/src/main/res/layout/fragment_crea_gruppo.xml" value="0.2857789855072464" />
         <entry key="app/src/main/res/layout/fragment_profilo.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/fragment_statistiche.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.32916666666666666" />

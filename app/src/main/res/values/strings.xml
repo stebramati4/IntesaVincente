@@ -15,4 +15,9 @@
     <string name="conferma">CONFERMA</string>
 
     <string name="inserisci_nome_gruppo">Inserisci nome gruppo</string>
+
+    <string name="modificaProfilo">Modifica il tuo profilo</string>
+    <string name="nickname">Nickname</string>
+    <string name="email">Email</string>
+    <string name="salvaModifiche">SALVA MODIFICHE</string>
 </resources>

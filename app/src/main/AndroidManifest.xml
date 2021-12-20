@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IntesaVincente">
         <activity
+            android:name=".ui.Register"
+            android:exported="true" />
+        <activity
+            android:name=".ui.login"
+            android:exported="true" />
+        <activity
+            android:name=".login"
+            android:exported="true" />
+        <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login" />

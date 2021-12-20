@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_profilo_menu_to_creaUniscitiFragment2"
             app:destination="@id/creaUniscitiFragment2" />
+        <action
+            android:id="@+id/action_profilo_menu_to_login2"
+            app:destination="@id/login" />
     </fragment>
     <fragment
         android:id="@+id/statistiche_menu"
@@ -46,4 +49,13 @@
         android:name="com.example.intesavincente.CreaGruppoFragment"
         android:label="fragment_crea_gruppo"
         tools:layout="@layout/fragment_crea_gruppo" />
+    <activity
+        android:id="@+id/register"
+        android:name="com.example.intesavincente.ui.Register"
+        android:label="activity_register"
+        tools:layout="@layout/activity_register" />
+    <activity
+        android:id="@+id/login"
+        android:name="com.example.intesavincente.ui.Login"
+        android:label="Login" />
 </navigation>

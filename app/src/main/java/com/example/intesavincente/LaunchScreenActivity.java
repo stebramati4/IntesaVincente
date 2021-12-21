@@ -1,36 +1,14 @@
 package com.example.intesavincente;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.google.android.gms.common.internal.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Set;
-import androidx.appcompat.app.AppCompatActivity;
-// import androidx.core.splashscreen.SplashScreen;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Set;
-
-import com.example.intesavincente.R;
-import com.example.intesavincente.ui.LoginFragment;
-//import com.example.intesavincente.Constants;
 public class LaunchScreenActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;

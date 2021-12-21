@@ -9,7 +9,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LaunchScreenActivity extends AppCompatActivity {
+public class Launch_Screen extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 

@@ -45,7 +45,7 @@ public class LaunchScreenActivity extends AppCompatActivity {
          * SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
          */
 
-        setContentView(R.layout.fragment_profilo);
+        setContentView(R.layout.launch_screen);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();

@@ -1,11 +1,11 @@
-  <ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".ui.RegisterFragment">
 
-
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
         <RelativeLayout
             android:id="@+id/login_layout"
             android:layout_width="match_parent"

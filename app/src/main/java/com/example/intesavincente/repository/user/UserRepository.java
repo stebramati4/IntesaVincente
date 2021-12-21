@@ -52,12 +52,12 @@ public class UserRepository implements IUserRepository {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
                                 authenticationResponse = new AuthenticationResponse();
-                                FirebaseUser user = mAuth.getCurrentUser();
+                                FirebaseUser utente = mAuth.getCurrentUser();
                                 authenticationResponse.setSuccess(true);
-                                if (user != null) {
+                                if (utente != null) {
                                     mSharedPreferencesProvider.
-                                            setAuthenticationToken(user.getIdToken(false).getResult().getToken());
-                                    mSharedPreferencesProvider.setUserId(user.getUid());
+                                            setAuthenticationToken(utente.getIdToken(false).getResult().getToken());
+                                    mSharedPreferencesProvider.setUserId(utente.getUid());
                                 }
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -87,12 +87,12 @@ public class UserRepository implements IUserRepository {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser utente = mAuth.getCurrentUser();
                             authenticationResponse.setSuccess(true);
-                            if (user != null) {
+                            if (utente != null) {
                                 mSharedPreferencesProvider.
-                                        setAuthenticationToken(user.getIdToken(false).getResult().getToken());
-                                mSharedPreferencesProvider.setUserId(user.getUid());
+                                        setAuthenticationToken(utente.getIdToken(false).getResult().getToken());
+                                mSharedPreferencesProvider.setUserId(utente.getUid());
                             }
                         } else {
                             // If sign in fails, display a message to the user.

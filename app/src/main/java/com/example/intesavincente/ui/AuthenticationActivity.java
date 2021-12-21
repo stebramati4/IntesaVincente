@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.intesavincente.R;
+
 public class AuthenticationActivity extends AppCompatActivity {
 
     @Override

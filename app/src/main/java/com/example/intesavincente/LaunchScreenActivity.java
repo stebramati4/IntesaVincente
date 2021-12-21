@@ -61,7 +61,7 @@ public class LaunchScreenActivity extends AppCompatActivity {
         if (currentUser != null) {
             // Start another Activity with Navigation Controller
             if (arePreferencesSet()) {
-                navController.navigate(R.id.action_from_launchScreenActivity_to_newsActivity);
+                navController.navigate(R.id.action_from_launchScreenActivity_to_);
             } else {
                 navController.navigate(R.id.action_from_launchScreenActivity_to_preferencesActivity);
             }

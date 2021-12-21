@@ -24,6 +24,7 @@
     <string name="skip">salta</string>
     <string name="registrati">registrati</string>
     <string name="google_signin">accedi con google</string>
+    <string name="registration_failure">An error occured</string>
 
     <string name="salvaModifiche">SALVA MODIFICHE</string>
 </resources>

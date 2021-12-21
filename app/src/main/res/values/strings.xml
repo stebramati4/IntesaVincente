@@ -18,6 +18,12 @@
 
     <string name="modificaProfilo">Modifica il tuo profilo</string>
     <string name="nickname">Nickname</string>
-    <string name="email">Email</string>
+    <string name="form_email_address">Email</string>
+    <string name="form_password">password</string>
+    <string name="accedi">accedi</string>
+    <string name="skip">salta</string>
+    <string name="registrati">registrati</string>
+    <string name="google_signin">accedi con google</string>
+
     <string name="salvaModifiche">SALVA MODIFICHE</string>
 </resources>

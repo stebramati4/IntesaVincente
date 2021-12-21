@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IntesaVincente">
         <activity
+            android:name=".ui.AuthenticationActivity"
+            android:exported="true" />
+        <activity
             android:name=".Indovinatore"
             android:exported="false" />
         <activity

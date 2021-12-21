@@ -101,7 +101,7 @@
         android:layout_marginEnd="342dp"
         android:layout_marginStart="34dp"
         android:layout_marginTop="16dp"
-        android:text="@string/email"
+        android:text="@string/form_email_address"
         app:layout_constraintBottom_toTopOf="@+id/campoMail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -7,7 +7,7 @@
 
         <activity
             android:id="@+id/launchScreenActivity"
-            android:name="com.example.intesavincente.LaunchScreenActivity"
+            android:name="com.example.intesavincente.Launch_Screen"
             android:label="activity_launch_screen"
             tools:layout="@layout/launch_screen" />
     <action

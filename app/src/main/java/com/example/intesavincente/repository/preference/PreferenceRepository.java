@@ -1,5 +1,7 @@
 package com.example.intesavincente.repository.preference;
 
+import static com.example.intesavincente.Constants.USER_COLLECTION;
+
 import android.app.Application;
 import android.util.Log;
 
@@ -7,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.intesavincente.Constants;
+import com.example.intesavincente.MODEL.Utente;
 import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,9 +31,9 @@ public class PreferenceRepository implements IPreferenceRepository{
         mUserLiveData = new MutableLiveData<>();
     }
 
-    public MutableLiveData<Boolean> saveUserPreferences(User user) {
-        if (user != null) {
-            mFirebaseDatabase.child(USER_COLLECTION).child(user.getUId()).setValue(user).
+    public MutableLiveData<Boolean> saveUserPreferences(Utente utente) {
+        if (utente != null) {
+            mFirebaseDatabase.child(USER_COLLECTION).child(utente.getNickname()).setValue(utente).
                     addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             mResponseLiveData.postValue(true);

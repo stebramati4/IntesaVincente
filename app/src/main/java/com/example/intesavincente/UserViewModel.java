@@ -4,13 +4,14 @@ import android.app.Application;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.intesavincente.MODEL.AuthenticationResponse;
 import com.example.intesavincente.repository.user.IUserRepository;
 import com.example.intesavincente.repository.user.UserRepository;
 
-public class UserViewModel {
+public class UserViewModel extends AndroidViewModel {
 
     private MutableLiveData<AuthenticationResponse> mAuthenticationResponseLiveData;
     private final IUserRepository mUserRepository;

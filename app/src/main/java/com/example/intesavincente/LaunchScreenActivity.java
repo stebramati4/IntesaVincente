@@ -28,9 +28,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Set;
 
-import it.unimib.worldnews.R;
-import it.unimib.worldnews.ui.authentication.LoginFragment;
-import it.unimib.worldnews.utils.Constants;
+import com.example.intesavincente.R;
+import com.example.intesavincente.ui.LoginFragment;
+import com.example.intesavincente.Constants;
 public class LaunchScreenActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -45,7 +45,7 @@ public class LaunchScreenActivity extends AppCompatActivity {
          * SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
          */
 
-        setContentView(R.layout.activity_launch_screen);
+        setContentView(R.layout.fragment_profilo);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();

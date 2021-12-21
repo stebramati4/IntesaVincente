@@ -21,6 +21,16 @@ public class Utente {
     public String getPassword() {
         return password;
     }
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getImage() {
+        return image;
+    }
+    public Statistica getStatistica() {
+        return statistica;
+    }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
@@ -47,4 +57,5 @@ public class Utente {
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }

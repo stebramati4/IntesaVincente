@@ -2,7 +2,7 @@ package com.example.intesavincente;
 
 public class Constants {
 
-    public static final String SHARED_PREFERENCES_FILE_NAME = "it.unimib.worldnews.preferences";
+    public static final String SHARED_PREFERENCES_FILE_NAME = "com.example.intesavincente.preferences";
     public static final String SHARED_PREFERENCES_COUNTRY_OF_INTEREST = "COUNTRY_OF_INTEREST";
     public static final String SHARED_PREFERENCES_TOPICS_OF_INTEREST = "TOPICS_OF_INTEREST";
 
@@ -25,6 +25,6 @@ public class Constants {
 
     public static final String FIREBASE_DATABASE_URL = "https://intesavincente-e720b-default-rtdb.europe-west1.firebasedatabase.app/";
 
-    public static final String USER_COLLECTION = "users";
+    public static final String USER_COLLECTION = "Utente";
     public static final String USER_EMAIL = "email";
 }

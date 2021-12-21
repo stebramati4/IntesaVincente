@@ -30,7 +30,7 @@ import java.util.Set;
 
 import com.example.intesavincente.R;
 import com.example.intesavincente.ui.LoginFragment;
-import com.example.intesavincente.Constants;
+//import com.example.intesavincente.Constants;
 public class LaunchScreenActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -60,11 +60,7 @@ public class LaunchScreenActivity extends AppCompatActivity {
 
         if (currentUser != null) {
             // Start another Activity with Navigation Controller
-            if (arePreferencesSet()) {
-                navController.navigate(R.id.action_from_launchScreenActivity_to_);
-            } else {
-                navController.navigate(R.id.action_from_launchScreenActivity_to_preferencesActivity);
-            }
+            navController.navigate(R.id.action_from_launchScreenActivity_to_profilo);
             /* The equivalent way with explicit Intent
             if (arePreferencesSet()) {
                 startActivity(new Intent(this, NewsActivity.class));
@@ -72,17 +68,13 @@ public class LaunchScreenActivity extends AppCompatActivity {
                 startActivity(new Intent(this, PreferencesActivity.class));
             }*/
         } else {
-            navController.navigate(R.id.action_from_MainActivity_to_authenticationActivity);
+            navController.navigate(R.id.action_from_launchScreenActivity_to_authenticationActivity);
         }
         finish();
     }
 
-    /**
-     * It checks if the preferences have already been set by the user.
-     *
-     * @return true if the preferences have been set, false otherwise.
-     */
-    private boolean arePreferencesSet() {
+
+/*    private boolean arePreferencesSet() {
         SharedPreferences sharedPref = getSharedPreferences(Constants.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
 
         String countryOfInterest = sharedPref.getString(Constants.SHARED_PREFERENCES_COUNTRY_OF_INTEREST, null);
@@ -93,5 +85,5 @@ public class LaunchScreenActivity extends AppCompatActivity {
         }
 
         return false;
-    }
+    }*/
 }

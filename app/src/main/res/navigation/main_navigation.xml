@@ -9,7 +9,7 @@
             android:id="@+id/launchScreenActivity"
             android:name="com.example.intesavincente.Launch_Screen"
             android:label="activity_launch_screen"
-            tools:layout="@layout/launch_screen" />
+            tools:layout="@layout/activity_launch_screen" />
     <action
         android:id="@+id/action_from_launchScreenActivity_to_profilo"
         app:destination="@id/profilo" />

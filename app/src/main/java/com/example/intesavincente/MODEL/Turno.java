@@ -58,4 +58,5 @@ public class Turno {
                 ", passo=" + passo + '\'' +
                 ", parole indovinate=" + parole_indovinate +
                 '}';
+    }
 }

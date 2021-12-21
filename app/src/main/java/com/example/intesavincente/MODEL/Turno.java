@@ -8,6 +8,7 @@ public class Turno {
     private int passo;
     private int parole_indovinate;
 
+    //prova
     public Turno(Gruppo gruppo) {
         this.gruppo = gruppo;
         this.passo = 3;

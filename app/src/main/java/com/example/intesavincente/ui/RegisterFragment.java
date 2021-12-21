@@ -16,11 +16,7 @@ import com.example.intesavincente.R;
 import com.example.intesavincente.UserViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RegisterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class RegisterFragment extends Fragment {
 
     private static final String TAG = "RegisterFragment";

@@ -3,10 +3,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:background="@color/blue"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.LoginFragment">
+        tools:context=".ui.LoginFragment"
+        android:background="@color/blue">
 
         <RelativeLayout
             android:id="@+id/login_layout"
@@ -79,7 +79,9 @@
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTint="@android:color/black"
-                    android:hint="@string/form_password"
+                    android:hint="@string/form_password">
+
+
 
                     <EditText
                         android:id="@+id/password"
@@ -88,7 +90,8 @@
                         android:textColor="@android:color/black"
                         android:inputType="textPassword"
                         android:maxLines="1"/>
-                </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
 
             <Button
                 android:id="@+id/login_button"

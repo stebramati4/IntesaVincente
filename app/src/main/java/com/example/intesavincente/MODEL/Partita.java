@@ -12,6 +12,10 @@ public class Partita {
         this.vincitore = vincitore;
     }
 
+    public Partita(Turno[] turni) {
+        this.turni = turni;
+    }
+
     public Turno[] getTurni() {
         return turni;
     }

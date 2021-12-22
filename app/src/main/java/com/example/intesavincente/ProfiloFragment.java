@@ -15,6 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.intesavincente.MODEL.Partita;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ProfiloFragment extends Fragment {
 
     private static final String TAG = "ProfiloFragment";
@@ -25,20 +29,39 @@ public class ProfiloFragment extends Fragment {
 
     }
 
+    Button buttonGiocaSquadre;
+    Button buttonAllenamento;
+
+    DatabaseReference db;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profilo, container, false);
 
-        Button buttonGiocaSquadre = v.findViewById(R.id.button_giocaSquadre);
+        buttonGiocaSquadre = v.findViewById(R.id.button_giocaSquadre);
+        buttonAllenamento = v.findViewById(R.id.button_allenamento);
+
+        db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
+
         buttonGiocaSquadre.setOnClickListener(view -> {
+            addPartita();
             Navigation.findNavController(v).navigate(R.id.action_profilo_menu_to_creaUniscitiFragment2);
         });
 
-        Button buttonAllenamento = v.findViewById(R.id.button_allenamento);
+
         buttonAllenamento.setOnClickListener(view -> {
+            addPartita();
             Navigation.findNavController(v).navigate(R.id.action_profilo_menu_to_creaUniscitiFragment2);
         });
 
         return v;
     }
+
+    private void addPartita() {
+        String partitaID = db.push().getKey();
+        Partita partita = new Partita();
+        db.child("partite").child(partitaID).setValue(partita);
+
+    }
+
 }

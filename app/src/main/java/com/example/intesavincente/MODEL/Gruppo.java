@@ -7,9 +7,8 @@ public class Gruppo {
     public Utente[] componenti;
     public String ciao;
 
-    public Gruppo(String nome, Utente[] componenti) {
+    public Gruppo(String nome) {
         this.nome = nome;
-        this.componenti = componenti;
     }
 
     public String getNome() {

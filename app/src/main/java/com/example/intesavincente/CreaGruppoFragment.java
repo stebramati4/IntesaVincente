@@ -1,14 +1,20 @@
 package com.example.intesavincente;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.intesavincente.MODEL.Gruppo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -50,6 +56,11 @@ public class CreaGruppoFragment extends Fragment {
         return fragment;
     }
 
+    Button creaGruppoButton;
+    EditText nomeGruppo;
+
+    DatabaseReference db;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +76,34 @@ public class CreaGruppoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_crea_gruppo, container, false);
+        View v = inflater.inflate(R.layout.fragment_crea_gruppo, container, false);
+
+        creaGruppoButton = v.findViewById(R.id.crea);
+        nomeGruppo = v.findViewById(R.id.campoNick);
+
+        db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
+
+        creaGruppoButton.setOnClickListener(view -> {
+            addGroup();
+            //cambia activity
+        });
+
+        return v;
+    }
+
+    //crea il gruppo e lo aggiunge al database
+    private void addGroup() {
+        String nome = nomeGruppo.getText().toString();
+
+        if(!TextUtils.isEmpty(nome)){
+            String gruppoID = db.push().getKey();
+            Gruppo gruppo = new Gruppo(nome);
+            db.child("partite").child("gruppi").child(gruppoID).setValue(gruppo);
+
+        }
+        else{
+           // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();
+        }
 
     }
     // Write a message to the database

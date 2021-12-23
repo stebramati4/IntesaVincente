@@ -6,6 +6,9 @@ public class Gruppo {
     private String nome;
     private Utente[] componenti;
     private String ciao;
+    public Gruppo(){
+
+    }
 
     public Gruppo(String nome) {
         this.nome = nome;

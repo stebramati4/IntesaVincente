@@ -13,7 +13,7 @@
     <action
         android:id="@+id/action_from_launchScreenActivity_to_profilo"
         app:destination="@id/profilo" />
-        <activity
+        <fragment
             android:id="@+id/profilo"
             android:name="com.example.intesavincente.ProfiloFragment"
             android:label="activity_news"

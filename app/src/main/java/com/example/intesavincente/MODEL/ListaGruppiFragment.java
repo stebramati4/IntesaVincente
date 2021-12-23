@@ -75,8 +75,12 @@ public class ListaGruppiFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_lista_gruppi, container, false);
+        String []prova= new String[2];
+        prova[0]= "pippo";
+        prova[1]="francesco";
+        //final ArrayAdapter<Gruppo> myArrayAdapter = new ArrayAdapter<Gruppo>(this.getContext(), android.R.layout.activity_list_item, arrayGruppi);
+        final ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_list_item_1, prova);
 
-        final ArrayAdapter<Gruppo> myArrayAdapter = new ArrayAdapter<Gruppo>(this.getContext(), android.R.layout.activity_list_item, arrayGruppi);
         listaGruppi = v.findViewById(R.id.Gruppi_listView);
         listaGruppi.setAdapter(myArrayAdapter);
 

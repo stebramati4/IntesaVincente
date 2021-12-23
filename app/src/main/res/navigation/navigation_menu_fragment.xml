@@ -40,10 +40,20 @@
         android:id="@+id/scegliRuoloFragment"
         android:name="com.example.intesavincente.ScegliRuoloFragment"
         android:label="fragment_scegli_ruolo"
-        tools:layout="@layout/fragment_scegli_ruolo" />
+        tools:layout="@layout/fragment_scegli_ruolo" >
+        <action
+            android:id="@+id/action_scegliRuoloFragment_to_ListaGruppiFragment"
+            app:destination="@id/ListaGruppiFragment" />
+    </fragment>
     <fragment
         android:id="@+id/creaGruppoFragment"
         android:name="com.example.intesavincente.CreaGruppoFragment"
         android:label="fragment_crea_gruppo"
         tools:layout="@layout/fragment_crea_gruppo" />
+    <fragment
+        android:id="@+id/ListaGruppiFragment"
+        android:name="com.example.intesavincente.MODEL.ListaGruppiFragment"
+        android:label="fragment_lista_gruppi"
+        tools:layout="@layout/fragment_lista_gruppi" />
+
 </navigation>

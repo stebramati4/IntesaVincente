@@ -3,9 +3,9 @@ package com.example.intesavincente.MODEL;
 import java.util.Arrays;
 
 public class Gruppo {
-    public String nome;
-    public Utente[] componenti;
-    public String ciao;
+    private String nome;
+    private Utente[] componenti;
+    private String ciao;
 
     public Gruppo(String nome) {
         this.nome = nome;
@@ -27,6 +27,14 @@ public class Gruppo {
         this.componenti = componenti;
     }
 
+    //private boolean hasIndovinatore(Utente[] componenti){
+    // int indovinatore = 0;
+    // for(int i = 0; i<componenti.length; i++){
+    // controlla se utente ha scelto indovinatore
+    //if ha scelto indovinatore indovinatore++
+    // if indovinatore == 1 return true
+    //else retunrn false
+
     @Override
     public String toString() {
         return "Gruppo{" +
@@ -34,4 +42,6 @@ public class Gruppo {
                 ", componenti=" + Arrays.toString(componenti) +
                 '}';
     }
+
 }
+

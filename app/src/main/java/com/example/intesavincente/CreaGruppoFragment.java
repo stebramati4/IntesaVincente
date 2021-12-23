@@ -98,7 +98,7 @@ public class CreaGruppoFragment extends Fragment {
         if(!TextUtils.isEmpty(nome)){
             String gruppoID = db.push().getKey();
             Gruppo gruppo = new Gruppo(nome);
-            db.child("partite").child("gruppi").child(gruppoID).setValue(gruppo);
+            db.child("gruppi").child(gruppoID).setValue(gruppo);
 
         }
         else{

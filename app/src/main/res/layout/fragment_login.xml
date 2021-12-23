@@ -24,14 +24,20 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white" >
+                    android:layout_height="194dp"
+                    android:background="@color/blue">
 
                     <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="77dp"
-                        android:src="@drawable/intesavincente_piatto_logo" />
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="314dp"
+                        android:layout_alignBottom="@+id/imageView3"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="33dp"
+                        android:layout_marginEnd="33dp"
+                        android:layout_marginBottom="0dp"
+                        android:src="@drawable/intesavincente_logo" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
@@ -40,16 +46,7 @@
                 android:layout_below="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="30dp" >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="40sp" />
-
-            </RelativeLayout>
+                android:paddingBottom="30dp" />
 
             <LinearLayout
                 android:id="@+id/login_container"
@@ -92,26 +89,28 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-            <Button
-                android:id="@+id/login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:paddingStart="18dp"
-                android:paddingLeft="18dp"
-                android:text="@string/form_email_address"
-                android:textAllCaps="false"
-                android:textSize="16sp" />
+                <Button
+                    android:id="@+id/login_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingStart="18dp"
+                    android:paddingLeft="18dp"
+                    android:text="@string/form_email_address"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    app:iconTint="@color/orange"
+                    app:rippleColor="@color/orange" />
 
                 <Button
                     android:id="@+id/google_login_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/googleg_standard_color_18"
                     android:drawableStart="@drawable/googleg_standard_color_18"
+                    android:drawableLeft="@drawable/googleg_standard_color_18"
                     android:text="@string/google_signin"
-                    android:textSize="16sp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="true"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textview_create_account"

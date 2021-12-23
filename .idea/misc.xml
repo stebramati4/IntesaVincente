@@ -20,7 +20,6 @@
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_crea_gruppo.xml" value="0.1" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_crea_unisciti.xml" value="0.176" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_inserisci_nome_gruppo.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_lista_gruppi.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_profilo.xml" value="0.264" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_scegli_ruolo.xml" value="0.264" />
         <entry key="..\:/Users/matil/Documents/GitHub/IntesaVincente/app/src/main/res/layout/fragment_statistiche.xml" value="0.18840579710144928" />
@@ -48,14 +47,15 @@
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/activity_indovinatore.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/activity_inserisci_parola.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/activity_launch_screen.xml" value="0.3" />
-        <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/activity_main.xml" value="0.18697916666666667" />
-        <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/activity_modifica_profilo.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/activity_main.xml" value="0.36" />
+        <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/activity_modifica_profilo.xml" value="0.36" />
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_amici.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_crea_gruppo.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_crea_unisciti.xml" value="0.18697916666666667" />
-        <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_lista_gruppi.xml" value="0.21829710144927536" />
+        <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_login.xml" value="0.3" />
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_profilo.xml" value="0.18697916666666667" />
-        <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_register.xml" value="0.20104166666666667" />
+        <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_register.xml" value="0.3" />
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_scegli_ruolo.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/fragment_statistiche.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/stebr/OneDrive/Documenti/GitHub/intesaVincente2/app/src/main/res/layout/launch_screen.xml" value="0.18" />

@@ -50,11 +50,11 @@
 
             <LinearLayout
                 android:id="@+id/login_container"
+                android:layout_below="@+id/sub_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/sub_header"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="12dp" >
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -65,26 +65,27 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
                         android:inputType="textEmailAddress"
-                        android:maxLines="1"
-                        android:textColor="@android:color/black" />
+                        android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/form_password"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@android:color/black">
+                    app:passwordToggleTint="@android:color/black"
+                    android:hint="@string/form_password">
+
 
 
                     <EditText
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
                         android:inputType="textPassword"
-                        android:maxLines="1"
-                        android:textColor="@android:color/black" />
+                        android:maxLines="1"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -93,12 +94,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:backgroundTint="@color/orange"
                     android:paddingStart="18dp"
                     android:paddingLeft="18dp"
-                    android:text="@string/accedi"
+                    android:text="@string/form_email_address"
                     android:textAllCaps="true"
-                    android:textColor="@color/purple_700"
                     android:textSize="16sp"
                     app:iconTint="@color/orange"
                     app:rippleColor="@color/orange" />
@@ -107,12 +106,10 @@
                     android:id="@+id/google_login_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/orange"
                     android:drawableStart="@drawable/googleg_standard_color_18"
                     android:drawableLeft="@drawable/googleg_standard_color_18"
                     android:text="@string/google_signin"
                     android:textAllCaps="true"
-                    android:textColor="@color/purple_700"
                     android:textSize="16sp" />
 
                 <TextView

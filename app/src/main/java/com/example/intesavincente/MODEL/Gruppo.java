@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Gruppo {
     private String nome;
     private Utente[] componenti;
-    private String ciao;
+
     public Gruppo(){
 
     }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.intesavincente.ADAPTER.ListaGruppiAdapter;
 import com.example.intesavincente.Constants;
 import com.example.intesavincente.MainActivity;
 import com.example.intesavincente.R;
@@ -76,7 +77,7 @@ public class ListaGruppiFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_lista_gruppi, container, false);
 
-        final ArrayAdapter<Gruppo> myArrayAdapter = new ArrayAdapter<Gruppo>(this.getContext(), android.R.layout.activity_list_item, arrayGruppi);
+        final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(this.getContext(), android.R.layout.activity_list_item, arrayGruppi);
         listaGruppi = v.findViewById(R.id.Gruppi_listView);
         listaGruppi.setAdapter(myArrayAdapter);
 

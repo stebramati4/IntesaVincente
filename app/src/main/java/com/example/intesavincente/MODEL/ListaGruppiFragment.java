@@ -61,7 +61,7 @@ public class ListaGruppiFragment extends Fragment {
     }
 
     ListView listaGruppi;
-    ArrayList<Gruppo> arrayGruppi = new ArrayList<>();
+    ArrayList<Gruppo> arrayGruppi = new ArrayList<Gruppo>();
 
     DatabaseReference db;
 
@@ -77,7 +77,7 @@ public class ListaGruppiFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_lista_gruppi, container, false);
 
-        final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(this.getContext(), android.R.layout.activity_list_item, arrayGruppi);
+        final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), android.R.layout.activity_list_item, arrayGruppi);
         listaGruppi = v.findViewById(R.id.Gruppi_listView);
         listaGruppi.setAdapter(myArrayAdapter);
 

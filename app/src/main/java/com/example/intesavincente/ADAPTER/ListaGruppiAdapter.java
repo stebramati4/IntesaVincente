@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.example.intesavincente.MODEL.Gruppo;
 import com.example.intesavincente.R;
 
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -18,14 +20,11 @@ import androidx.annotation.Nullable;
  */
 public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
 
-    private Gruppo[] mArrayGruppi;
+    private ArrayList<Gruppo> mArrayGruppi;
     private int mLayout;
 
-    public ListaGruppiAdapter(){
 
-    }
-
-    public ListaGruppiAdapter(@NonNull Context context, int resource, @NonNull Gruppo[] objects) {
+    public ListaGruppiAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Gruppo> objects) {
         super(context, resource, objects);
         this.mArrayGruppi = objects;
         this.mLayout = resource;
@@ -41,7 +40,7 @@ public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
         TextView textViewNomeGruppo = convertView.findViewById(R.id.nome_gruppo);
         //TextView textViewSourceTitle = convertView.findViewById(R.id.news_source);
 
-        textViewNomeGruppo.setText(mArrayGruppi[position].getNome());
+        textViewNomeGruppo.setText(mArrayGruppi.get(position).getNome());
         //textViewSourceTitle.setText(mArrayNews[position].getNewsSource().getName());
 
         return convertView;

@@ -11,13 +11,8 @@
             android:label="activity_launch_screen"
             tools:layout="@layout/activity_launch_screen" />
     <action
-        android:id="@+id/action_from_launchScreenActivity_to_profilo"
-        app:destination="@id/profilo" />
-        <fragment
-            android:id="@+id/profilo"
-            android:name="com.example.intesavincente.ProfiloFragment"
-            android:label="activity_news"
-            tools:layout="@layout/fragment_profilo" />
+        android:id="@+id/action_from_launchScreenActivity_to_MainActivity2"
+        app:destination="@id/mainActivity2" />
     <action
             android:id="@+id/action_from_launchScreenActivity_to_authenticationActivity"
             app:destination="@id/authenticationActivity" />
@@ -26,5 +21,10 @@
             android:name="com.example.intesavincente.ui.AuthenticationActivity"
             android:label="activity_authentication"
             tools:layout="@layout/activity_authentication" />
+    <activity
+        android:id="@+id/mainActivity2"
+        android:name="com.example.intesavincente.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 
 </navigation>

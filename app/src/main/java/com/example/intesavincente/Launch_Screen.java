@@ -38,7 +38,7 @@ public class Launch_Screen extends AppCompatActivity {
 
         if (currentUser != null) {
             // Start another Activity with Navigation Controller
-            navController.navigate(R.id.action_from_launchScreenActivity_to_profilo);
+            navController.navigate(R.id.action_from_launchScreenActivity_to_MainActivity2);
             /* The equivalent way with explicit Intent
             if (arePreferencesSet()) {
                 startActivity(new Intent(this, NewsActivity.class));

@@ -28,6 +28,14 @@ public class Gruppo {
         this.componenti = componenti;
     }
 
+    public String getUtente() {
+        String utenti=null;
+        for(int i=0;i<3;i++){
+            utenti=utenti+ componenti[i].getNickname();
+        }
+        return utenti;
+    }
+
     //private boolean hasIndovinatore(Utente[] componenti){
     // int indovinatore = 0;
     // for(int i = 0; i<componenti.length; i++){

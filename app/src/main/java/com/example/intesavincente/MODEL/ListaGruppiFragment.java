@@ -59,6 +59,7 @@ public class ListaGruppiFragment extends Fragment {
         return fragment;
     }
 
+
     ListView listaGruppi;
     ArrayList<Gruppo> arrayGruppi = new ArrayList<>();
 

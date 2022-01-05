@@ -40,7 +40,7 @@ public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
         TextView textViewNomeGruppo = convertView.findViewById(R.id.nome_gruppo);
         //TextView textViewSourceTitle = convertView.findViewById(R.id.news_source);
 
-        textViewNomeGruppo.setText(mArrayGruppi.get(position).getNome());
+        textViewNomeGruppo.setText(mArrayGruppi.get(position).toString());
         //textViewSourceTitle.setText(mArrayNews[position].getNewsSource().getName());
 
         return convertView;

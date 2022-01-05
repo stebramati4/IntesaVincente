@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
  * create an instance of this fragment.
  */
 public class CreaGruppoFragment extends Fragment {
+
+    private static final String TAG = "CreaGruppoFragment";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -99,6 +102,8 @@ public class CreaGruppoFragment extends Fragment {
             String gruppoID = db.push().getKey();
             Gruppo gruppo = new Gruppo(nome);
             db.child("gruppi").child(gruppoID).setValue(gruppo);
+
+            Log.d(TAG, "Gruppo: " + gruppo.getNome());
 
         }
         else{

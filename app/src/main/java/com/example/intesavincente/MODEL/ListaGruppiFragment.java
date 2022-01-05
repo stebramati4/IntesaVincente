@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import com.example.intesavincente.ADAPTER.ListaGruppiAdapter;
 import com.example.intesavincente.Constants;
 import com.example.intesavincente.MainActivity;
 import com.example.intesavincente.R;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +28,8 @@ import java.util.ArrayList;
 
 
 public class ListaGruppiFragment extends Fragment {
+
+    private static final String TAG = "ListaGruppiFragment";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,15 +79,19 @@ public class ListaGruppiFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_lista_gruppi, container, false);
 
-        final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), android.R.layout.activity_list_item, arrayGruppi);
+        final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), R.layout.gruppi_list_item, arrayGruppi);
         listaGruppi = v.findViewById(R.id.Gruppi_listView);
         listaGruppi.setAdapter(myArrayAdapter);
 
         db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
-   /*     db.addValueEventListener(new ValueEventListener() {
+
+        db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Gruppo value = snapshot.getValue(Gruppo.class);
+                Log.d(TAG, "Valore: " + value);
+                arrayGruppi.add(value);
+                myArrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -94,13 +100,10 @@ public class ListaGruppiFragment extends Fragment {
             }
         });
 
-*/
        db.addChildEventListener(new ChildEventListener() {
            @Override
            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-               Gruppo value = snapshot.getValue(Gruppo.class);
-               arrayGruppi.add(value);
-               myArrayAdapter.notifyDataSetChanged();
+
            }
 
            @Override
@@ -123,7 +126,6 @@ public class ListaGruppiFragment extends Fragment {
 
            }
        });
-
 
        return v;
     }

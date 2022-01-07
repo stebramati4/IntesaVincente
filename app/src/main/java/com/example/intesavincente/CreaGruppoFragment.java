@@ -73,6 +73,7 @@ public class CreaGruppoFragment extends Fragment {
     EditText nomeGruppo;
 
     DatabaseReference db;
+    DatabaseReference db1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,56 +98,58 @@ public class CreaGruppoFragment extends Fragment {
         db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
 
         creaGruppoButton.setOnClickListener(view -> {
-            addGroup();
+           // addGroup();
             //cambia activity
-        });
 
 
-        return v;
 
-    }
 
 
     //crea il gruppo e lo aggiunge al database
-    private void addGroup() {
+    //private void addGroup() {
         db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
         String nome = nomeGruppo.getText().toString();
 
         if(!TextUtils.isEmpty(nome)) {
             String gruppoID = db.push().getKey();
-            Gruppo gruppo = new Gruppo(nome);
-            //System.out.println("gruppoid " + db.push().getKey());
-            db.child("gruppi").child(gruppoID).setValue(gruppo);
+
             //FirebaseAuth.getInstance().getCurrentUser()
             // String email=FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
             //String uID=FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-            db = FirebaseDatabase.getInstance().getReference("utenti");
+            db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
 
-            db.addListenerForSingleValueEvent(new ValueEventListener() {
+            db1.addListenerForSingleValueEvent(new ValueEventListener() {
+
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     //arrayGruppi.clear();
                     List<String> keys = new ArrayList<>();
                     for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                         keys.add(keyNode.getKey());
-                        System.out.println("Utente stampa query ");
-                        System.out.println("Utente stampa query " + keyNode.child("idUtente"));
-                        Log.d(TAG, "Utente stampa query " + keyNode.child("idUtente"));
-                        Log.d(TAG, "Utente chiave " + keyNode.getKey());
-                        Log.d(TAG, "Utente nome " + keyNode.child("nickname").getValue());
-                        Log.d(TAG, "Utente indovinatore " + keyNode.child("indovinatore").getValue());
-                        if (keyNode.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                             keys.add(keyNode.getKey());
                             Utente utente = (Utente) keyNode.getValue(Utente.class);
 
-                            Log.d(TAG, "Utente stampa query " + keyNode.child("idUtente"));
-                            Log.d(TAG, "Utente chiave " + keyNode.getKey());
-                            Log.d(TAG, "Utente nome " + keyNode.child("nickname").getValue());
-                            Log.d(TAG, "Utente indovinatore " + keyNode.child("indovinatore").getValue());
-                            db.child("gruppi").child(gruppoID).child("utenti").setValue(utente);
-                        }else{
+                            Log.d(TAG, "Utente stampa query if " + keyNode.child("idUtente"));
+                            Log.d(TAG, "Utente chiave  if " + keyNode.getKey());
+                            Log.d(TAG, "Utente nome if" + keyNode.child("nickname").getValue());
+                            Log.d(TAG, "Utente indovinatore if" + keyNode.child("indovinatore").getValue());
+                            Log.d(TAG, "Utente stampa query if " + keyNode.child("gruppi").child("utenti"));
+                            Log.d(TAG, " gruppo id"+gruppoID);
+                            Log.d(TAG, " nome"+nome);
+                            Gruppo gruppo = new Gruppo(gruppoID,nome,utente);
+                            Log.d(TAG, "componenti del gruppo ");
+                            //gruppo.setComponenti(utente);
+                            Log.d(TAG, "componenti del gruppo ");
+                            Log.d(TAG, "componenti del gruppo " +gruppo.getComponenti().stampa());
+                            //db1.child("gruppi").child(gruppoID).setValue(utente);
+
+
+                            //System.out.println("gruppoid " + db.push().getKey());
+                            db.child("gruppi").child(gruppoID).setValue(gruppo);
+                        } else {
                             // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();
                         }
 
@@ -162,9 +165,11 @@ public class CreaGruppoFragment extends Fragment {
                 }
             });
 
+        }
+    });
+        return v;
+}
 
-
-     }}
 
 }
 

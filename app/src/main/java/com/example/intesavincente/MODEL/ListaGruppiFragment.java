@@ -190,6 +190,7 @@ public class ListaGruppiFragment extends Fragment {
                     arrayGruppi.add(gruppo);
                     final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), R.layout.gruppi_list_item, arrayGruppi);
 
+
                     listaGruppi = v.findViewById(R.id.Gruppi_listView);
                     listaGruppi.setAdapter(myArrayAdapter);
                     myArrayAdapter.notifyDataSetChanged();

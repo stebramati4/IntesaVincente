@@ -14,6 +14,7 @@
         android:orientation="vertical"
         android:background="?attr/selectableItemBackground" >
 
+
         <TextView
             android:id="@+id/nome_gruppo"
             android:layout_width="match_parent"

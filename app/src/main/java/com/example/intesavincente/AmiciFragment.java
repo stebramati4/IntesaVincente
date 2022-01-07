@@ -9,11 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
+ *
  * A simple {@link Fragment} subclass.
  * Use the {@link AmiciFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class AmiciFragment extends Fragment {
+
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

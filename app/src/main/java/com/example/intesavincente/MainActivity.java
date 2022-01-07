@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
@@ -44,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Bottone IMPOSTAZIONI premuto");
         });
 
-
-
-
     ImageButton tasto= (ImageButton) findViewById(R.id.tastoSettings);
         tasto.setOnClickListener(new View.OnClickListener(){
         @Override
@@ -67,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(modificaProfilo);
             }
         });
-
-
-
 
     }
 }

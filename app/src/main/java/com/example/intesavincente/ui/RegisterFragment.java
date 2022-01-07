@@ -12,9 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.intesavincente.Constants;
+import com.example.intesavincente.MODEL.Utente;
 import com.example.intesavincente.R;
 import com.example.intesavincente.UserViewModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class RegisterFragment extends Fragment {
@@ -40,6 +45,8 @@ public class RegisterFragment extends Fragment {
 
         final EditText editTextEmail = view.findViewById(R.id.email);
         final EditText editTextPassword = view.findViewById(R.id.password);
+        final EditText nicknameText = view.findViewById(R.id.nickname1);
+        DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
 
         final Button buttonRegister = view.findViewById(R.id.register_button);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
@@ -47,10 +54,18 @@ public class RegisterFragment extends Fragment {
             public void onClick(View v) {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
+                String nickname = nicknameText.getText().toString();
+
                 mUserViewModel.signUpWithEmail(email, password).observe(getViewLifecycleOwner(), authenticationResponse -> {
                     if (authenticationResponse != null) {
                         if (authenticationResponse.isSuccess()) {
-                            Navigation.findNavController(v).navigate(R.id.mainActivity);
+                                if(nickname!=null){
+                                    String utenteID = db.push().getKey();
+                                    Utente u=new Utente(FirebaseAuth.getInstance().getCurrentUser().getUid(),nickname,email,null,password, false);
+
+                                    db.child("utenti").child(utenteID).setValue(u);
+                                    Navigation.findNavController(v).navigate(R.id.mainActivity);
+                                }
                         } else {
                             updateUIForFailure(authenticationResponse.getMessage());
                         }

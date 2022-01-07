@@ -93,6 +93,7 @@ public class CreaGruppoFragment extends Fragment {
         return v;
     }
 
+
     //crea il gruppo e lo aggiunge al database
     private void addGroup() {
         String nome = nomeGruppo.getText().toString();

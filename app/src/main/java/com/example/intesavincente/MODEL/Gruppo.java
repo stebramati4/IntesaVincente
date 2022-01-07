@@ -3,6 +3,7 @@ package com.example.intesavincente.MODEL;
 import java.util.Arrays;
 
 public class Gruppo {
+    private String ID;
     private String nome;
     private Utente[] componenti;
 
@@ -12,6 +13,12 @@ public class Gruppo {
 
     public Gruppo(String nome) {
         this.nome = nome;
+    }
+
+    public Gruppo(String ID, String  nome, Utente[] componenti) {
+        this.ID=ID;
+        this.nome=nome;
+        this.componenti=componenti;
     }
 
     public String getNome() {
@@ -45,6 +52,7 @@ public class Gruppo {
                 ", componenti=" + Arrays.toString(componenti) +
                 '}';
     }
+
 
 }
 

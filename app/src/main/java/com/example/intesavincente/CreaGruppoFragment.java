@@ -98,7 +98,6 @@ public class CreaGruppoFragment extends Fragment {
 
         creaGruppoButton.setOnClickListener(view -> {
             addGroup();
-            addUtente();
             //cambia activity
         });
 
@@ -116,54 +115,59 @@ public class CreaGruppoFragment extends Fragment {
         if(!TextUtils.isEmpty(nome)) {
             String gruppoID = db.push().getKey();
             Gruppo gruppo = new Gruppo(nome);
+            //System.out.println("gruppoid " + db.push().getKey());
             db.child("gruppi").child(gruppoID).setValue(gruppo);
             //FirebaseAuth.getInstance().getCurrentUser()
             // String email=FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
             //String uID=FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        else{
-           // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();
-        }
+            db = FirebaseDatabase.getInstance().getReference("utenti");
 
-    }}
-    private void addUtente(){
-        db = FirebaseDatabase.getInstance().getReference("utenti");
-
-        db.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //arrayGruppi.clear();
-                List<String> keys = new ArrayList<>();
-                for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
-                    Log.d(TAG, "Utente stampa query " + keyNode.child("idUtente"));
-                    Log.d(TAG, "Utente chiave " + keyNode.getKey());
-                    Log.d(TAG, "Utente nome " + keyNode.child("nickname").getValue());
-                    Log.d(TAG, "Utente indovinatore " + keyNode.child("indovinatore").getValue());
-                    if (keyNode.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+            db.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //arrayGruppi.clear();
+                    List<String> keys = new ArrayList<>();
+                    for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
                         keys.add(keyNode.getKey());
-                        Utente utente = (Utente) keyNode.getValue(Utente.class);
-
+                        System.out.println("Utente stampa query ");
+                        System.out.println("Utente stampa query " + keyNode.child("idUtente"));
                         Log.d(TAG, "Utente stampa query " + keyNode.child("idUtente"));
                         Log.d(TAG, "Utente chiave " + keyNode.getKey());
                         Log.d(TAG, "Utente nome " + keyNode.child("nickname").getValue());
                         Log.d(TAG, "Utente indovinatore " + keyNode.child("indovinatore").getValue());
-                        db.child("gruppi").child(gruppoID).child("utenti").setValue(utente);
+                        if (keyNode.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            keys.add(keyNode.getKey());
+                            Utente utente = (Utente) keyNode.getValue(Utente.class);
+
+                            Log.d(TAG, "Utente stampa query " + keyNode.child("idUtente"));
+                            Log.d(TAG, "Utente chiave " + keyNode.getKey());
+                            Log.d(TAG, "Utente nome " + keyNode.child("nickname").getValue());
+                            Log.d(TAG, "Utente indovinatore " + keyNode.child("indovinatore").getValue());
+                            db.child("gruppi").child(gruppoID).child("utenti").setValue(utente);
+                        }else{
+                            // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();
+                        }
+
                     }
 
+
+                    //Utente u=new Utente(email,false,FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    // db.child("gruppi").child(gruppoID).child("utenti").setValue(utente);
                 }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
 
-                //Utente u=new Utente(email,false,FirebaseAuth.getInstance().getCurrentUser().getUid());
-                // db.child("gruppi").child(gruppoID).child("utenti").setValue(utente);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-    }
+
+     }}
+
+}
+
     // Write a message to the database
 
    /* FirebaseDatabase mdatabase = FirebaseDatabase.getInstance();

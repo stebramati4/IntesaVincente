@@ -185,7 +185,9 @@ public class ListaGruppiFragment extends Fragment {
                     keys.add(keyNode.getKey());
                     Gruppo gruppo=(Gruppo)keyNode.getValue(Gruppo.class);
                     Log.d(TAG, "GruppoID inside getData: "+keyNode.getKey());
-                    Log.d(TAG, "Gruppo Name inside getData: "+keyNode.child("nome").getValue());
+                    Log.d(TAG, "Gruppo nome utente: "+keyNode.child("utenti").child("nickName").getValue());
+                    Log.d(TAG, "Gruppo indovinatore : "+keyNode.child("utenti").child("indovinatore").getValue());
+
                     Log.d(TAG, "DS inside getData: "+keyNode.child(keyNode.getKey()));
                     //Gruppo gruppo1=new Gruppo(keyNode.child("nome").getValue(),keyNode.getKey(),null);
                     arrayGruppi.add(gruppo);

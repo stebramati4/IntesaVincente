@@ -45,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Bottone IMPOSTAZIONI premuto");
         });
 
-
-
-
     ImageButton tasto= (ImageButton) findViewById(R.id.tastoSettings);
         tasto.setOnClickListener(new View.OnClickListener(){
         @Override
@@ -68,9 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(modificaProfilo);
             }
         });
-
-
-
 
     }
 }

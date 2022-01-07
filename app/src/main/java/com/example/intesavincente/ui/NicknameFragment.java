@@ -1,4 +1,4 @@
-package com.example.intesavincente;
+package com.example.intesavincente.ui;
 
 import android.os.Bundle;
 
@@ -8,16 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.intesavincente.R;
+
 /**
- *
  * A simple {@link Fragment} subclass.
- * Use the {@link AmiciFragment#newInstance} factory method to
+ * Use the {@link NicknameFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AmiciFragment extends Fragment {
-
-
-
+public class NicknameFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +26,7 @@ public class AmiciFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AmiciFragment() {
+    public NicknameFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +36,11 @@ public class AmiciFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AmiciFragment.
+     * @return A new instance of fragment NicknameFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AmiciFragment newInstance(String param1, String param2) {
-        AmiciFragment fragment = new AmiciFragment();
+    public static NicknameFragment newInstance(String param1, String param2) {
+        NicknameFragment fragment = new NicknameFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,6 +61,6 @@ public class AmiciFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_amici, container, false);
+        return inflater.inflate(R.layout.fragment_nickname, container, false);
     }
 }

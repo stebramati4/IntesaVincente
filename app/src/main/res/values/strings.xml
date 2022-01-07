@@ -14,9 +14,9 @@
     <string name="suggerimento">Parola intuita</string>
     <string name="conferma">CONFERMA</string>
 
-    <string name="inserisci_nome_gruppo">Inserisci nome gruppo</string>
+    <string name="inserisci_nome_gruppo">Inserisci Nome Gruppo</string>
 
-    <string name="modificaProfilo">Modifica il tuo profilo</string>
+    <string name="modificaProfilo">Modifica Il Tuo Profilo</string>
     <string name="nickname">Nickname</string>
     <string name="form_email_address">Email</string>
     <string name="form_password">password</string>
@@ -27,4 +27,7 @@
     <string name="registration_failure">An error occured</string>
 
     <string name="salvaModifiche">SALVA MODIFICHE</string>
+
+    <string name="inserisci_nickname">Inserisci Nickname</string>
+    <string name="salva_nickname">SALVA NICKNAME</string>
 </resources>

@@ -77,8 +77,6 @@
                     app:passwordToggleTint="@android:color/black"
                     android:hint="@string/form_password">
 
-
-
                     <EditText
                         android:id="@+id/password"
                         android:layout_width="match_parent"
@@ -87,7 +85,6 @@
                         android:inputType="textPassword"
                         android:maxLines="1"/>
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <Button
                     android:id="@+id/login_button"

@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.intesavincente.MODEL.Gruppo;
+import com.example.intesavincente.MODEL.Utente;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -91,6 +93,7 @@ public class CreaGruppoFragment extends Fragment {
         return v;
     }
 
+
     //crea il gruppo e lo aggiunge al database
     private void addGroup() {
         String nome = nomeGruppo.getText().toString();
@@ -99,8 +102,15 @@ public class CreaGruppoFragment extends Fragment {
             String gruppoID = db.push().getKey();
             Gruppo gruppo = new Gruppo(nome);
             db.child("gruppi").child(gruppoID).setValue(gruppo);
+            //FirebaseAuth.getInstance().getCurrentUser()
+           // String email=FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
+            //String uID=FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            //Utente u=new Utente(email,false,FirebaseAuth.getInstance().getCurrentUser().getUid());
+            //db.child("gruppi").child(gruppoID).child("utenti").setValue(u);
         }
+
         else{
            // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();
         }

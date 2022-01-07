@@ -25,7 +25,7 @@
     <string name="registrati">registrati</string>
     <string name="google_signin">accedi con google</string>
     <string name="registration_failure">An error occured</string>
-
+    <string name="form_nickname_address">nickname</string>
     <string name="salvaModifiche">SALVA MODIFICHE</string>
 
     <string name="inserisci_nickname">Inserisci Nickname</string>

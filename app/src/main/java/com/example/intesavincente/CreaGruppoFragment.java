@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CreaGruppoFragment#newInstance} factory method to
@@ -36,6 +40,8 @@ public class CreaGruppoFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private static final String TAG ="CreaGruppoFragment" ;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,7 +101,9 @@ public class CreaGruppoFragment extends Fragment {
             //cambia activity
         });
 
+
         return v;
+
     }
 
 
@@ -111,7 +119,36 @@ public class CreaGruppoFragment extends Fragment {
             // String email=FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
             //String uID=FirebaseAuth.getInstance().getCurrentUser().getUid();
+            db = FirebaseDatabase.getInstance().getReference().child("utenti");
 
+            db.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //arrayGruppi.clear();
+                    List<String> keys = new ArrayList<>();
+                    for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
+                        if (keyNode.child("idUtente").equals(FirebaseAuth.getInstance().getCurrentUser())) {
+                            keys.add(keyNode.getKey());
+                            Utente utente = (Utente) keyNode.getValue(Utente.class);
+
+                            Log.d(TAG, "Utente stampa query " + keyNode.child("idUtente"));
+                            Log.d(TAG, "Utente chiave " + keyNode.getKey());
+                            Log.d(TAG, "Utente nome " + keyNode.child("nickname").getValue());
+                            Log.d(TAG, "Utente indovinatore " + keyNode.child("indovinatore").getValue());
+                            db.child("gruppi").child(gruppoID).child("utenti").setValue(utente);
+                        }
+
+                    }
+
+
+                    //Utente u=new Utente(email,false,FirebaseAuth.getInstance().getCurrentUser().getUid());
+                   // db.child("gruppi").child(gruppoID).child("utenti").setValue(utente);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
         }
         else{
            // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();

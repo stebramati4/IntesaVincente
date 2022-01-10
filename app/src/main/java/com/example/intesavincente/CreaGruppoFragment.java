@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.intesavincente.ADAPTER.ListaGruppiAdapter;
 import com.example.intesavincente.MODEL.Gruppo;
 import com.example.intesavincente.MODEL.Utente;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +41,7 @@ public class CreaGruppoFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG ="CreaGruppoFragment";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -66,7 +72,8 @@ public class CreaGruppoFragment extends Fragment {
     Button creaGruppoButton;
     EditText nomeGruppo;
 
-    DatabaseReference db;
+    DatabaseReference db1;
+    DatabaseReference db2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,8 +82,6 @@ public class CreaGruppoFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
@@ -88,7 +93,27 @@ public class CreaGruppoFragment extends Fragment {
         creaGruppoButton = v.findViewById(R.id.crea);
         nomeGruppo = v.findViewById(R.id.campoNick);
 
-        db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
+        db2 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
+
+        db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
+        db1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //arrayGruppi.clear();
+                for(DataSnapshot keyNode : snapshot.getChildren()){
+                    if(keyNode.getKey().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        String key = keyNode.getKey();
+                        Utente utente = keyNode.getValue(Utente.class);
+                        Log.d(TAG, "Nickname: " + keyNode.child("nickname").getValue());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         creaGruppoButton.setOnClickListener(view -> {
             addGroup();
@@ -98,15 +123,14 @@ public class CreaGruppoFragment extends Fragment {
         return v;
     }
 
-
     //crea il gruppo e lo aggiunge al database
     private void addGroup() {
         String nome = nomeGruppo.getText().toString();
 
         if(!TextUtils.isEmpty(nome)) {
-            String gruppoID = db.push().getKey();
+            String gruppoID = db2.push().getKey();
             Gruppo gruppo = new Gruppo(nome);
-            db.child("gruppi").child(gruppoID).setValue(gruppo);
+            db2.child("gruppi").child(gruppoID).setValue(gruppo);
             //FirebaseAuth.getInstance().getCurrentUser()
             // String email=FirebaseAuth.getInstance().getCurrentUser().getEmail();
 

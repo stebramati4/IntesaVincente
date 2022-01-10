@@ -62,7 +62,6 @@ public class ListaGruppiFragment extends Fragment {
         return fragment;
     }
 
-
     ListView listaGruppi;
     ArrayList<Gruppo> arrayGruppi = new ArrayList<Gruppo>();
 
@@ -80,105 +79,10 @@ public class ListaGruppiFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_lista_gruppi, container, false);
 
-       // final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), android.R.layout.activity_list_item, arrayGruppi);
-        //listaGruppi = v.findViewById(R.id.Gruppi_listView);
-        //listaGruppi.setAdapter(myArrayAdapter);
-       // final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), R.layout.gruppi_list_item, arrayGruppi);
-
-        //listaGruppi = v.findViewById(R.id.Gruppi_listView);
-       // listaGruppi.setAdapter(myArrayAdapter);
-        //db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi").child("gruppoID");
         db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
-
-        /*     db.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Gruppo value = snapshot.getValue(Gruppo.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-*//*
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("gruppi");
-        //DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("gruppi/gruppoID");
-        Query usersQuery = usersRef.orderByChild("nome");
-
-        usersQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    Log.d(TAG, "GruppoID inside getData: "+userSnapshot.getKey());
-                    Log.d(TAG, "Gruppo Name inside getData: "+userSnapshot.child("nome").getValue());
-                    Log.d(TAG, "DS inside getData: "+userSnapshot.child(userSnapshot.getKey()));
-                   // System.out.println(userSnapshot.getKey() + ": " + userSnapshot.getChild("nome").getValue(String.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                throw databaseError.toException();
-            }
-*//*
-
-       db.addChildEventListener(new ChildEventListener() {
-
-           @Override
-           public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-               Gruppo value = snapshot.getValue(Gruppo.class);
-               arrayGruppi.add(value);
-               Log.d(TAG," valore"+ value);
-
-               myArrayAdapter.notifyDataSetChanged();
-
-
-
-               //ListaGruppiAdapter adapter = new ListaGruppiAdapter(ListaGruppiFragment.this, arrayGruppi);
-               //listaGruppi.setAdapter(myArrayAdapter);
-           }
-
-           @Override
-           public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-               arrayGruppi.clear();
-               List<String> keys= new ArrayList<>();
-               for(DataSnapshot keyNode : snapshot.getChildren()){
-
-                       keys.add(keyNode.getKey());
-                       Gruppo gruppo = (Gruppo) keyNode.getValue(Gruppo.class);
-                       Log.d(TAG, "GruppoID inside getData: " + keyNode.getKey());
-                       Log.d(TAG, "Gruppo Name inside getData: " + keyNode.child("nome").getValue());
-                       Log.d(TAG, "DS inside getData: " + keyNode.child(keyNode.getKey()));
-                       //Gruppo gruppo1=new Gruppo(keyNode.child("nome").getValue(),keyNode.getKey(),null);
-                       arrayGruppi.add(gruppo);
-                       myArrayAdapter.notifyDataSetChanged();
-
-               }
-           }
-
-           @Override
-           public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-           }
-
-           @Override
-           public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-           }
-
-           @Override
-           public void onCancelled(@NonNull DatabaseError error) {
-
-           }
-
-
-       });
-   */
         db.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) { 
                 arrayGruppi.clear();
                 List<String> keys= new ArrayList<>();
                 for(DataSnapshot keyNode : snapshot.getChildren()){

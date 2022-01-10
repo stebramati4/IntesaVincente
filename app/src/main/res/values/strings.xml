@@ -30,4 +30,5 @@
 
     <string name="inserisci_nickname">Inserisci Nickname</string>
     <string name="salva_nickname">SALVA NICKNAME</string>
+    <string name="logout">LOGOUT</string>
 </resources>

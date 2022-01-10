@@ -62,7 +62,6 @@ public class ListaGruppiFragment extends Fragment {
         return fragment;
     }
 
-
     ListView listaGruppi;
     ArrayList<Gruppo> arrayGruppi = new ArrayList<Gruppo>();
 
@@ -80,26 +79,16 @@ public class ListaGruppiFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_lista_gruppi, container, false);
 
-       // final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), android.R.layout.activity_list_item, arrayGruppi);
-        //listaGruppi = v.findViewById(R.id.Gruppi_listView);
-        //listaGruppi.setAdapter(myArrayAdapter);
-       // final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), R.layout.gruppi_list_item, arrayGruppi);
-
-        //listaGruppi = v.findViewById(R.id.Gruppi_listView);
-       // listaGruppi.setAdapter(myArrayAdapter);
-        //db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi").child("gruppoID");
         db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
-
         db.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) { 
                 arrayGruppi.clear();
                 List<String> keys= new ArrayList<>();
                 for(DataSnapshot keyNode : snapshot.getChildren()){
                     keys.add(keyNode.getKey());
                     Gruppo gruppo=(Gruppo)keyNode.getValue(Gruppo.class);
                     Log.d(TAG, "GruppoID inside getData: "+keyNode.getKey());
-                    Log.d(TAG, "nomeGruppo inside getData: "+keyNode.getValue());
                     Log.d(TAG, "Gruppo nome utente: "+keyNode.child("utenti").child("nickName").getValue());
                     Log.d(TAG, "Gruppo indovinatore : "+keyNode.child("utenti").child("indovinatore").getValue());
 

@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         Toolbar toolbar = findViewById(R.id.toolbar_logo);
-        setSupportActionBar(toolbar);
 
         ImageButton imageButtonSettings = findViewById(R.id.tastoSettings);
         imageButtonSettings.setOnClickListener(view -> {

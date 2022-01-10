@@ -143,7 +143,7 @@ public class CreaGruppoFragment extends Fragment {
                             Log.d(TAG, "componenti del gruppo ");
                             //gruppo.setComponenti(utente);
                             Log.d(TAG, "componenti del gruppo ");
-                            Log.d(TAG, "componenti del gruppo " +gruppo.getComponenti().stampa());
+                            Log.d(TAG, "componenti del gruppo " +gruppo.stampa());              //Non è più gruppo.getComponenti().stampa()
                             //db1.child("gruppi").child(gruppoID).setValue(utente);
 
 

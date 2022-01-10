@@ -61,10 +61,19 @@ public class Gruppo {
                 ", componenti=" + Arrays.toString(componenti)+
                 '}';
     }
-    public String stampa(){
+
+    public String stampa(){     //Modificato in modo tale che prenda già i componenti del gruppo
+        Utente[] componenti = getComponenti();
         String stampa = "";
         for(int i=0;i<3;i++){
-            stampa = stampa.append(componenti[i].toString1());
+            if(componenti[i] != null){
+                if(i == 0)
+                    stampa = componenti[i].toString1();
+                else
+                    stampa = stampa + ", " + componenti[i].toString1();
+            }
+            else
+                return stampa;
         }
         return stampa;
     }

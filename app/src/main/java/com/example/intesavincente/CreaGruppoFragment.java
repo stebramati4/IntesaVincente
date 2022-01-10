@@ -183,4 +183,4 @@ public class CreaGruppoFragment extends Fragment {
         mDatabase.child("users").child(userId).setValue(user);
     }*/
 
-    // piccola modifica inutile
+    // piccola modifica inutile 2

@@ -10,7 +10,9 @@ public class Utente {
     private String password;
     public Statistica statistica;
     public boolean indovinatore;
+    public Utente(){
 
+    }
     public Utente(String mail, boolean indovinatore, String idUtente) {
         this.mail = mail;
         this.indovinatore=indovinatore;
@@ -64,8 +66,8 @@ public class Utente {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
+    //@Override
+    public String toString1() {
         return "Utente{" +
                 "nickname='" + nickname + '\'' +
                 ", mail='" + mail + '\'' +

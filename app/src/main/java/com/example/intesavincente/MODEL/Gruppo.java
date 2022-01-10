@@ -5,20 +5,26 @@ import java.util.Arrays;
 public class Gruppo {
     private String ID;
     private String nome;
-    private Utente[] componenti;
+    private Utente[] componenti=new Utente[3];
 
     public Gruppo(){
 
     }
 
     public Gruppo(String nome) {
+
         this.nome = nome;
     }
 
-    public Gruppo(String ID, String  nome, Utente[] componenti) {
+    public Gruppo(String ID, String  nome, Utente u) {
         this.ID=ID;
         this.nome=nome;
-        this.componenti=componenti;
+        for(int i=0;i<3;i++) {
+            if (componenti[i] != null)
+                componenti[i] = u;
+            else
+                componenti[i] = null;
+        }
     }
 
     public String getNome() {
@@ -30,11 +36,14 @@ public class Gruppo {
     }
 
     public Utente[] getComponenti() {
+
         return componenti;
     }
 
-    public void setComponenti(Utente[] componenti) {
-        this.componenti = componenti;
+    public void setComponenti(Utente utente) {
+        for(int i=0;i<3;i++){
+            componenti[i]=utente;
+        }
     }
 
     //private boolean hasIndovinatore(Utente[] componenti){
@@ -49,10 +58,25 @@ public class Gruppo {
     public String toString() {
         return "Gruppo{" +
                 "nome='" + nome + '\'' +
-                ", componenti=" + Arrays.toString(componenti) +
+                ", componenti=" + Arrays.toString(componenti)+
                 '}';
     }
 
+    public String stampa(){     //Modificato in modo tale che prenda già i componenti del gruppo
+        Utente[] componenti = getComponenti();
+        String stampa = "";
+        for(int i=0;i<3;i++){
+            if(componenti[i] != null){
+                if(i == 0)
+                    stampa = componenti[i].toString1();
+                else
+                    stampa = stampa + ", " + componenti[i].toString1();
+            }
+            else
+                return stampa;
+        }
+        return stampa;
+    }
 
 }
 

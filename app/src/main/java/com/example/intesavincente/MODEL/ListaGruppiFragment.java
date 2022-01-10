@@ -142,3 +142,5 @@ public class ListaGruppiFragment extends Fragment {
     }
 
 }
+
+// piccola modifica inutile

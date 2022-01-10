@@ -87,16 +87,19 @@ public class ListaGruppiFragment extends Fragment {
                 List<String> keys= new ArrayList<>();
                 for(DataSnapshot keyNode : snapshot.getChildren()){
                     keys.add(keyNode.getKey());
-                    Gruppo gruppo=(Gruppo)keyNode.getValue(Gruppo.class);
+                    Log.d(TAG, "Chiavi gruppi "+ keys.toString());
+                    Log.d(TAG, "Chiavi gruppi "+ keyNode);
+
                     Log.d(TAG, "GruppoID inside getData: "+keyNode.getKey());
-                    Log.d(TAG, "Gruppo nome utente: "+keyNode.child("utenti").child("nickName").getValue());
-                    Log.d(TAG, "Gruppo indovinatore : "+keyNode.child("utenti").child("indovinatore").getValue());
+                    Log.d(TAG, "Nome Gruppo: "+keyNode.child("nome").getValue());
+                    Log.d(TAG, "Componenti : "+keyNode.child("componenti").getValue());
 
                     Log.d(TAG, "DS inside getData: "+keyNode.child(keyNode.getKey()));
                     //Gruppo gruppo1=new Gruppo(keyNode.child("nome").getValue(),keyNode.getKey(),null);
+
+                    Gruppo gruppo=(Gruppo)keyNode.getValue(Gruppo.class);
                     arrayGruppi.add(gruppo);
                     final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), R.layout.gruppi_list_item, arrayGruppi);
-
 
                     listaGruppi = v.findViewById(R.id.Gruppi_listView);
                     listaGruppi.setAdapter(myArrayAdapter);

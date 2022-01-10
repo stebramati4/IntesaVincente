@@ -75,6 +75,8 @@ public class CreaGruppoFragment extends Fragment {
     DatabaseReference db;
     DatabaseReference db1;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +133,7 @@ public class CreaGruppoFragment extends Fragment {
                         if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                             keys.add(keyNode.getKey());
                             Utente utente = (Utente) keyNode.getValue(Utente.class);
-
+                            //Log.d(TAG, " utente " + keyNode.getValue(Utente.class));
                             Log.d(TAG, "Utente stampa query if " + keyNode.child("idUtente"));
                             Log.d(TAG, "Utente chiave  if " + keyNode.getKey());
                             Log.d(TAG, "Utente nome if" + keyNode.child("nickname").getValue());
@@ -139,13 +141,14 @@ public class CreaGruppoFragment extends Fragment {
                             Log.d(TAG, "Utente stampa query if " + keyNode.child("gruppi").child("utenti"));
                             Log.d(TAG, " gruppo id"+gruppoID);
                             Log.d(TAG, " nome"+nome);
+                            Log.d(TAG, " utente "+utente.toString1());
+
                             Gruppo gruppo = new Gruppo(gruppoID,nome,utente);
                             Log.d(TAG, "componenti del gruppo ");
                             //gruppo.setComponenti(utente);
                             Log.d(TAG, "componenti del gruppo ");
-                            Log.d(TAG, "componenti del gruppo " +gruppo.stampa());              //Non è più gruppo.getComponenti().stampa()
+                            Log.d(TAG, "componenti del gruppo " + gruppo.stampaLista());              //Non è più gruppo.getComponenti().stampa()
                             //db1.child("gruppi").child(gruppoID).setValue(utente);
-
 
                             //System.out.println("gruppoid " + db.push().getKey());
                             db.child("gruppi").child(gruppoID).setValue(gruppo);

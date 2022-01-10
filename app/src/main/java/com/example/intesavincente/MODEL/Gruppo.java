@@ -1,30 +1,31 @@
 package com.example.intesavincente.MODEL;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Gruppo {
     private String ID;
     private String nome;
-    private Utente[] componenti=new Utente[3];
+    private ArrayList<Utente> componenti = new ArrayList<Utente>();
 
     public Gruppo(){
 
     }
 
     public Gruppo(String nome) {
-
         this.nome = nome;
     }
 
-    public Gruppo(String ID, String  nome, Utente u) {
+    public Gruppo(String ID, String  nome, Utente utente) {
         this.ID=ID;
         this.nome=nome;
-        for(int i=0;i<3;i++) {
-            if (componenti[i] != null)
-                componenti[i] = u;
-            else
-                componenti[i] = null;
-        }
+        componenti.add(utente);
+    }
+
+    public Gruppo(String ID, String  nome, ArrayList<Utente> componenti) {
+        this.ID=ID;
+        this.nome=nome;
+        this.componenti = componenti;
     }
 
     public String getNome() {
@@ -35,15 +36,12 @@ public class Gruppo {
         this.nome = nome;
     }
 
-    public Utente[] getComponenti() {
-
+    public ArrayList<Utente> getComponenti() {
         return componenti;
     }
 
     public void setComponenti(Utente utente) {
-        for(int i=0;i<3;i++){
-            componenti[i]=utente;
-        }
+
     }
 
     //private boolean hasIndovinatore(Utente[] componenti){
@@ -58,19 +56,19 @@ public class Gruppo {
     public String toString() {
         return "Gruppo{" +
                 "nome='" + nome + '\'' +
-                ", componenti=" + Arrays.toString(componenti)+
+                ", componenti=" + stampaLista()+
                 '}';
     }
 
-    public String stampa(){     //Modificato in modo tale che prenda già i componenti del gruppo
-        Utente[] componenti = getComponenti();
+    public String stampaLista(){     //Modificato in modo tale che prenda già i componenti del gruppo
+        ArrayList<Utente> componenti = getComponenti();
         String stampa = "";
-        for(int i=0;i<3;i++){
-            if(componenti[i] != null){
+        for(int i=0;i<componenti.size();i++){
+            if(componenti.get(i) != null){
                 if(i == 0)
-                    stampa = componenti[i].toString1();
+                    stampa = componenti.get(i).toString1();
                 else
-                    stampa = stampa + ", " + componenti[i].toString1();
+                    stampa = stampa + ", " + componenti.get(i).toString1();
             }
             else
                 return stampa;

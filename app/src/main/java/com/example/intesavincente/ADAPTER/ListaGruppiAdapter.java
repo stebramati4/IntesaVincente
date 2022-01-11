@@ -1,6 +1,7 @@
 package com.example.intesavincente.ADAPTER;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import androidx.annotation.Nullable;
  */
 public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
 
+    private static final String TAG ="ListaGruppiAdapter" ;
+
     private ArrayList<Gruppo> mArrayGruppi;
     private int mLayout;
 
@@ -38,10 +41,11 @@ public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
         }
 
         TextView textViewNomeGruppo = convertView.findViewById(R.id.nome_gruppo);
-        //TextView textViewSourceTitle = convertView.findViewById(R.id.news_source);
-
         textViewNomeGruppo.setText(mArrayGruppi.get(position).getNome());
-        //textViewSourceTitle.setText(mArrayNews[position].getNewsSource().getName());
+        Log.d(TAG, "Componenti : "+mArrayGruppi.get(position).getComponenti());
+        Log.d(TAG, "Tipo : "+mArrayGruppi.getClass());
+        TextView textViewComponenti = convertView.findViewById(R.id.componenti);
+        textViewNomeGruppo.setText(mArrayGruppi.get(position).stampaNomeComponenti());
 
         return convertView;
     }

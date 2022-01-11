@@ -96,9 +96,12 @@ public class ListaGruppiFragment extends Fragment {
 
                     Log.d(TAG, "DS inside getData: "+keyNode.child(keyNode.getKey()));
                     //Gruppo gruppo1=new Gruppo(keyNode.child("nome").getValue(),keyNode.getKey(),null);
-
-                    Gruppo gruppo=(Gruppo)keyNode.getValue(Gruppo.class);
+                    Log.d(TAG, "Nome Gruppo: "+keyNode.getValue());
+                    Log.d(TAG, "Class: "+keyNode.child("componenti").getValue().getClass());
+                    
+                    Gruppo gruppo = (Gruppo)keyNode.getValue(Gruppo.class);
                     arrayGruppi.add(gruppo);
+
                     final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), R.layout.gruppi_list_item, arrayGruppi);
 
                     listaGruppi = v.findViewById(R.id.Gruppi_listView);

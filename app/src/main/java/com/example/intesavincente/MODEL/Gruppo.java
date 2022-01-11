@@ -61,7 +61,7 @@ public class Gruppo {
     }
 
     public String stampaLista(){     //Modificato in modo tale che prenda già i componenti del gruppo
-        ArrayList<Utente> componenti = getComponenti();
+        //ArrayList<Utente> componenti = getComponenti();
         String stampa = "";
         for(int i=0;i<componenti.size();i++){
             if(componenti.get(i) != null){

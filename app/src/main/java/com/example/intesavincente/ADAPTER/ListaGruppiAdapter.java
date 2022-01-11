@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 /**
- * * Custom Adapter that extends ArrayAdapter to show the news in a ListView.
+ * * Custom Adapter that extends ArrayAdapter to show the groups in a ListView.
  */
 public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
 

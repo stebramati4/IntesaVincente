@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.intesavincente.MODEL.Gruppo;
 import com.example.intesavincente.MODEL.Utente;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,6 +72,7 @@ public class CreaGruppoFragment extends Fragment {
 
     Button creaGruppoButton;
     EditText nomeGruppo;
+    Snackbar snackbarCreaGruppo;
 
     DatabaseReference db;
     DatabaseReference db1;
@@ -96,6 +98,7 @@ public class CreaGruppoFragment extends Fragment {
 
         creaGruppoButton = v.findViewById(R.id.crea);
         nomeGruppo = v.findViewById(R.id.campoNick);
+
 
         db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
 
@@ -152,6 +155,10 @@ public class CreaGruppoFragment extends Fragment {
 
                             //System.out.println("gruppoid " + db.push().getKey());
                             db.child("gruppi").child(gruppoID).setValue(gruppo);
+
+                            snackbarCreaGruppo = Snackbar.make(v, "GRUPPO " + gruppo.getNome() + " CREATO", Snackbar.LENGTH_SHORT);
+                            snackbarCreaGruppo.show();
+
                         } else {
                             // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();
                         }

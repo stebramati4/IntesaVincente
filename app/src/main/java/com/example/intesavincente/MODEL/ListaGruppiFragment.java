@@ -67,6 +67,8 @@ public class ListaGruppiFragment extends Fragment {
 
     ListView listaGruppi;
     Snackbar snackbarUniscitiGruppo;
+    Snackbar snackbarIsInserito;
+    Snackbar snackbarGruppoPieno;
     ArrayList<Gruppo> arrayGruppi = new ArrayList<Gruppo>();
 
     DatabaseReference dbGruppi;
@@ -92,47 +94,39 @@ public class ListaGruppiFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) { 
                 arrayGruppi.clear();
                 List<String> keys= new ArrayList<>();
-                for(DataSnapshot keyNode : snapshot.getChildren()){
+                for(DataSnapshot keyNode : snapshot.getChildren()) {
                     keys.add(keyNode.getKey());
-                    Log.d(TAG, "Chiavi gruppi "+ keys.toString());
-                    Log.d(TAG, "Chiavi gruppi "+ keyNode);
+                    Log.d(TAG, "Chiavi gruppi " + keys.toString());
+                    Log.d(TAG, "Chiavi gruppi " + keyNode);
 
-                    Log.d(TAG, "GruppoID inside getData: "+keyNode.getKey());
-                    Log.d(TAG, "Nome Gruppo: "+keyNode.child("nome").getValue());
-                    Log.d(TAG, "Componenti : "+keyNode.child("componenti").getValue());
+                    Log.d(TAG, "GruppoID inside getData: " + keyNode.getKey());
+                    Log.d(TAG, "Nome Gruppo: " + keyNode.child("nome").getValue());
+                    Log.d(TAG, "Componenti : " + keyNode.child("componenti").getValue());
 
-                    Log.d(TAG, "DS inside getData: "+keyNode.child(keyNode.getKey()));
+                    Log.d(TAG, "DS inside getData: " + keyNode.child(keyNode.getKey()));
                     //Gruppo gruppo1=new Gruppo(keyNode.child("nome").getValue(),keyNode.getKey(),null);
-                    Log.d(TAG, "Nome Gruppo: "+keyNode.getValue());
-                    Log.d(TAG, "Class: "+keyNode.child("componenti").getValue().getClass());
-                    Log.d(TAG, "Tipo componente: "+keyNode.child("componenti").child("0").getValue(Utente.class).getClass());
+                    Log.d(TAG, "Nome Gruppo: " + keyNode.getValue());
+                    Log.d(TAG, "Class: " + keyNode.child("componenti").getValue().getClass());
+                    Log.d(TAG, "Tipo componente: " + keyNode.child("componenti").child("0").getValue(Utente.class).getClass());
+
                     String gruppoId = keyNode.getKey();
                     String nomeGruppo = (String) keyNode.child("nome").getValue();
-
                     ArrayList<Utente> componenti = new ArrayList<Utente>();
 
-                    for(int i=0; i<3; i++){
-                        if(keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
+                    for (int i = 0; i < 3; i++) {
+                        if (keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
                             Utente componente = keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
-                            Log.d(TAG, "Componente: "+componente.toString1());
+                            Log.d(TAG, "Componente: " + componente.toString1());
                             componenti.add(componente);
                         }
                     }
-
                     Gruppo gruppo = new Gruppo(gruppoId, nomeGruppo, componenti);
                     arrayGruppi.add(gruppo);
-                    for(int i=0; i<arrayGruppi.size(); i++){
-                        Log.d(TAG, "Nome Gruppo: "+arrayGruppi.get(i).getNome());
-                        Log.d(TAG, "Nome Gruppo: "+arrayGruppi.get(i).getComponenti());
-                    }
-
-
-
                 }
-
                 final ListaGruppiAdapter myArrayAdapter = new ListaGruppiAdapter(requireContext(), R.layout.gruppi_list_item, arrayGruppi);
                 listaGruppi.setAdapter(myArrayAdapter);
                 myArrayAdapter.notifyDataSetChanged();
+
 
             }
 
@@ -155,7 +149,6 @@ public class ListaGruppiFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         List<String> keysUtenti = new ArrayList<>();
-                        List<String> keysGruppi = new ArrayList<>();
                         for (DataSnapshot keyNode : snapshot.getChildren()) {
                             Log.d(TAG, "KeyNode " + keyNode);
                             keysUtenti.add(keyNode.getKey());
@@ -168,17 +161,49 @@ public class ListaGruppiFragment extends Fragment {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         ArrayList<Utente> listaComponenti = new ArrayList<Utente>();
-                                        for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
-                                            Log.d(TAG, "KeyNode " + keyNode);
-                                            Log.d(TAG, "Class KeyNode " + keyNode.getValue().getClass());
-                                            Log.d(TAG, "GruppoID " + keyNode.child("componenti").getValue().getClass());
-                                            listaComponenti = (ArrayList<Utente>) keyNode.child("componenti").getValue();
+                                        List<String> keysGruppi = new ArrayList<>();
+                                        for (DataSnapshot keyNodeGruppi : dataSnapshot.getChildren()) {
+                                            keysGruppi.add(keyNodeGruppi.getKey());
+                                            Log.d(TAG, "KeyNode " + keyNodeGruppi);
+                                            Log.d(TAG, "Class KeyNode " + keyNodeGruppi.getValue().getClass());
+                                            Log.d(TAG, "GruppoID " + keyNodeGruppi.child("componenti").getValue().getClass());
+                                            if(gruppo.getID().equals(keyNodeGruppi.getKey())){
+                                                Boolean isInserito = false;
+
+                                                for (int i = 0; i < 3; i++) {
+                                                    if (keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
+                                                        Utente componente = keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
+                                                        listaComponenti.add(componente);
+                                                    }
+                                                }
+
+                                                for(int i = 0; i < listaComponenti.size(); i++){
+                                                    Log.d(TAG, "Utente " + utente.getNickname());
+                                                    Log.d(TAG, "Componente " + listaComponenti.get(i).getNickname());
+                                                    if(utente.getNickname().equals(listaComponenti.get(i).getNickname())){
+                                                        isInserito = true;
+                                                    }
+                                                }
+                                                if(isInserito){
+                                                    snackbarIsInserito = Snackbar.make(v, "UTENTE GIA' PRESENTE NEL GRUPPO", Snackbar.LENGTH_SHORT);
+                                                    snackbarIsInserito.show();
+                                                }
+                                                else {
+                                                    if (listaComponenti.size() < 3) {
+                                                        dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(utente);
+                                                        snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
+                                                        snackbarUniscitiGruppo.show();
+                                                    }
+                                                    else{
+                                                        snackbarGruppoPieno = Snackbar.make(v, "GRUPPO GIA' COMPLETO", Snackbar.LENGTH_SHORT);
+                                                        snackbarGruppoPieno.show();
+                                                    }
+                                                }
+                                            }
                                             Log.d(TAG, "GruppoID " + listaComponenti);
-                                            keysGruppi.add(keyNode.getKey());
                                         }
-                                        if(listaComponenti.size() < 3) {
-                                            dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(utente);
-                                        }
+
+
                                     }
 
                                     @Override

@@ -99,16 +99,19 @@ public class ListaGruppiFragment extends Fragment {
                     Log.d(TAG, "Nome Gruppo: "+keyNode.getValue());
                     Log.d(TAG, "Class: "+keyNode.child("componenti").getValue().getClass());
                     Log.d(TAG, "Tipo componente: "+keyNode.child("componenti").child("0").getValue(Utente.class).getClass());
-                    Log.d(TAG, "Componente: "+keyNode.child("componenti").getValue(ArrayList.class));
-                    Log.d(TAG, "Componente: "+keyNode.child("componenti").child("0").getKey());
                     String gruppoId = keyNode.getKey();
                     String nomeGruppo = (String) keyNode.child("nome").getValue();
+
                     ArrayList<Utente> componenti = new ArrayList<Utente>();
+
                     for(int i=0; i<3; i++){
-                        if(keyNode.child("componenti").child(String.valueOf(i)).getValue() != null) {
-                            componenti.add((Utente) keyNode.child("componenti").child(String.valueOf(i)).getValue());
+                        if(keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
+                            Utente componente = keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
+                            Log.d(TAG, "Componente: "+componente.toString1());
+                            componenti.add(componente);
                         }
                     }
+
                     Gruppo gruppo = new Gruppo(gruppoId, nomeGruppo, componenti);
                     arrayGruppi.add(gruppo);
                     for(int i=0; i<arrayGruppi.size(); i++){

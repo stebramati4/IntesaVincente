@@ -42,10 +42,10 @@ public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
 
         TextView textViewNomeGruppo = convertView.findViewById(R.id.nome_gruppo);
         textViewNomeGruppo.setText(mArrayGruppi.get(position).getNome());
-        Log.d(TAG, "Componenti : "+mArrayGruppi.get(position).getComponenti());
-        Log.d(TAG, "Tipo : "+mArrayGruppi.getClass());
+        Log.d(TAG, "Componenti : "+mArrayGruppi.get(position).getNome());
         TextView textViewComponenti = convertView.findViewById(R.id.componenti);
-        textViewNomeGruppo.setText(mArrayGruppi.get(position).stampaNomeComponenti());
+        textViewComponenti.setText(mArrayGruppi.get(position).stampaNomeComponenti());
+        Log.d(TAG, "Componenti : "+mArrayGruppi.get(position).stampaNomeComponenti());
 
         return convertView;
     }

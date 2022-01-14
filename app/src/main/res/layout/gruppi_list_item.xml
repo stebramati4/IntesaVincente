@@ -5,14 +5,15 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"
+    app:cardBackgroundColor="@color/blue_list_item"
     app:cardCornerRadius="4dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="?attr/selectableItemBackground" >
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
 
 
         <TextView
@@ -20,15 +21,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:textSize="18sp"
-            android:textColor="@android:color/black" />
+            android:textAllCaps="true"
+            android:textColor="@color/orange"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/componenti"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
             android:textSize="14sp" />
 
     </LinearLayout>

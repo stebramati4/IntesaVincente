@@ -89,25 +89,29 @@
                 <Button
                     android:id="@+id/login_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_marginTop="20dp"
-                    android:paddingStart="18dp"
+                    android:backgroundTint="@color/orange"
                     android:paddingLeft="18dp"
-                    android:text="@string/form_email_address"
+                    android:paddingStart="18dp"
+                    android:text="@string/accedi"
                     android:textAllCaps="true"
-                    android:textSize="16sp"
-                    app:iconTint="@color/orange"
-                    app:rippleColor="@color/orange" />
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="10dp" />
 
                 <Button
                     android:id="@+id/google_login_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/googleg_standard_color_18"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/orange"
                     android:drawableLeft="@drawable/googleg_standard_color_18"
+                    android:drawableStart="@drawable/googleg_standard_color_18"
                     android:text="@string/google_signin"
                     android:textAllCaps="true"
-                    android:textSize="16sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="10dp" />
 
                 <TextView
                     android:id="@+id/textview_create_account"
@@ -123,8 +127,9 @@
                     android:paddingEnd="12dp"
                     android:paddingRight="12dp"
                     android:paddingBottom="12dp"
-                    android:text="registrati"
-                    android:textColor="@android:color/black"
+                    android:text="@string/registrati"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

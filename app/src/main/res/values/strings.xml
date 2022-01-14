@@ -7,8 +7,8 @@
     <string name="unisciti_a_gruppo">UNISCITI A GRUPPO</string>
     <string name="indovinatore">INDOVINATORE</string>
     <string name="suggeritore">SUGGERITORE</string>
-    <string name="unisciti_come">Unisciti come</string>
-    <string name="avanti">Avanti</string>
+    <string name="unisciti_come">Unisciti Come</string>
+    <string name="avanti">AVANTI</string>
 
     <string name="inserisciParpla">INSERISCI PAROLA</string>
     <string name="suggerimento">Parola intuita</string>
@@ -19,13 +19,13 @@
     <string name="modificaProfilo">Modifica Il Tuo Profilo</string>
     <string name="nickname">Nickname</string>
     <string name="form_email_address">Email</string>
-    <string name="form_password">password</string>
-    <string name="accedi">accedi</string>
+    <string name="form_password">Password</string>
+    <string name="accedi">ACCEDI</string>
     <string name="skip">salta</string>
-    <string name="registrati">registrati</string>
+    <string name="registrati">Registrati</string>
     <string name="google_signin">accedi con google</string>
     <string name="registration_failure">An error occured</string>
-    <string name="form_nickname_address">nickname</string>
+    <string name="form_nickname_address">Nickname</string>
     <string name="salvaModifiche">SALVA MODIFICHE</string>
 
     <string name="inserisci_nickname">Inserisci Nickname</string>

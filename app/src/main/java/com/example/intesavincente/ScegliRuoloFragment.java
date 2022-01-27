@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ScegliRuoloFragment extends Fragment {
 
     @Override
@@ -22,6 +25,7 @@ public class ScegliRuoloFragment extends Fragment {
 
     private static final String TAG ="ScegliRuoloFragment" ;
     Button avantiButton;
+    DatabaseReference db;
     Button indovinatore;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,17 +46,19 @@ public class ScegliRuoloFragment extends Fragment {
 
                 // get selected radio button from radioGroup
                 int selectedId = radioGroup2.getCheckedRadioButtonId();
-                if(selectedId==1089)
-                    Log.d(TAG, "suggeritore" + selectedId);
-                if(selectedId==1414)
+                Log.d(TAG, "selectedID" + selectedId);
+                if(selectedId==2131230727){
                     Log.d(TAG, "indovinatore" + selectedId);
 
+                    db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
+
+                    db.child("gruppi").child(gruppoID).child(indovinatore).setValue(false);
+
+                }
+
+
                 //radioButton = (RadioButton) v.findViewById(selectedId);
-                final String value =
-                        ((RadioButton)v.findViewById(radioGroup2.getCheckedRadioButtonId()))
-                                .getText().toString();
-                if(value.equals(R.id.SuggeritoreRadio))
-                    Log.d(TAG, "con value " + radioGroup2);
+
             }
 
         });

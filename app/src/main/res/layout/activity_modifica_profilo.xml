@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue"
-    tools:context=".modificaProfilo">
+    tools:context=".ModificaProfilo">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_logo"
@@ -164,7 +164,7 @@
         app:layout_constraintVertical_bias="0.238" />
 
     <Button
-        android:id="@+id/logout"
+        android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:backgroundTint="@color/orange"

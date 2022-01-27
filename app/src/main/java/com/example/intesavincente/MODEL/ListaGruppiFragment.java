@@ -127,7 +127,6 @@ public class ListaGruppiFragment extends Fragment {
                 listaGruppi.setAdapter(myArrayAdapter);
                 myArrayAdapter.notifyDataSetChanged();
 
-
             }
 
             @Override

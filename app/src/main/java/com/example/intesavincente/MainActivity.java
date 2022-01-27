@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
@@ -14,8 +13,6 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View arg0) {
             // definisco l'intenzione
-            Intent modificaProfilo = new Intent(MainActivity.this,modificaProfilo.class);
+            Intent modificaProfilo = new Intent(MainActivity.this, ModificaProfilo.class);
             // passo all'attivazione dell'activity Pagina.java
             startActivity(modificaProfilo);
         }
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // definisco l'intenzione
-                Intent modificaProfilo = new Intent(MainActivity.this,modificaProfilo.class);
+                Intent modificaProfilo = new Intent(MainActivity.this, ModificaProfilo.class);
                 // passo all'attivazione dell'activity Pagina.java
                 startActivity(modificaProfilo);
             }

@@ -27,7 +27,7 @@
             android:name=".InserisciParola"
             android:exported="false" />
         <activity
-            android:name=".modificaProfilo"
+            android:name=".ModificaProfilo"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

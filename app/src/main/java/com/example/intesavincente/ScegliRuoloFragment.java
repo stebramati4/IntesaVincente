@@ -87,38 +87,29 @@ public class ScegliRuoloFragment extends Fragment {
                                                 Log.d(TAG, "KeyNode " + keyNodeGruppi);
                                                 Log.d(TAG, "Class KeyNode " + keyNodeGruppi.getValue().getClass());
                                                 Log.d(TAG, "GruppoID " + keyNodeGruppi.child("componenti").getValue().getClass());
+                                                String gruppoID=keyNode.getKey();
                                                 if(gruppo.getID().equals(keyNodeGruppi.getKey())){
                                                     Boolean isInserito = false;
 
                                                     for (int i = 0; i < 3; i++) {
                                                         if (keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
                                                             Utente componente = keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
-                                                            listaComponenti.add(componente);
+                                                            //listaComponenti.add(componente);
 
                                                         }
                                                     }
 
                                                     for(int i = 0; i < listaComponenti.size(); i++){
-                                                        Log.d(TAG, "Utente " + utente.getNickname());
-                                                        Log.d(TAG, "Componente " + listaComponenti.get(i).getNickname());
-                                                        if(listaComponenti.get(i).idUtente.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
-                                                            db.child("gruppi").child(gruppoID).chìld(listaComponenti.get(i)).child("idUtente").setValue(false);
+                                                        String numero= String.valueOf(i);
+                                                        Log.d(TAG, "Componente123 " + listaComponenti.get(i).getNickname());
+                                                        if(listaComponenti.get(i).idUtente.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                                                            db.child("gruppi").child(gruppoID).child(numero).child("idUtente").setValue(false);
+                                                            Log.d(TAG, "Componente1234 " + listaComponenti.get(i).getNickname());
+                                                        }
+
 
                                                     }
-                                                    else {
-                                                        if (listaComponenti.size() < 3) {
-                                                            dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(utente);
-                                                            snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
-                                                            snackbarUniscitiGruppo.show();
-                                                            Navigation.findNavController(v).navigate(R.id.action_ListaGruppiFragment_to_scegliRuoloFragment);
 
-
-                                                        }
-                                                        else{
-                                                            snackbarGruppoPieno = Snackbar.make(v, "GRUPPO GIA' COMPLETO", Snackbar.LENGTH_SHORT);
-                                                            snackbarGruppoPieno.show();
-                                                        }
-                                                    }
                                                 }
                                                 Log.d(TAG, "GruppoID " + listaComponenti);
                                             }
@@ -147,19 +138,12 @@ public class ScegliRuoloFragment extends Fragment {
                 }
 
 
-                //radioButton = (RadioButton) v.findViewById(selectedId);
-
             }
 
         });
 
 
 
-
-
-     //  avantiButton.setOnClickListener(view -> {
-       //    Navigation.findNavController(v).navigate(R.id.);
-      // });
 
        return v;
     }

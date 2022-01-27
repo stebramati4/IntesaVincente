@@ -2,6 +2,7 @@ package com.example.intesavincente;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -13,8 +14,18 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.intesavincente.MODEL.Gruppo;
+import com.example.intesavincente.MODEL.Utente;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScegliRuoloFragment extends Fragment {
 
@@ -26,12 +37,15 @@ public class ScegliRuoloFragment extends Fragment {
     private static final String TAG ="ScegliRuoloFragment" ;
     Button avantiButton;
     DatabaseReference db;
+    DatabaseReference dbGruppi;
+    DatabaseReference dbUtenti;
     Button indovinatore;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
        View v = inflater.inflate(R.layout.fragment_scegli_ruolo, container, false);
        avantiButton = v.findViewById(R.id.AvantiButton);
+
        //indovinatore=v.findViewById(R.id.radioGroup2.getCheckedRadioButtonId());
         //RadioButton checkedRadioButton = (RadioButton)v.findViewById(R.id.radioGroup2.getCheckedRadioButtonId());
         //RadioButton checkedRadioButton = (RadioButton)v.findViewById(radioGroup2.getCheckedRadioButtonId());
@@ -49,11 +63,87 @@ public class ScegliRuoloFragment extends Fragment {
                 Log.d(TAG, "selectedID" + selectedId);
                 if(selectedId==2131230727){
                     Log.d(TAG, "indovinatore" + selectedId);
-
                     db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
+                    dbGruppi = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
+                    dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            List<String> keysGruppi = new ArrayList<>();
+                            for (DataSnapshot keyNode : snapshot.getChildren()) {
+                                Log.d(TAG, "KeyNode " + keyNode);
+                                keysGruppi.add(keyNode.getKey());
+                                if (keyNode.child("id").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                    keysGruppi.add(keyNode.getKey());
+                                    Gruppo gruppo = (Gruppo) keyNode.getValue(Gruppo.class);
+                                    Log.d(TAG, "gruppo " + gruppo);
+                                    Log.d(TAG, "Reference " + dbGruppi.getRef());
+                                    dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            ArrayList<Utente> listaComponenti = new ArrayList<Utente>();
+                                            List<String> keysGruppi = new ArrayList<>();
+                                            for (DataSnapshot keyNodeGruppi : dataSnapshot.getChildren()) {
+                                                keysGruppi.add(keyNodeGruppi.getKey());
+                                                Log.d(TAG, "KeyNode " + keyNodeGruppi);
+                                                Log.d(TAG, "Class KeyNode " + keyNodeGruppi.getValue().getClass());
+                                                Log.d(TAG, "GruppoID " + keyNodeGruppi.child("componenti").getValue().getClass());
+                                                if(gruppo.getID().equals(keyNodeGruppi.getKey())){
+                                                    Boolean isInserito = false;
 
-                    db.child("gruppi").child(gruppoID).child(indovinatore).setValue(false);
+                                                    for (int i = 0; i < 3; i++) {
+                                                        if (keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
+                                                            Utente componente = keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
+                                                            listaComponenti.add(componente);
 
+                                                        }
+                                                    }
+
+                                                    for(int i = 0; i < listaComponenti.size(); i++){
+                                                        Log.d(TAG, "Utente " + utente.getNickname());
+                                                        Log.d(TAG, "Componente " + listaComponenti.get(i).getNickname());
+                                                        if(listaComponenti.get(i).idUtente.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+                                                            db.child("gruppi").child(gruppoID).chìld(listaComponenti.get(i)).child("idUtente").setValue(false);
+
+                                                    }
+                                                    else {
+                                                        if (listaComponenti.size() < 3) {
+                                                            dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(utente);
+                                                            snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
+                                                            snackbarUniscitiGruppo.show();
+                                                            Navigation.findNavController(v).navigate(R.id.action_ListaGruppiFragment_to_scegliRuoloFragment);
+
+
+                                                        }
+                                                        else{
+                                                            snackbarGruppoPieno = Snackbar.make(v, "GRUPPO GIA' COMPLETO", Snackbar.LENGTH_SHORT);
+                                                            snackbarGruppoPieno.show();
+                                                        }
+                                                    }
+                                                }
+                                                Log.d(TAG, "GruppoID " + listaComponenti);
+                                            }
+
+
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
+                                } else {
+                                    // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
 
 

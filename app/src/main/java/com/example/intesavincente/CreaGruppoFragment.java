@@ -158,6 +158,7 @@ public class CreaGruppoFragment extends Fragment {
 
                             snackbarCreaGruppo = Snackbar.make(v, "GRUPPO " + gruppo.getNome() + " CREATO", Snackbar.LENGTH_SHORT);
                             snackbarCreaGruppo.show();
+                            Navigation.findNavController(v).navigate(R.id.action_creaGruppoFragment_to_scegliRuoloFragment);
 
                         } else {
                             // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();

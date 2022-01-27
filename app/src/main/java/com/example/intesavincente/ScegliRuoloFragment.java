@@ -24,9 +24,9 @@ public class ScegliRuoloFragment extends Fragment {
                              Bundle savedInstanceState) {
        View v = inflater.inflate(R.layout.fragment_scegli_ruolo, container, false);
        avantiButton = v.findViewById(R.id.AvantiButton);
-       avantiButton.setOnClickListener(view -> {
-           Navigation.findNavController(v).navigate(R.id.action_scegliRuoloFragment_to_ListaGruppiFragment);
-       });
+     //  avantiButton.setOnClickListener(view -> {
+       //    Navigation.findNavController(v).navigate(R.id.);
+      // });
 
        return v;
     }

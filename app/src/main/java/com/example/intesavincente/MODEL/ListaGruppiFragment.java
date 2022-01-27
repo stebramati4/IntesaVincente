@@ -5,12 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.intesavincente.ADAPTER.ListaGruppiAdapter;
@@ -173,6 +175,7 @@ public class ListaGruppiFragment extends Fragment {
                                                     if (keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
                                                         Utente componente = keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
                                                         listaComponenti.add(componente);
+
                                                     }
                                                 }
 
@@ -192,6 +195,9 @@ public class ListaGruppiFragment extends Fragment {
                                                         dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(utente);
                                                         snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
                                                         snackbarUniscitiGruppo.show();
+                                                        Navigation.findNavController(v).navigate(R.id.action_ListaGruppiFragment_to_scegliRuoloFragment);
+
+
                                                     }
                                                     else{
                                                         snackbarGruppoPieno = Snackbar.make(v, "GRUPPO GIA' COMPLETO", Snackbar.LENGTH_SHORT);

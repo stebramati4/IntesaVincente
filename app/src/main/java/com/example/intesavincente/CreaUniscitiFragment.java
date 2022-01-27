@@ -32,7 +32,7 @@ public class CreaUniscitiFragment extends Fragment {
 
         Button unisciti = v.findViewById(R.id.unisciti_button);
         unisciti.setOnClickListener(view -> {
-            Navigation.findNavController(v).navigate(R.id.action_creaUniscitiFragment2_to_scegliRuoloFragment);
+            Navigation.findNavController(v).navigate(R.id.action_creaUniscitiFragment2_to_listaGruppiFragment);
         });
         return v;
     }

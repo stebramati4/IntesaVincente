@@ -13,7 +13,7 @@
         android:outlineProvider="none">
 
         <RadioGroup
-            android:id="@+id/radioGroup2"
+            android:id="@+id/radioGroupScelta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -22,8 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <RadioButton
-                android:onClick="onClick"
-                android:id="@+id/SuggeritoreRadio"
+                android:id="@+id/suggeritoreRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/suggeritore"
@@ -33,7 +32,7 @@
                 android:textSize="24sp" />
 
             <RadioButton
-                android:id="@+id/IndovinatoreRadio"
+                android:id="@+id/indovinatoreRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/indovinatore"
@@ -51,12 +50,12 @@
             android:text="@string/unisciti_come"
             android:textColor="@color/white"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/radioGroup2"
+            app:layout_constraintBottom_toTopOf="@+id/radioGroupScelta"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/AvantiButton"
+            android:id="@+id/avantiButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginTop="32dp"
@@ -69,7 +68,7 @@
             app:cornerRadius="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup2"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupScelta"
             tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

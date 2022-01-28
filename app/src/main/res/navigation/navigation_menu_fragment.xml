@@ -41,7 +41,13 @@
         android:name="com.example.intesavincente.ScegliRuoloFragment"
         android:label="fragment_scegli_ruolo"
         tools:layout="@layout/fragment_scegli_ruolo" >
-         </fragment>
+        <action
+            android:id="@+id/action_scegliRuoloFragment_to_indovinatore"
+            app:destination="@id/indovinatore" />
+        <action
+            android:id="@+id/action_scegliRuoloFragment_to_suggeritoreActivity"
+            app:destination="@id/suggeritoreActivity" />
+    </fragment>
     <fragment
         android:id="@+id/creaGruppoFragment"
         android:name="com.example.intesavincente.CreaGruppoFragment"
@@ -60,4 +66,13 @@
         android:id="@+id/action_ListaGruppiFragment_to_scegliRuoloFragment"
         app:destination="@id/scegliRuoloFragment" />
     </fragment>
+    <activity
+        android:id="@+id/indovinatore"
+        android:name="com.example.intesavincente.Indovinatore"
+        android:label="Indovinatore" />
+    <activity
+        android:id="@+id/suggeritoreActivity"
+        android:name="com.example.intesavincente.SuggeritoreActivity"
+        android:label="activity_suggeritore"
+        tools:layout="@layout/activity_suggeritore" />
 </navigation>

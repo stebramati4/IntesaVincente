@@ -4,27 +4,27 @@ import java.util.List;
 
 public class WordsResponse {
 
-    private String status;
+    private String parola;
 
-    public WordsResponse(String status) {
-        this.status = status;
+    public WordsResponse(String parola) {
+        this.parola = parola;
     }
 
     public WordsResponse() {
     }
 
-    public String getStatus() {
-        return status;
+    public String getParola() {
+        return parola;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.parola = parola;
     }
 
     @Override
     public String toString() {
         return "NewsResponse{" +
-                "status='" + status +
+                "parola='" + parola +
                 '}';
     }
 }

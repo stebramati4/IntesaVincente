@@ -9,6 +9,6 @@ public interface IWordsRepository {
         JSON_ERROR
     };
     //metodo che permetta di ottenre info che mi servono (in questo caso info per ogni paese)
-    void fetchWords(String parola);
+    void fetchWords();
 
 }

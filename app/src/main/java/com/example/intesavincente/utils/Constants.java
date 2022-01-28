@@ -24,7 +24,7 @@ public class Constants {
     public static final String USER_EMAIL = "email";
 
     public static final String WORDS_API_BASE_URL = "https://random-word-api.herokuapp.com/";
-    public static final String TOP_HEADLINES_ENDPOINT = "word";
+    public static final String RANDOM_WORD_ENDPOINT = "word";
     public static final String TOP_HEADLINES_COUNTRY_PARAMETER = "number";
     public static final String API_KEY = "";
 }

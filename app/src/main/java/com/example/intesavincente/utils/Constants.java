@@ -6,11 +6,6 @@ public class Constants {
     public static final String SHARED_PREFERENCES_COUNTRY_OF_INTEREST = "COUNTRY_OF_INTEREST";
     public static final String SHARED_PREFERENCES_TOPICS_OF_INTEREST = "TOPICS_OF_INTEREST";
 
-    public static final String NEWS_API_BASE_URL = "https://newsapi.org/v2/";
-    public static final String TOP_HEADLINES_ENDPOINT = "top-headlines";
-    public static final String TOP_HEADLINES_COUNTRY_PARAMETER = "country";
-    public static final String NEWS_API_KEY = "";
-
     public static final String LAST_UPDATE = "last_update";
     public static final String PAGE_SIZE = "pageSize";
     public static final int MAX_NEWS_RESULTS_PER_PAGE = 10;
@@ -28,8 +23,8 @@ public class Constants {
     public static final String USER_COLLECTION = "Utente";
     public static final String USER_EMAIL = "email";
 
-    public static final String WORDS_API_BASE_URL = "https://random-words-api.vercel.app/word";
-    public static final String TOP_HEADLINES_ENDPOINT = "top-headlines";
-    public static final String TOP_HEADLINES_COUNTRY_PARAMETER = "country";
+    public static final String WORDS_API_BASE_URL = "https://random-word-api.herokuapp.com/";
+    public static final String TOP_HEADLINES_ENDPOINT = "word";
+    public static final String TOP_HEADLINES_COUNTRY_PARAMETER = "number";
     public static final String API_KEY = "";
 }

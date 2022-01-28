@@ -11,8 +11,6 @@ import retrofit2.http.Query;
 public interface WordsApiService {
 
     @GET(Constants.TOP_HEADLINES_ENDPOINT)
-    Call<WordsResponse> getWords(
-            @Query(Constants.TOP_HEADLINES_COUNTRY_PARAMETER) String parola,
-            @Header("Authorization") String apiKey);
+    Call<WordsResponse> getWords();
 
 }

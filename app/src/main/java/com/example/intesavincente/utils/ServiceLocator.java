@@ -29,7 +29,7 @@ public class ServiceLocator {
      */
     public WordsApiService getWordsApiService() {
         //creato client di tipo retrofit, associo a interfaccia newsapiservice
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEWS_API_BASE_URL).
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.WORDS_API_BASE_URL).
                 addConverterFactory(GsonConverterFactory.create()).build();
         return retrofit.create(WordsApiService.class);
     }

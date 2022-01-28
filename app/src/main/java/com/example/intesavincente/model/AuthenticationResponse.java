@@ -1,4 +1,4 @@
-package com.example.intesavincente.MODEL;
+package com.example.intesavincente.model;
 
 public class AuthenticationResponse {
     private boolean success;

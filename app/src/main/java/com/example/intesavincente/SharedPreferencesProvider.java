@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 //import com.google.android.gms.common.internal.Constants;
-import com.example.intesavincente.Constants;
+import com.example.intesavincente.utils.Constants;
 public class SharedPreferencesProvider {
 
     private final Application mApplication;

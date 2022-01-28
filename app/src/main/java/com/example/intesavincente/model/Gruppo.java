@@ -1,7 +1,6 @@
-package com.example.intesavincente.MODEL;
+package com.example.intesavincente.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Gruppo {
     private String ID;

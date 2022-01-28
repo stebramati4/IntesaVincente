@@ -1,4 +1,4 @@
-package com.example.intesavincente.MODEL;
+package com.example.intesavincente.model;
 
 import java.util.Arrays;
 import java.util.Objects;

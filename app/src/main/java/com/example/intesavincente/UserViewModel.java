@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.intesavincente.MODEL.AuthenticationResponse;
+import com.example.intesavincente.model.AuthenticationResponse;
 import com.example.intesavincente.repository.user.IUserRepository;
 import com.example.intesavincente.repository.user.UserRepository;
 

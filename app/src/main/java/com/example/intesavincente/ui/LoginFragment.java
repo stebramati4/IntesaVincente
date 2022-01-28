@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.intesavincente.Constants;
+import com.example.intesavincente.utils.Constants;
 import com.example.intesavincente.R;
 import com.example.intesavincente.UserViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;

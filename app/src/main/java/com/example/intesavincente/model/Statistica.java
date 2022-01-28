@@ -1,4 +1,4 @@
-package com.example.intesavincente.MODEL;
+package com.example.intesavincente.model;
 
 public class Statistica {
     public int partiteGiocate;

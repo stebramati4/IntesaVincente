@@ -1,4 +1,4 @@
-package com.example.intesavincente.MODEL;
+package com.example.intesavincente.model;
 
 import com.google.firebase.auth.FirebaseAuth;
 

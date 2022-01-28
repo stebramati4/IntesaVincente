@@ -1,6 +1,6 @@
 package com.example.intesavincente.repository.preference;
 
-import static com.example.intesavincente.Constants.USER_COLLECTION;
+import static com.example.intesavincente.utils.Constants.USER_COLLECTION;
 
 import android.app.Application;
 import android.util.Log;
@@ -8,8 +8,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.intesavincente.Constants;
-import com.example.intesavincente.MODEL.Utente;
+import com.example.intesavincente.utils.Constants;
+import com.example.intesavincente.model.Utente;
 import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

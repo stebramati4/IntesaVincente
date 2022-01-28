@@ -5,11 +5,10 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.intesavincente.MODEL.AuthenticationResponse;
+import com.example.intesavincente.model.AuthenticationResponse;
 import com.example.intesavincente.R;
 import com.example.intesavincente.SharedPreferencesProvider;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;

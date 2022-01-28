@@ -1,4 +1,4 @@
-package com.example.intesavincente;
+package com.example.intesavincente.utils;
 
 public class Constants {
 
@@ -27,4 +27,9 @@ public class Constants {
 
     public static final String USER_COLLECTION = "Utente";
     public static final String USER_EMAIL = "email";
+
+    public static final String WORDS_API_BASE_URL = "https://random-words-api.vercel.app/word";
+    public static final String TOP_HEADLINES_ENDPOINT = "top-headlines";
+    public static final String TOP_HEADLINES_COUNTRY_PARAMETER = "country";
+    public static final String API_KEY = "";
 }

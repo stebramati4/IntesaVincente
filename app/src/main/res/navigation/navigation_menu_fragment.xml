@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/ListaGruppiFragment"
-        android:name="com.example.intesavincente.MODEL.ListaGruppiFragment"
+        android:name="com.example.intesavincente.model.ListaGruppiFragment"
         android:label="fragment_lista_gruppi"
         tools:layout="@layout/fragment_lista_gruppi" >
     <action

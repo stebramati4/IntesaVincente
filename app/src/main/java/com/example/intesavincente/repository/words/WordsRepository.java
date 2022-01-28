@@ -31,23 +31,27 @@ public class WordsRepository implements IWordsRepository{
         this.mResponseCallback = responseCallback;
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void fetchWords() {
+        System.out.println("parolafuori");
         Call<WordsResponse> mWordsResponse = mWordsApiService.getWords();
+        System.out.println("parolafuori1"+mWordsResponse.toString());
         mWordsResponse.enqueue(new Callback<WordsResponse>() {
             @Override
             public void onResponse(Call<WordsResponse> call, Response<WordsResponse> response) {
+                //System.out.println("fuori if" + response.body());
+                System.out.println("funziona");
+                System.out.println("fuori if con getparola" + response.body().getParola());
                 if (response.body() != null && response.isSuccessful() && !response.body().getParola().equals("error"))
                     //String parola = response.body().toString();
-                    System.out.println("parola"+ response.toString());
-                    System.out.println("parola1"+ response.body().getParola());
+                    System.out.println("parola" + response.toString());
+                System.out.println("parola1" + response.body().getParola());
             }
 
             @Override
             public void onFailure(Call<WordsResponse> call, Throwable t) {
-
+                System.out.println("non funziona" );
             }
         });
     }

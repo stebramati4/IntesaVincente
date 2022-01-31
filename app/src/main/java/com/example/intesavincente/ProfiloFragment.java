@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.intesavincente.model.Partita;
 import com.example.intesavincente.utils.Constants;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,24 +39,16 @@ public class ProfiloFragment extends Fragment {
         db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
 
         buttonGiocaSquadre.setOnClickListener(view -> {
-            addPartita();
             Navigation.findNavController(v).navigate(R.id.action_profilo_menu_to_creaUniscitiFragment2);
         });
 
 
         buttonAllenamento.setOnClickListener(view -> {
-            addPartita();
             Navigation.findNavController(v).navigate(R.id.action_profilo_menu_to_creaUniscitiFragment2);
         });
 
         return v;
     }
 
-    private void addPartita() {
-        String partitaID = db.push().getKey();
-        Partita partita = new Partita();
-        db.child("partite").child(partitaID).setValue(partita);
-
-    }
 
 }

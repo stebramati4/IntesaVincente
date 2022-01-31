@@ -2,19 +2,40 @@ package com.example.intesavincente;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.intesavincente.model.Partita;
+import com.example.intesavincente.model.WordsResponse;
 import com.example.intesavincente.repository.words.IWordsRepository;
 import com.example.intesavincente.repository.words.WordsRepository;
 import com.example.intesavincente.utils.ResponseCallback;
+
+import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class Indovinatore extends AppCompatActivity implements ResponseCallback {
 
     private String parola;
     private IWordsRepository mIWordsRepository;
+
+    private Partita partita;
+
+    private static final long START_TIME_IN_MILLIS = 600000;
+    private TextView timer;
+    private Button buzz;
+    private Button passo;
+    private CountDownTimer countDownTimer;
+    private boolean timerRunning;
+    private long timeLeftMillis = START_TIME_IN_MILLIS;
+
+    private int npasso;
 
 
     @Override
@@ -24,12 +45,33 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
 
         mIWordsRepository = new WordsRepository(this.getApplication(), this);
         TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
-        Button buzz = findViewById(R.id.buzz);
+        buzz = findViewById(R.id.buzz);
+        timer = findViewById(R.id.timer);
         buzz.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+           public void onClick(View v) {
+                if(timerRunning) {
+                    pauseTimer();
+                    Intent i = new Intent(Indovinatore.this, InserisciParola.class);
+                    startActivity(i);
+                } else {
+                    startTimer();
+                }
                 mIWordsRepository.fetchWords();
                 //parolaDaIndovinare.setText();
+            }
+        });
+
+        passo = findViewById(R.id.button_passo);
+
+        passo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(timerRunning) {
+                    pauseTimer();
+                    npasso = partita.getPasso();
+                    partita.setPasso(npasso--);
+                }
             }
         });
     }
@@ -44,5 +86,39 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
     @Override
     public void onFailure(String errorMessage) {
 
+    }
+
+    public void startTimer() {
+        countDownTimer = new CountDownTimer(timeLeftMillis, 1000) {
+            @Override
+            public void onTick(long l) {
+                timeLeftMillis = l;
+                updateCountDowText();
+            }
+
+            @Override
+            public void onFinish() {
+                timerRunning = false;
+            }
+        }.start();
+        timerRunning = true;
+    }
+
+    public void pauseTimer() {
+        countDownTimer.cancel();
+        timerRunning = false;
+    }
+
+    public void updateCountDowText() {
+        int seconds = (int) (timeLeftMillis / 1000) % 60;
+
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d", seconds);
+
+        timer.setText(timeLeftFormatted);
+
+        if(timeLeftFormatted.equals("00")){
+            pauseTimer();
+            System.out.println("PARTITA FINITA");
+        }
     }
 }

@@ -1,57 +1,62 @@
 package com.example.intesavincente.model;
 
-import java.util.Arrays;
 import java.util.Objects;
 
-public class Partita {
-    private Turno[] turni;
-    private Gruppo vincitore;
+public class Partita{
+    private Gruppo gruppo;
+    private int passo;
+    private int parole_indovinate;
 
-    public Partita() {
-        this.turni = turni;
-        this.vincitore = vincitore;
+    //prova
+    public Partita(Gruppo gruppo) {
+        this.gruppo = gruppo;
+        this.passo = 3;
+        this.parole_indovinate = 0;
     }
 
-    public Partita(Turno[] turni) {
-        this.turni = turni;
+    public Gruppo getGruppo() {
+        return gruppo;
     }
 
-    public Turno[] getTurni() {
-        return turni;
+    public void setGruppo(Gruppo gruppo) {
+        this.gruppo = gruppo;
     }
 
-    public void setTurni(Turno[] turni) {
-        this.turni = turni;
+    public int getPasso() {
+        return passo;
     }
 
-    public Gruppo getVincitore() {
-        return vincitore;
+    public void setPasso(int passo) {
+        this.passo = passo;
     }
 
-    public void setVincitore(Gruppo vincitore) {
-        this.vincitore = vincitore;
+    public int getParole_indovinate() {
+        return parole_indovinate;
+    }
+
+    public void setParole_indovinate(int parole_indovinate) {
+        this.parole_indovinate = parole_indovinate;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Partita partita = (Partita) o;
-        return Arrays.equals(turni, partita.turni) && Objects.equals(vincitore, partita.vincitore);
+        Partita turno = (Partita) o;
+        return passo == turno.passo && parole_indovinate == turno.parole_indovinate && gruppo.equals(turno.gruppo);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(vincitore);
-        result = 31 * result + Arrays.hashCode(turni);
-        return result;
+        return Objects.hash(gruppo, passo, parole_indovinate);
     }
 
     @Override
     public String toString() {
-        return "Partita{" +
-                "turni=" + Arrays.toString(turni) +
-                ", vincitore=" + vincitore +
+        return "Turno{" +
+                "gruppo='" + gruppo + '\'' +
+                ", passo=" + passo + '\'' +
+                ", parole indovinate=" + parole_indovinate +
                 '}';
     }
 }

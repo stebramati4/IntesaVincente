@@ -14,10 +14,13 @@ import com.example.intesavincente.service.WordsApiService;
 import com.example.intesavincente.utils.Constants;
 import com.example.intesavincente.utils.ResponseCallback;
 import com.example.intesavincente.utils.ServiceLocator;
+
+import java.util.List;
+
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WordsRepository implements IWordsRepository{
+public class WordsRepository implements IWordsRepository {
 
     private static final String TAG = "WordsRepository";
 
@@ -31,26 +34,27 @@ public class WordsRepository implements IWordsRepository{
         this.mResponseCallback = responseCallback;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     public void fetchWords() {
         System.out.println("parolafuori");
-        Call<WordsResponse> mWordsResponse = mWordsApiService.getWords();
+        Call<List<String>> mWordsResponse = mWordsApiService.getWords();
         System.out.println("parolafuori1"+mWordsResponse.toString());
-        mWordsResponse.enqueue(new Callback<WordsResponse>() {
+        mWordsResponse.enqueue(new Callback<List<String>>() {
             @Override
-            public void onResponse(Call<WordsResponse> call, Response<WordsResponse> response) {
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 //System.out.println("fuori if" + response.body());
                 System.out.println("funziona");
-                System.out.println("fuori if con getparola" + response.body().getParola());
-                if (response.body() != null && response.isSuccessful() && !response.body().getParola().equals("error"))
+                //System.out.println("fuori if con getparola" + response.body().getParola());.
+                if (response.body() != null && response.isSuccessful())
                     //String parola = response.body().toString();
                     System.out.println("parola" + response.toString());
-                System.out.println("parola1" + response.body().getParola());
+                //System.out.println("parola1" + response.body());
             }
 
+
             @Override
-            public void onFailure(Call<WordsResponse> call, Throwable t) {
+            public void onFailure(Call<List<String>> call, Throwable t) {
                 System.out.println("non funziona" );
             }
         });

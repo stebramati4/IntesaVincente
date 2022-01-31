@@ -49,7 +49,10 @@ public class WordsRepository implements IWordsRepository {
                 if (response.body() != null && response.isSuccessful())
                     //String parola = response.body().toString();
                     System.out.println("parola" + response.toString());
-                //System.out.println("parola1" + response.body());
+
+                System.out.println("parola1 " + response.body().toString());
+                System.out.println("parola2 " + response.body());
+
             }
 
 

@@ -10,4 +10,7 @@ public class SuggeritoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggeritore);
     }
+    public void onResponse(String parola) {
+        findViewById(R.id.parolaDaIndovinare);
+    }
 }

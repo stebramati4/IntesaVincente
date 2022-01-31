@@ -50,6 +50,7 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
         buzz.setOnClickListener(new View.OnClickListener() {
             @Override
            public void onClick(View v) {
+                //partita= new Partita();
                 if(timerRunning) {
                     pauseTimer();
                     Intent i = new Intent(Indovinatore.this, InserisciParola.class);
@@ -63,7 +64,6 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
         });
 
         passo = findViewById(R.id.button_passo);
-
         passo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

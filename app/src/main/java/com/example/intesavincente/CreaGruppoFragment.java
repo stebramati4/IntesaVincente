@@ -16,6 +16,8 @@ import android.widget.EditText;
 
 import com.example.intesavincente.model.Gruppo;
 import com.example.intesavincente.model.Utente;
+import com.example.intesavincente.repository.gruppo.GruppoRepository;
+import com.example.intesavincente.repository.partita.PartitaRepository;
 import com.example.intesavincente.utils.Constants;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -121,58 +123,15 @@ public class CreaGruppoFragment extends Fragment {
 
             //String uID=FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-            db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
+            GruppoRepository g= new GruppoRepository();
+            g.inserisciGruppo(gruppoID,nome);
+            snackbarCreaGruppo = Snackbar.make(v, "GRUPPO " + nome + " CREATO", Snackbar.LENGTH_SHORT);
+            snackbarCreaGruppo.show();
+            PartitaRepository p =new PartitaRepository();
+            p.inserisciGruppoInPartita(gruppoID);
 
-            db1.addListenerForSingleValueEvent(new ValueEventListener() {
+            Navigation.findNavController(v).navigate(R.id.action_creaGruppoFragment_to_scegliRuoloFragment);
 
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    //arrayGruppi.clear();
-                    List<String> keys = new ArrayList<>();
-                    for (DataSnapshot keyNode : dataSnapshot.getChildren()) {
-                        keys.add(keyNode.getKey());
-                        if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                            keys.add(keyNode.getKey());
-                            Utente utente = (Utente) keyNode.getValue(Utente.class);
-                            //Log.d(TAG, " utente " + keyNode.getValue(Utente.class));
-                            Log.d(TAG, "Utente stampa query if " + keyNode.child("idUtente"));
-                            Log.d(TAG, "Utente chiave  if " + keyNode.getKey());
-                            Log.d(TAG, "Utente nome if" + keyNode.child("nickname").getValue());
-                            Log.d(TAG, "Utente indovinatore if" + keyNode.child("indovinatore").getValue());
-                            Log.d(TAG, "Utente stampa query if " + keyNode.child("gruppi").child("utenti"));
-                            Log.d(TAG, " gruppo id"+gruppoID);
-                            Log.d(TAG, " nome"+nome);
-                            Log.d(TAG, " utente "+utente.toString1());
-
-                            Gruppo gruppo = new Gruppo(gruppoID,nome,utente);
-                            Log.d(TAG, "componenti del gruppo ");
-                            //gruppo.setComponenti(utente);
-                            Log.d(TAG, "componenti del gruppo ");
-                            Log.d(TAG, "componenti del gruppo " + gruppo.stampaLista());              //Non è più gruppo.getComponenti().stampa()
-                            //db1.child("gruppi").child(gruppoID).setValue(utente);
-
-                            //System.out.println("gruppoid " + db.push().getKey());
-                            db.child("gruppi").child(gruppoID).setValue(gruppo);
-
-                            snackbarCreaGruppo = Snackbar.make(v, "GRUPPO " + gruppo.getNome() + " CREATO", Snackbar.LENGTH_SHORT);
-                            snackbarCreaGruppo.show();
-                            Navigation.findNavController(v).navigate(R.id.action_creaGruppoFragment_to_scegliRuoloFragment);
-
-                        } else {
-                            // Toast.makeText(this, "Devi inserire un nome", Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-
-
-                    //Utente u=new Utente(email,false,FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    // db.child("gruppi").child(gruppoID).child("utenti").setValue(utente);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
 
         }
     });

@@ -3,23 +3,27 @@ package com.example.intesavincente.model;
 import java.util.Objects;
 
 public class Partita{
-    private Gruppo gruppo;
+    private String gruppoID;
     private int passo;
     private int parole_indovinate;
 
     //prova
-    public Partita(Gruppo gruppo) {
-        this.gruppo = gruppo;
+    public Partita(){
+        this.passo = 3;
+        this.parole_indovinate = 0;
+    }
+    public Partita(String gruppo) {
+        this.gruppoID = gruppo;
         this.passo = 3;
         this.parole_indovinate = 0;
     }
 
-    public Gruppo getGruppo() {
-        return gruppo;
+    public String getGruppo() {
+        return gruppoID;
     }
 
-    public void setGruppo(Gruppo gruppo) {
-        this.gruppo = gruppo;
+    public void setGruppo(String gruppo) {
+        this.gruppoID = gruppo;
     }
 
     public int getPasso() {
@@ -43,18 +47,18 @@ public class Partita{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Partita turno = (Partita) o;
-        return passo == turno.passo && parole_indovinate == turno.parole_indovinate && gruppo.equals(turno.gruppo);
+        return passo == turno.passo && parole_indovinate == turno.parole_indovinate && gruppoID.equals(turno.gruppoID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gruppo, passo, parole_indovinate);
+        return Objects.hash(gruppoID, passo, parole_indovinate);
     }
 
     @Override
     public String toString() {
         return "Turno{" +
-                "gruppo='" + gruppo + '\'' +
+                "gruppo='" + gruppoID + '\'' +
                 ", passo=" + passo + '\'' +
                 ", parole indovinate=" + parole_indovinate +
                 '}';

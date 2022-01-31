@@ -52,13 +52,14 @@ public class WordsRepository implements IWordsRepository {
 
                 System.out.println("parola1 " + response.body().toString());
                 System.out.println("parola2 " + response.body());
-
+                mResponseCallback.onResponse(response.body().toString());
             }
 
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
                 System.out.println("non funziona" );
+                mResponseCallback.onFailure(t.getMessage());
             }
         });
     }

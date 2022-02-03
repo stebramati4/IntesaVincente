@@ -6,24 +6,27 @@ public class Partita{
     private String gruppoID;
     private int passo;
     private int parole_indovinate;
+    private Boolean isAttiva;
 
     //prova
     public Partita(){
         this.passo = 3;
         this.parole_indovinate = 0;
+        this.isAttiva = true;
     }
     public Partita(String gruppo) {
         this.gruppoID = gruppo;
         this.passo = 3;
         this.parole_indovinate = 0;
+        this.isAttiva = true;
     }
 
-    public String getGruppo() {
+    public String getGruppoID() {
         return gruppoID;
     }
 
-    public void setGruppo(String gruppo) {
-        this.gruppoID = gruppo;
+    public void setGruppoID(String gruppoID) {
+        this.gruppoID = gruppoID;
     }
 
     public int getPasso() {
@@ -40,6 +43,14 @@ public class Partita{
 
     public void setParole_indovinate(int parole_indovinate) {
         this.parole_indovinate = parole_indovinate;
+    }
+
+    public Boolean getAttiva() {
+        return isAttiva;
+    }
+
+    public void setAttiva(Boolean attiva) {
+        isAttiva = attiva;
     }
 
     @Override

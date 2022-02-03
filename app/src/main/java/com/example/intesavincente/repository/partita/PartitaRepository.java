@@ -24,11 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PartitaRepository {
-    DatabaseReference dbPartite;
-    Button creaGruppoButton;
-    EditText nomeGruppo;
-    Snackbar snackbarCreaGruppo;
-    UtenteRepository mUtenteRepository = new UtenteRepository();
+
+    private static final String TAG = "PartitaRepository";
+
+    private DatabaseReference dbPartite;
+    private Button creaGruppoButton;
+    private EditText nomeGruppo;
+    private Snackbar snackbarCreaGruppo;
+    private UtenteRepository mUtenteRepository = new UtenteRepository();
 
     public void inserisciGruppoInPartita(String gruppoID) {
         Partita p=new Partita(gruppoID);
@@ -37,5 +40,30 @@ public class PartitaRepository {
         String partitaID=dbPartite.push().getKey();
         dbPartite.child(partitaID).setValue(p);
         mUtenteRepository.aggiungiIDPartita(partitaID);
+    }
+
+    public void chiudiPartita(String idPartita){
+        Log.d(TAG, "aggiungiIDPartita");
+        dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
+
+        dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    keys.add(keyNode.getKey());
+                    if (keyNode.getKey().toString().equals(idPartita)) {
+                        Partita p = (Partita) keyNode.getValue(Partita.class);
+                        p.setAttiva(false);
+                        dbPartite.child(idPartita).setValue(p);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

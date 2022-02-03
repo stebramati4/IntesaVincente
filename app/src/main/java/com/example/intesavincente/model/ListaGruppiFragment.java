@@ -108,12 +108,11 @@ public class ListaGruppiFragment extends Fragment {
 
                     String gruppoId = keyNode.getKey();
                     String nomeGruppo = (String) keyNode.child("nome").getValue();
-                    ArrayList<Utente> componenti = new ArrayList<Utente>();
+                    ArrayList<String> componenti = new ArrayList<String>();
 
                     for (int i = 0; i < 3; i++) {
                         if (keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
-                            Utente componente = keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
-                            Log.d(TAG, "Componente: " + componente.toString1());
+                            String componente = keyNode.child("componenti").getKey().toString();
                             componenti.add(componente);
                         }
                     }

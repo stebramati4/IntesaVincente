@@ -41,7 +41,7 @@ public class GruppoRepository {
                     keys.add(keyNode.getKey());
                     if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         keys.add(keyNode.getKey());
-                        Utente utente = (Utente) keyNode.getValue(Utente.class);
+                        String utente = keyNode.child("idUtente").getValue().toString();
                         //Log.d(TAG, " utente " + keyNode.getValue(Utente.class));
                         Log.d(TAG, "Utente stampa query if " + keyNode.child("idUtente"));
                         Log.d(TAG, "Utente chiave  if " + keyNode.getKey());
@@ -50,7 +50,7 @@ public class GruppoRepository {
                         Log.d(TAG, "Utente stampa query if " + keyNode.child("gruppi").child("utenti"));
                         Log.d(TAG, " gruppo id" + gruppoID);
                         Log.d(TAG, " nome" + nome);
-                        Log.d(TAG, " utente " + utente.toString1());
+                        //Log.d(TAG, " utente " + utente.toString1());
 
                         Gruppo gruppo = new Gruppo(gruppoID, nome, utente);
                         Log.d(TAG, "componenti del gruppo ");

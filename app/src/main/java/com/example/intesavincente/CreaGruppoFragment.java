@@ -127,6 +127,7 @@ public class CreaGruppoFragment extends Fragment {
             g.inserisciGruppo(gruppoID,nome);
             snackbarCreaGruppo = Snackbar.make(v, "GRUPPO " + nome + " CREATO", Snackbar.LENGTH_SHORT);
             snackbarCreaGruppo.show();
+
             PartitaRepository p =new PartitaRepository();
             p.inserisciGruppoInPartita(gruppoID);
 

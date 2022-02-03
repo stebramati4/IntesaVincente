@@ -83,7 +83,30 @@ public class GruppoRepository {
         });
     }
 
+    public ArrayList<String> getListaIdComponenti(String idGruppo){
+        ArrayList<String> idComponenti = new ArrayList<String>();
+        db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
+        DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
+        String TAG ="GruppoRepository" ;
+        db1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    keys.add(keyNode.getKey());
+                    if (keyNode.getKey().toString().equals(idGruppo)){
 
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return idComponenti;
+    }
 
 
 

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.intesavincente.ADAPTER.ListaGruppiAdapter;
+import com.example.intesavincente.repository.gruppo.GruppoRepository;
 import com.example.intesavincente.utils.Constants;
 import com.example.intesavincente.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -71,6 +72,8 @@ public class ListaGruppiFragment extends Fragment {
     DatabaseReference dbGruppi;
     DatabaseReference dbUtenti;
     DatabaseReference db;
+
+    GruppoRepository mGruppoRepository = new GruppoRepository();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -135,6 +138,7 @@ public class ListaGruppiFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Gruppo gruppo = (Gruppo) listaGruppi.getItemAtPosition(i);
+                mGruppoRepository.getListaIdComponenti(gruppo.getID());
                 Log.d(TAG, "Gruppo selezionato " + listaGruppi.getItemAtPosition(i).toString());
                 Log.d(TAG, "Tipo " + listaGruppi.getItemAtPosition(i).getClass());
 

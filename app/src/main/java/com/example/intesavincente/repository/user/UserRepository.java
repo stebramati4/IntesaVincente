@@ -11,6 +11,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.intesavincente.model.AuthenticationResponse;
 import com.example.intesavincente.R;
 import com.example.intesavincente.SharedPreferencesProvider;
+import com.example.intesavincente.model.Utente;
+import com.example.intesavincente.utils.Constants;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -21,6 +23,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserRepository implements IUserRepository {
     private static final String TAG = "UserRepository";
@@ -31,6 +41,10 @@ public class UserRepository implements IUserRepository {
     private final SharedPreferencesProvider mSharedPreferencesProvider;
 
     private final MutableLiveData<AuthenticationResponse> mAuthenticationResponseLiveData;
+
+    private DatabaseReference db;
+    private DatabaseReference dbUtenti;
+
 
     public UserRepository(Application application) {
         mAuth = FirebaseAuth.getInstance();
@@ -152,4 +166,30 @@ public class UserRepository implements IUserRepository {
 
         return mAuthenticationResponseLiveData;
     }
+
+    public void aggiungiIDPartita(String partitaID){
+        dbUtenti = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
+        DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
+
+        dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    keys.add(keyNode.getKey());
+                    if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        Utente utente = (Utente) keyNode.getValue(Utente.class);
+                        utente.setPartite(partitaID);
+                        dbUtenti.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(utente);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }
+

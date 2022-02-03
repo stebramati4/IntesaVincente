@@ -2,35 +2,37 @@ package com.example.intesavincente.model;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class Utente {
     public String nickname;
     public String idUtente;
     private String mail;
-    public String image;
     private String password;
     public Statistica statistica;
-    public boolean indovinatore;
+    private ArrayList<String> partite = new ArrayList<String>();
+
     public Utente(){
 
     }
-    public Utente(String mail, boolean indovinatore, String idUtente) {
+
+    public Utente(String idUtente,String nickname, String mail, String password) {
+        this.idUtente = idUtente;
+        this.nickname = nickname;
         this.mail = mail;
-        this.indovinatore=indovinatore;
-        this.idUtente=idUtente;
+        this.password = password;
+        this.partite = null;
     }
     public void setId(String idUtente){
         FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
-    public Utente(String idUtente,String nickname, String mail, String image, String password, boolean indovinatore) {
+
+    public Utente(String idUtente,String nickname, String mail, String password, String idPartita) {
         this.idUtente = idUtente;
         this.nickname = nickname;
         this.mail = mail;
-        this.image = image;
         this.password = password;
-        this.indovinatore=indovinatore;
-    }
-    public Boolean isIndovinatore(){
-        return indovinatore;
+        partite.add(idPartita);
     }
     public String getMail() {
         return mail;
@@ -39,13 +41,11 @@ public class Utente {
     public String getPassword() {
         return password;
     }
+
     public String getNickname() {
         return nickname;
     }
 
-    public String getImage() {
-        return image;
-    }
     public Statistica getStatistica() {
         return statistica;
     }
@@ -58,12 +58,16 @@ public class Utente {
         this.mail = mail;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ArrayList<String> getPartite() {
+        return partite;
+    }
+
+    public void setPartite(String partitaID) {
+        partite.add(partitaID);
     }
 
     //@Override
@@ -71,7 +75,6 @@ public class Utente {
         return "Utente{" +
                 "nickname='" + nickname + '\'' +
                 ", mail='" + mail + '\'' +
-                ", image='" + image + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

@@ -61,7 +61,7 @@ public class RegisterFragment extends Fragment {
                         if (authenticationResponse.isSuccess()) {
                                 if(nickname!=null){
                                     String utenteID = db.push().getKey();
-                                    Utente u=new Utente(FirebaseAuth.getInstance().getCurrentUser().getUid(),nickname,email,null,password, false);
+                                    Utente u=new Utente(FirebaseAuth.getInstance().getCurrentUser().getUid(), nickname, email, password);
 
                                     db.child("utenti").child(utenteID).setValue(u);
                                     Navigation.findNavController(v).navigate(R.id.mainActivity);

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.example.intesavincente.model.Gruppo;
 import com.example.intesavincente.model.Partita;
 import com.example.intesavincente.model.Utente;
+import com.example.intesavincente.repository.user.UserRepository;
 import com.example.intesavincente.utils.Constants;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,16 +23,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PartitaRepository {
-    DatabaseReference db1;
+    DatabaseReference dbPartite;
     Button creaGruppoButton;
     EditText nomeGruppo;
     Snackbar snackbarCreaGruppo;
+    UserRepository mUserRepository;
 
     public void inserisciGruppoInPartita(String gruppoID) {
         Partita p=new Partita(gruppoID);
-        db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
+        dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
         String TAG ="CreaGruppoFragment" ;
-        String partitaID=db1.push().getKey();
-        db1.child("partite").child(partitaID).setValue(p);
+        String partitaID=dbPartite.push().getKey();
+        dbPartite.child(partitaID).setValue(p);
+        mUserRepository.aggiungiIDPartita(partitaID);
     }
 }

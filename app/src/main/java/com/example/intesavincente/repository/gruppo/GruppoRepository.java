@@ -31,7 +31,7 @@ public class GruppoRepository {
     public void inserisciGruppo(String gruppoID,String nome) {
         db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
         DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
-        String TAG ="CreaGruppoFragment" ;
+        String TAG ="GruppoRepository" ;
         db1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

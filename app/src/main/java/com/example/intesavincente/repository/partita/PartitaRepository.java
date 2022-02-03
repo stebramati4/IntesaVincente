@@ -10,6 +10,7 @@ import com.example.intesavincente.model.Gruppo;
 import com.example.intesavincente.model.Partita;
 import com.example.intesavincente.model.Utente;
 import com.example.intesavincente.repository.user.UserRepository;
+import com.example.intesavincente.repository.utente.UtenteRepository;
 import com.example.intesavincente.utils.Constants;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +28,7 @@ public class PartitaRepository {
     Button creaGruppoButton;
     EditText nomeGruppo;
     Snackbar snackbarCreaGruppo;
-    UserRepository mUserRepository;
+    UtenteRepository mUtenteRepository = new UtenteRepository();
 
     public void inserisciGruppoInPartita(String gruppoID) {
         Partita p=new Partita(gruppoID);
@@ -35,6 +36,6 @@ public class PartitaRepository {
         String TAG ="CreaGruppoFragment" ;
         String partitaID=dbPartite.push().getKey();
         dbPartite.child(partitaID).setValue(p);
-        mUserRepository.aggiungiIDPartita(partitaID);
+        mUtenteRepository.aggiungiIDPartita(partitaID);
     }
 }

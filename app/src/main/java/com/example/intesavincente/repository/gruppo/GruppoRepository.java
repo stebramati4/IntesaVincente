@@ -32,7 +32,7 @@ public class GruppoRepository {
         db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
         DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
         String TAG ="GruppoRepository" ;
-        db1.addListenerForSingleValueEvent(new ValueEventListener() {
+        db1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //arrayGruppi.clear();

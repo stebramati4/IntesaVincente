@@ -45,7 +45,6 @@ public class UserRepository implements IUserRepository {
     private DatabaseReference db;
     private DatabaseReference dbUtenti;
 
-
     public UserRepository(Application application) {
         mAuth = FirebaseAuth.getInstance();
         mApplication = application;
@@ -167,29 +166,5 @@ public class UserRepository implements IUserRepository {
         return mAuthenticationResponseLiveData;
     }
 
-    public void aggiungiIDPartita(String partitaID){
-        dbUtenti = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
-        DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
-
-        dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<String> keys = new ArrayList<>();
-                for (DataSnapshot keyNode : snapshot.getChildren()) {
-                    keys.add(keyNode.getKey());
-                    if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                        Utente utente = (Utente) keyNode.getValue(Utente.class);
-                        utente.setPartite(partitaID);
-                        dbUtenti.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(utente);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 }
 

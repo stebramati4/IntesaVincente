@@ -51,4 +51,36 @@ public class UtenteRepository {
             }
         });
     }
+
+    public ArrayList<String> getListaUtenti(ArrayList<String> mArrayIdComponenti){
+        ArrayList<String> listaNomi = new ArrayList<String>();
+        dbUtenti = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
+
+            dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<String> keys = new ArrayList<>();
+                    for (DataSnapshot keyNode : snapshot.getChildren()) {
+                        keys.add(keyNode.getKey());
+                        for(int i = 0; i < mArrayIdComponenti.size(); i++){
+                            Log.d(TAG, "Dentro for idComponenti");
+                            if (keyNode.child("idUtente").getValue().equals(mArrayIdComponenti.get(i))){
+                                Log.d(TAG, "Dentro if idComponenti " + mArrayIdComponenti.get(i));
+                                //Utente utente = (Utente) keyNode.getValue(Utente.class);
+                                String nomeUtente = (String) keyNode.child("nickname").getValue();
+                                Log.d(TAG, "Nome utente " + nomeUtente);
+                                listaNomi.add(nomeUtente);
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        return listaNomi;
+    }
 }

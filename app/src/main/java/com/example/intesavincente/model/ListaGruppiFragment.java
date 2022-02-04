@@ -107,15 +107,14 @@ public class ListaGruppiFragment extends Fragment {
                     //Gruppo gruppo1=new Gruppo(keyNode.child("nome").getValue(),keyNode.getKey(),null);
                     Log.d(TAG, "Nome Gruppo: " + keyNode.getValue());
                     Log.d(TAG, "Class: " + keyNode.child("componenti").getValue().getClass());
-                    Log.d(TAG, "Tipo componente: " + keyNode.child("componenti").child("0").getValue(Utente.class).getClass());
 
                     String gruppoId = keyNode.getKey();
                     String nomeGruppo = (String) keyNode.child("nome").getValue();
                     ArrayList<String> componenti = new ArrayList<String>();
 
                     for (int i = 0; i < 3; i++) {
-                        if (keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
-                            String componente = keyNode.child("componenti").getKey().toString();
+                        if (keyNode.child("componenti").child(String.valueOf(i)).getValue() != null) {
+                            String componente = keyNode.child("componenti").child(String.valueOf(i)).getValue().toString();
                             componenti.add(componente);
                         }
                     }
@@ -138,8 +137,7 @@ public class ListaGruppiFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Gruppo gruppo = (Gruppo) listaGruppi.getItemAtPosition(i);
-                Log.d(TAG, "gruppo00 " +gruppo.getID() );
-                mGruppoRepository.getListaIdComponenti(gruppo.getID());
+                Log.d(TAG, "gruppo00 " +gruppo.getID());
 
                 Log.d(TAG, "Gruppo selezionato " + listaGruppi.getItemAtPosition(i).toString());
                 Log.d(TAG, "Tipo " + listaGruppi.getItemAtPosition(i).getClass());

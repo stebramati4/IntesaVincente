@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.intesavincente.model.Gruppo;
 import com.example.intesavincente.R;
+import com.example.intesavincente.repository.utente.UtenteRepository;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,9 @@ public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
     private static final String TAG ="ListaGruppiAdapter" ;
 
     private ArrayList<Gruppo> mArrayGruppi;
+    private ArrayList<String> mArrayIdComponenti;
+    private ArrayList<String> mArrayUtenti;
+    private UtenteRepository mUtenteRepository = new UtenteRepository();
     private int mLayout;
 
 
@@ -42,10 +46,15 @@ public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
 
         TextView textViewNomeGruppo = convertView.findViewById(R.id.nome_gruppo);
         textViewNomeGruppo.setText(mArrayGruppi.get(position).getNome());
-        Log.d(TAG, "Componenti : "+mArrayGruppi.get(position).getNome());
+        Log.d(TAG, "Nome Gruppo : "+mArrayGruppi.get(position).getNome());
+
+        mArrayIdComponenti = mArrayGruppi.get(position).getComponenti();
+        Log.d(TAG, "ArrayIdComponenti : "+mArrayIdComponenti.toString());
+        mArrayUtenti = mUtenteRepository.getListaUtenti(mArrayIdComponenti);
+
         TextView textViewComponenti = convertView.findViewById(R.id.componenti);
-        textViewComponenti.setText(mArrayGruppi.get(position).stampaNomeComponenti());
-        Log.d(TAG, "Componenti : "+mArrayGruppi.get(position).stampaNomeComponenti());
+        textViewComponenti.setText(mArrayUtenti.toString());
+        Log.d(TAG, "Nome componente : "+mArrayUtenti.toString());
 
         return convertView;
     }

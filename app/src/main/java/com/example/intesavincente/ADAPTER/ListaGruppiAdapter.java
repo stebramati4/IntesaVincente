@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.intesavincente.model.Gruppo;
 import com.example.intesavincente.R;
 import com.example.intesavincente.repository.utente.UtenteRepository;
+import com.example.intesavincente.utils.FirebaseCallback;
 
 import java.util.ArrayList;
 
@@ -50,13 +51,47 @@ public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
 
         mArrayIdComponenti = mArrayGruppi.get(position).getComponenti();
         Log.d(TAG, "ArrayIdComponenti : "+mArrayIdComponenti.toString());
-        mArrayUtenti = mUtenteRepository.getListaUtenti(mArrayIdComponenti);
 
         TextView textViewComponenti = convertView.findViewById(R.id.componenti);
-        textViewComponenti.setText(mArrayUtenti.toString());
-        Log.d(TAG, "Nome componente : "+mArrayUtenti.toString());
+
+        mUtenteRepository.getListaUtenti(new FirebaseCallback() {
+            @Override
+            public void onResponse(ArrayList<String> listaNomi) {
+                textViewComponenti.setText(stampaNomeComponenti(listaNomi));
+                Log.d(TAG, "Nome componente : "+listaNomi.toString());
+            }
+        });
 
         return convertView;
     }
+
+    public String stampaNomeComponenti(ArrayList<String> listaNomi){
+        String stampa = "";
+        System.out.println("Tipo: " + listaNomi.getClass());
+        System.out.println("Size: " + listaNomi.size());
+        for(int i=0;i<listaNomi.size();i++){
+            String nomeUtente = listaNomi.get(i);
+            System.out.println("Utente: " + listaNomi.get(i));
+            System.out.println("Condizione: " + (listaNomi.get(i) != null));
+            if(listaNomi.get(i) != null){
+                if(i == 0) {
+                    System.out.println("Nickname utente if: ");
+                    stampa = listaNomi.get(i);
+
+                }
+                else {
+                    System.out.println("Nickname utente else: ");
+                    stampa = stampa + ", " + listaNomi.get(i);
+
+                }
+            }
+            else {
+                System.out.println("Else del primo If");
+                return stampa;
+            }
+        }
+        return stampa;
+    }
+
 }
 

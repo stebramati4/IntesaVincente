@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.example.intesavincente.model.Utente;
 import com.example.intesavincente.utils.Constants;
+import com.example.intesavincente.utils.FirebaseCallback;
+import com.example.intesavincente.utils.ResponseCallback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +24,8 @@ public class UtenteRepository {
 
     private DatabaseReference db;
     private DatabaseReference dbUtenti;
+    private DatabaseReference dbGruppi;
+    private ArrayList<String> listaNomi = new ArrayList<String>();
 
 
     public void aggiungiIDPartita(String partitaID){
@@ -52,35 +56,59 @@ public class UtenteRepository {
         });
     }
 
-    public ArrayList<String> getListaUtenti(ArrayList<String> mArrayIdComponenti){
-        ArrayList<String> listaNomi = new ArrayList<String>();
+    public void getListaUtenti(FirebaseCallback callback){
         dbUtenti = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
+        dbGruppi = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
 
-            dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    List<String> keys = new ArrayList<>();
-                    for (DataSnapshot keyNode : snapshot.getChildren()) {
-                        keys.add(keyNode.getKey());
-                        for(int i = 0; i < mArrayIdComponenti.size(); i++){
-                            Log.d(TAG, "Dentro for idComponenti");
-                            if (keyNode.child("idUtente").getValue().equals(mArrayIdComponenti.get(i))){
-                                Log.d(TAG, "Dentro if idComponenti " + mArrayIdComponenti.get(i));
-                                //Utente utente = (Utente) keyNode.getValue(Utente.class);
-                                String nomeUtente = (String) keyNode.child("nickname").getValue();
-                                Log.d(TAG, "Nome utente " + nomeUtente);
-                                listaNomi.add(nomeUtente);
-                            }
+        dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    keys.add(keyNode.getKey());
+                    ArrayList<String> componenti = new ArrayList<String>();
+
+                    for (int i = 0; i < 3; i++) {
+                        if (keyNode.child("componenti").child(String.valueOf(i)).getValue() != null) {
+                            String componente = keyNode.child("componenti").child(String.valueOf(i)).getValue().toString();
+                            componenti.add(componente);
                         }
                     }
+
+                    dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            listaNomi.clear();
+                            List<String> keys = new ArrayList<>();
+                            for (DataSnapshot keyNode : snapshot.getChildren()) {
+                                keys.add(keyNode.getKey());
+                                for (int i = 0; i < componenti.size(); i++) {
+                                    Log.d(TAG, "Dentro for idComponenti");
+                                    if (keyNode.child("idUtente").getValue().equals(componenti.get(i))) {
+                                        Log.d(TAG, "Dentro if idComponenti " + componenti.get(i));
+                                        //Utente utente = (Utente) keyNode.getValue(Utente.class);
+                                        String nomeUtente = (String) keyNode.child("nickname").getValue();
+                                        Log.d(TAG, "Nome utente " + nomeUtente);
+                                        listaNomi.add(nomeUtente);
+                                        Log.d(TAG, "Lista nomi " + listaNomi.toString());
+                                    }
+                                }
+                                callback.onResponse(listaNomi);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
-
-        return listaNomi;
+            }
+        });
     }
 }

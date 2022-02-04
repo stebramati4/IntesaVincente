@@ -138,7 +138,9 @@ public class ListaGruppiFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Gruppo gruppo = (Gruppo) listaGruppi.getItemAtPosition(i);
+                Log.d(TAG, "gruppo00 " +gruppo.getID() );
                 mGruppoRepository.getListaIdComponenti(gruppo.getID());
+
                 Log.d(TAG, "Gruppo selezionato " + listaGruppi.getItemAtPosition(i).toString());
                 Log.d(TAG, "Tipo " + listaGruppi.getItemAtPosition(i).getClass());
 

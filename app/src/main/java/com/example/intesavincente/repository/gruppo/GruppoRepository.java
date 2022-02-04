@@ -95,6 +95,14 @@ public class GruppoRepository {
                 for (DataSnapshot keyNode : snapshot.getChildren()) {
                     keys.add(keyNode.getKey());
                     if (keyNode.getKey().toString().equals(idGruppo)){
+                        for (int i = 0; i < 3; i++) {
+                            Log.d(TAG, "componenti1 fuori" + String.valueOf(i));
+                            if (keyNode.child("componenti").child(String.valueOf(i)).getValue() != null) {
+                                Log.d(TAG, "componentiDI" + String.valueOf(i));
+                                idComponenti.add(String.valueOf(i));
+
+                            }
+                        }
 
                     }
                 }

@@ -26,13 +26,15 @@ import java.util.List;
 public class PartitaRepository {
 
     private static final String TAG = "PartitaRepository";
-
+    DatabaseReference dbGruppi;
     private DatabaseReference dbPartite;
     private Button creaGruppoButton;
     private EditText nomeGruppo;
     private Snackbar snackbarCreaGruppo;
     private UtenteRepository mUtenteRepository = new UtenteRepository();
+    public void PartitaRepository(){
 
+    }
     public void inserisciGruppoInPartita(String gruppoID) {
         Partita p=new Partita(gruppoID);
         dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
@@ -64,12 +66,17 @@ public class PartitaRepository {
                                     keysUtenti.add(keyNode.getKey());
                                     if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                         keysUtenti.add(keyNode.getKey());
-                                        for (int i = 0; i < 3; i++) {
-                                            if (keyNode.child("partite").child(String.valueOf(i)).getValue(String.class) == null) {
-                                                Log.d(TAG, "partiteid " + keyNode.child("partite").child(String.valueOf(i)).getValue(String.class));
-                                                keyNode.child("partite").child(String.valueOf(i)).getRef().setValue(chiave);
+                                        for (int i = 0; i < 100; i++) {
+                                            if(keyNode.child("partite").child(String.valueOf(i)).getValue(String.class) == chiave)
                                                 break;
+
+                                                if (keyNode.child("partite").child(String.valueOf(i)).getValue(String.class) == null) {
+                                                    Log.d(TAG, "partiteid " + keyNode.child("partite").child(String.valueOf(i)).getValue(String.class));
+                                                    keyNode.child("partite").child(String.valueOf(i)).getRef().setValue(chiave);
+                                                    break;
+
                                             }
+
                                         }
                                     }
                                 }
@@ -90,11 +97,78 @@ public class PartitaRepository {
             }
         });
     }
+    public void trovaPartita() { //tipo void momentaneamente per far andare l'app, sarebbe tipo Partita
+        String TAG ="Indovinatore" ;
+        Log.d(TAG,"trovaPartita1" );
+
+        Partita p = null;
+        dbGruppi = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
+        dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
+        ArrayList<String> chiaveGruppo = new ArrayList<>();
+        ArrayList <Partita> pa=new ArrayList<>();
+        dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keys = new ArrayList<>();
+                String singolachiave = null;
+                Log.d(TAG,"trovaPartita2" );
+                //Partita p = null;
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    keys.add(keyNode.getKey());
+                    Log.d(TAG,"trovaPartita3"+keyNode.getKey());
+                    for (int i = 0; i < 3; i++) {
+                        if (keyNode.child("componenti").child(String.valueOf(i)).getValue(String.class).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            chiaveGruppo.add(keyNode.getKey());
+                            singolachiave = keyNode.getKey();
+                            String finalSingolachiave = singolachiave;
+                            Log.d(TAG, "chiave gruppo a cui appartiene l'utente"+singolachiave );
+                            Log.d(TAG, "chiave gruppo a cui appartiene l'utente1"+finalSingolachiave );
+                            dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Log.d(TAG, "dbpartite");
+                                    List<String> keys = new ArrayList<>();
+                                    for (DataSnapshot keyNode : snapshot.getChildren()) {
+                                        keys.add(keyNode.getKey());
+                                        Log.d(TAG, "fuori if");
+                                        if ((keyNode.child("gruppoID").equals(finalSingolachiave))) {
+                                            // && (keyNode.child("attiva").equals("true"))
+                                            Log.d(TAG, "partitaEsiste");
+                                            Partita po = (Partita) keyNode.getValue(Partita.class);
+                                           // return po;
+                                            pa.add(po);
+                                            Log.d(TAG, "partita " + pa.get(0).toString());
+                                        }
+
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //return pa.get(0);
+    //return p;
+    }
 
 
 
 
-            public void chiudiPartita(String idPartita){
+
+    public void chiudiPartita(String idPartita){
         Log.d(TAG, "aggiungiIDPartita");
         dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
 

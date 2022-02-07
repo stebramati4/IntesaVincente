@@ -27,11 +27,12 @@ public class GruppoRepository {
     Button creaGruppoButton;
     EditText nomeGruppo;
     Snackbar snackbarCreaGruppo;
+    String TAG ="GruppoRepository" ;
 
     public void inserisciGruppo(String gruppoID,String nome) {
+        Log.d(TAG,"fuori chiamata");
         db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
         DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
-        String TAG ="GruppoRepository" ;
         db1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -114,7 +114,6 @@ public class CreaGruppoFragment extends Fragment {
     //private void addGroup() {
         db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
         String nome = nomeGruppo.getText().toString();
-
         if(!TextUtils.isEmpty(nome)) {
             String gruppoID = db.push().getKey();
 
@@ -122,7 +121,7 @@ public class CreaGruppoFragment extends Fragment {
             // String email=FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
             //String uID=FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+            Log.d(TAG,"fuori chiamata1");
             GruppoRepository g= new GruppoRepository();
             g.inserisciGruppo(gruppoID,nome);
             snackbarCreaGruppo = Snackbar.make(v, "GRUPPO " + nome + " CREATO", Snackbar.LENGTH_SHORT);

@@ -155,9 +155,9 @@ public class ListaGruppiFragment extends Fragment {
                             if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 keysUtenti.add(keyNode.getKey());
                                 mPartitaRepository.inserisciPartitaInUtente(gruppo.getID());
-                                Utente utente = (Utente) keyNode.getValue(Utente.class);
-                                Log.d(TAG, "Utente " + utente.toString1());
-                                Log.d(TAG, "Reference " + dbGruppi.getRef());
+                                //Utente utente = (Utente) keyNode.getValue(Utente.class);
+                                //Log.d(TAG, "Utente " + utente.toString1());
+                               // Log.d(TAG, "Reference " + dbGruppi.getRef());
                                 dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -167,7 +167,7 @@ public class ListaGruppiFragment extends Fragment {
                                             keysGruppi.add(keyNodeGruppi.getKey());
                                             Log.d(TAG, "KeyNode " + keyNodeGruppi);
                                             Log.d(TAG, "Class KeyNode " + keyNodeGruppi.getValue().getClass());
-                                            Log.d(TAG, "GruppoID " + keyNodeGruppi.child("componenti").getValue().getClass());
+                                            //Log.d(TAG, "GruppoID " + keyNodeGruppi.child("componenti").getValue().getClass());
                                             if(gruppo.getID().equals(keyNodeGruppi.getKey())){
                                                 Boolean isInserito = false;
 
@@ -180,7 +180,7 @@ public class ListaGruppiFragment extends Fragment {
                                                 }
 
                                                 for(int i = 0; i < listaComponenti.size(); i++){
-                                                    Log.d(TAG, "Utente " + utente.getNickname());
+                                                   // Log.d(TAG, "Utente " + utente.getNickname());
                                                     Log.d(TAG, "Componente " + listaComponenti.get(i));
                                                     if(keyNode.child("idUtente").getValue().equals(listaComponenti.get(i))){
                                                         isInserito = true;
@@ -192,8 +192,9 @@ public class ListaGruppiFragment extends Fragment {
                                                 }
                                                 else {
                                                     if (listaComponenti.size() < 3) {
-                                                        dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(keyNode.child("idUtente").getValue());
-                                                        snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
+                                                        dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                                        //snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
+                                                        snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE  INSERITO", Snackbar.LENGTH_SHORT);
                                                         snackbarUniscitiGruppo.show();
                                                         Navigation.findNavController(v).navigate(R.id.action_ListaGruppiFragment_to_scegliRuoloFragment);
 

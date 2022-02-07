@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.intesavincente.model.Partita;
 import com.example.intesavincente.model.WordsResponse;
+import com.example.intesavincente.repository.partita.PartitaRepository;
 import com.example.intesavincente.repository.words.IWordsRepository;
 import com.example.intesavincente.repository.words.WordsRepository;
 import com.example.intesavincente.utils.ResponseCallback;
@@ -24,8 +25,8 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
 
     private String parola;
     private IWordsRepository mIWordsRepository;
-
-    private Partita partita;
+    private PartitaRepository mPartitaRepository= new PartitaRepository();
+    private Partita partita=new Partita();
 
     private static final long START_TIME_IN_MILLIS = 600000;
     private TextView timer;
@@ -42,7 +43,10 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indovinatore);
-
+        System.out.println("partita1");
+        //partita=mPartitaRepository.trovaPartita();
+        mPartitaRepository.trovaPartita();
+        System.out.println("partita123"+ partita.toString());
         mIWordsRepository = new WordsRepository(this.getApplication(), this);
         TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
         buzz = findViewById(R.id.buzz);
@@ -57,8 +61,10 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
                     startActivity(i);
                 } else {
                     startTimer();
+                    mIWordsRepository.fetchWords();
+                   // parolaDaIndovinare.setText();
                 }
-                mIWordsRepository.fetchWords();
+
                 //parolaDaIndovinare.setText();
             }
         });
@@ -80,7 +86,8 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
 
     @Override
     public void onResponse(String parola) {
-
+        TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
+        parolaDaIndovinare.setText(parola);
     }
 
     @Override

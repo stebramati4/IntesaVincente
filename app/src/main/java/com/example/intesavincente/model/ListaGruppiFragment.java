@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.example.intesavincente.ADAPTER.ListaGruppiAdapter;
 import com.example.intesavincente.repository.gruppo.GruppoRepository;
+import com.example.intesavincente.repository.partita.PartitaRepository;
 import com.example.intesavincente.utils.Constants;
 import com.example.intesavincente.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -72,7 +73,7 @@ public class ListaGruppiFragment extends Fragment {
     DatabaseReference dbGruppi;
     DatabaseReference dbUtenti;
     DatabaseReference db;
-
+    PartitaRepository mPartitaRepository =new PartitaRepository();
     GruppoRepository mGruppoRepository = new GruppoRepository();
 
     @Override
@@ -153,6 +154,7 @@ public class ListaGruppiFragment extends Fragment {
                             keysUtenti.add(keyNode.getKey());
                             if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 keysUtenti.add(keyNode.getKey());
+                                mPartitaRepository.inserisciPartitaInUtente(gruppo.getID());
                                 Utente utente = (Utente) keyNode.getValue(Utente.class);
                                 Log.d(TAG, "Utente " + utente.toString1());
                                 Log.d(TAG, "Reference " + dbGruppi.getRef());

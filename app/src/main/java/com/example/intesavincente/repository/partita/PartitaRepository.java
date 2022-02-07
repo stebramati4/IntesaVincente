@@ -41,8 +41,60 @@ public class PartitaRepository {
         dbPartite.child(partitaID).setValue(p);
         mUtenteRepository.aggiungiIDPartita(partitaID);
     }
+    public void inserisciPartitaInUtente(String gruppoID){
+        DatabaseReference dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
+        dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keysPartite = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    Log.d(TAG, "KeyNode " + keyNode);
+                    keysPartite.add(keyNode.getKey());
+                    if (keyNode.child("gruppoID").getValue().equals(gruppoID)) {
+                        keysPartite.add(keyNode.getKey());
+                        String chiave=keyNode.getKey();
+                        Log.d(TAG, "chiave " + chiave);
+                        DatabaseReference dbUtenti = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
+                        dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                List<String> keysUtenti = new ArrayList<>();
+                                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                                    Log.d(TAG, "KeyNode " + keyNode);
+                                    keysUtenti.add(keyNode.getKey());
+                                    if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                        keysUtenti.add(keyNode.getKey());
+                                        for (int i = 0; i < 3; i++) {
+                                            if (keyNode.child("partite").child(String.valueOf(i)).getValue(String.class) == null) {
+                                                Log.d(TAG, "partiteid " + keyNode.child("partite").child(String.valueOf(i)).getValue(String.class));
+                                                keyNode.child("partite").child(String.valueOf(i)).getRef().setValue(chiave);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
 
-    public void chiudiPartita(String idPartita){
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+
+                    }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+
+
+            public void chiudiPartita(String idPartita){
         Log.d(TAG, "aggiungiIDPartita");
         dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
 

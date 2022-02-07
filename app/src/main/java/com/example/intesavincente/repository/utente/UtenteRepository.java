@@ -72,10 +72,10 @@ public class UtenteRepository {
                         if (keyNode.child("componenti").child(String.valueOf(i)).getValue() != null) {
                             String componente = keyNode.child("componenti").child(String.valueOf(i)).getValue().toString();
                             componenti.add(componente);
+
                         }
                     }
-
-                        Log.d(TAG, "LIsta ID componenti"+componenti.toString());
+                        Log.d(TAG, "componenti11"+componenti.toString()+" "+componenti.size());
                         dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -93,6 +93,7 @@ public class UtenteRepository {
                                             listaNomi.add(nomeUtente);
 
                                             Log.d(TAG, "Lista nomi " + listaNomi.toString());
+                                            callback.onResponse(listaNomi);
                                         }
                                     }
 
@@ -107,9 +108,10 @@ public class UtenteRepository {
 
                             }
                         });
+                        Log.d(TAG, "Lista nomiFuori1" + listaNomi.toString());
                     }
                 Log.d(TAG, "Lista nomiFuori" + listaNomi.toString());
-                callback.onResponse(listaNomi);
+
                 }
 
             @Override

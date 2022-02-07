@@ -57,8 +57,21 @@ public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
         mUtenteRepository.getListaUtenti(new FirebaseCallback() {
             @Override
             public void onResponse(ArrayList<String> listaNomi) {
-                textViewComponenti.setText(stampaNomeComponenti(listaNomi));
-                Log.d(TAG, "Nome componente : "+listaNomi.toString());
+                Log.d(TAG, "Nome componente1 : "+listaNomi.toString());
+                    //Modificato in modo tale che prenda già i componenti del gruppo
+                    String stampa = "";
+                    for(int i=0;i<listaNomi.size();i++){
+                        if(listaNomi.get(i) != null){
+                            if(i == 0)
+                                stampa = listaNomi.get(i);
+                            else
+                                stampa = stampa + ", " + listaNomi.get(i);
+                        }
+                        else
+                            stampa="";
+                    }
+                    textViewComponenti.setText(stampa);
+
             }
         });
 

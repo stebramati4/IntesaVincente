@@ -59,14 +59,14 @@ public class UtenteRepository {
     public void getListaUtenti(FirebaseCallback callback){
         dbUtenti = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
         dbGruppi = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
-
+        ArrayList<String> componenti = new ArrayList<String>();
         dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> keys = new ArrayList<>();
                 for (DataSnapshot keyNode : snapshot.getChildren()) {
                     keys.add(keyNode.getKey());
-                    ArrayList<String> componenti = new ArrayList<String>();
+                    componenti.clear();
 
                     for (int i = 0; i < 3; i++) {
                         if (keyNode.child("componenti").child(String.valueOf(i)).getValue() != null) {
@@ -75,35 +75,42 @@ public class UtenteRepository {
                         }
                     }
 
-                    dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            listaNomi.clear();
-                            List<String> keys = new ArrayList<>();
-                            for (DataSnapshot keyNode : snapshot.getChildren()) {
-                                keys.add(keyNode.getKey());
-                                for (int i = 0; i < componenti.size(); i++) {
-                                    Log.d(TAG, "Dentro for idComponenti");
-                                    if (keyNode.child("idUtente").getValue().equals(componenti.get(i))) {
-                                        Log.d(TAG, "Dentro if idComponenti " + componenti.get(i));
-                                        //Utente utente = (Utente) keyNode.getValue(Utente.class);
-                                        String nomeUtente = (String) keyNode.child("nickname").getValue();
-                                        Log.d(TAG, "Nome utente " + nomeUtente);
-                                        listaNomi.add(nomeUtente);
-                                        Log.d(TAG, "Lista nomi " + listaNomi.toString());
+                        Log.d(TAG, "LIsta ID componenti"+componenti.toString());
+                        dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                listaNomi.clear();
+                                List<String> keys = new ArrayList<>();
+                                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                                    keys.add(keyNode.getKey());
+                                    for (int i = 0; i < componenti.size(); i++) {
+                                        Log.d(TAG, "Dentro for idComponenti");
+                                        if (keyNode.child("idUtente").getValue().equals(componenti.get(i))) {
+                                            Log.d(TAG, "Dentro if idComponenti " + componenti.get(i));
+                                            //Utente utente = (Utente) keyNode.getValue(Utente.class);
+                                            String nomeUtente = (String) keyNode.child("nickname").getValue();
+                                            Log.d(TAG, "Nome utente " + nomeUtente);
+                                            listaNomi.add(nomeUtente);
+
+                                            Log.d(TAG, "Lista nomi " + listaNomi.toString());
+                                        }
                                     }
+
+                                    Log.d(TAG, "Lista nomiOn " + listaNomi.toString());
                                 }
-                                callback.onResponse(listaNomi);
+
                             }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                Log.d(TAG, "Lista nomiFuori" + listaNomi.toString());
+                callback.onResponse(listaNomi);
                 }
-            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

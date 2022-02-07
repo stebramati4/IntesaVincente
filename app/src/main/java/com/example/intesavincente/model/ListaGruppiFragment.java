@@ -159,7 +159,7 @@ public class ListaGruppiFragment extends Fragment {
                                 dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        ArrayList<Utente> listaComponenti = new ArrayList<Utente>();
+                                        ArrayList<String> listaComponenti = new ArrayList();
                                         List<String> keysGruppi = new ArrayList<>();
                                         for (DataSnapshot keyNodeGruppi : dataSnapshot.getChildren()) {
                                             keysGruppi.add(keyNodeGruppi.getKey());
@@ -170,8 +170,8 @@ public class ListaGruppiFragment extends Fragment {
                                                 Boolean isInserito = false;
 
                                                 for (int i = 0; i < 3; i++) {
-                                                    if (keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
-                                                        Utente componente = keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
+                                                    if (keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(String.class) != null) {
+                                                        String componente = keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(String.class);
                                                         listaComponenti.add(componente);
 
                                                     }
@@ -179,8 +179,8 @@ public class ListaGruppiFragment extends Fragment {
 
                                                 for(int i = 0; i < listaComponenti.size(); i++){
                                                     Log.d(TAG, "Utente " + utente.getNickname());
-                                                    Log.d(TAG, "Componente " + listaComponenti.get(i).getNickname());
-                                                    if(utente.getNickname().equals(listaComponenti.get(i).getNickname())){
+                                                    Log.d(TAG, "Componente " + listaComponenti.get(i));
+                                                    if(keyNode.child("idUtente").getValue().equals(listaComponenti.get(i))){
                                                         isInserito = true;
                                                     }
                                                 }
@@ -190,7 +190,7 @@ public class ListaGruppiFragment extends Fragment {
                                                 }
                                                 else {
                                                     if (listaComponenti.size() < 3) {
-                                                        dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(utente);
+                                                        dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(keyNode.child("idUtente").getValue());
                                                         snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
                                                         snackbarUniscitiGruppo.show();
                                                         Navigation.findNavController(v).navigate(R.id.action_ListaGruppiFragment_to_scegliRuoloFragment);

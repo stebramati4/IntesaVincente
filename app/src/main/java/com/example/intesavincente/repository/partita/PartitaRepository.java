@@ -53,8 +53,8 @@ public class PartitaRepository {
                     Log.d(TAG, "KeyNode " + keyNode);
                     keysPartite.add(keyNode.getKey());
                     if (keyNode.child("gruppoID").getValue().equals(gruppoID)) {
-                        keysPartite.add(keyNode.getKey());
                         String chiave=keyNode.getKey();
+                        keysPartite.add(keyNode.getKey());
                         Log.d(TAG, "chiave " + chiave);
                         DatabaseReference dbUtenti = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
                         dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -66,16 +66,25 @@ public class PartitaRepository {
                                     keysUtenti.add(keyNode.getKey());
                                     if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                         keysUtenti.add(keyNode.getKey());
-                                        for (int i = 0; i < 100; i++) {
-                                            if(keyNode.child("partite").child(String.valueOf(i)).getValue(String.class) == chiave)
-                                                break;
-
-                                                if (keyNode.child("partite").child(String.valueOf(i)).getValue(String.class) == null) {
-                                                    Log.d(TAG, "partiteid " + keyNode.child("partite").child(String.valueOf(i)).getValue(String.class));
-                                                    keyNode.child("partite").child(String.valueOf(i)).getRef().setValue(chiave);
+                                        for (int i = 0; i < keysPartite.size(); i++) {
+                                            //if(keyNode.child("partite").child(String.valueOf(i)).getValue(String.class).equals(chiave))
+                                            if(!keysPartite.get(i).equals(chiave)) {
+                                                //  break;
+                                                // else{
+                                                //if (keyNode.child("partite").child(String.valueOf(i)).getValue(String.class) == null) {
+                                                if (keysPartite.get(i) == null) {
+                                                    Utente utente = (Utente) keyNode.getValue(Utente.class);
+                                                    utente.setPartite(chiave);
+                                                    String idUtente = keyNode.getKey().toString();
+                                                    dbUtenti.child(idUtente).setValue(utente);
+                                                   //Log.d(TAG, "partiteid " + keyNode.child("partite").child(String.valueOf(i)).getValue(String.class));
+                                                    //keyNode.child("partite").child(String.valueOf(i)).getRef().setValue(chiave);
+                                                  //  keyNode.child("partite").child(String.valueOf(i)).setValue(chiave);
                                                     break;
-
+                                                }
                                             }
+                                            //}
+
 
                                         }
                                     }

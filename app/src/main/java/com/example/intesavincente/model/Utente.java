@@ -27,12 +27,12 @@ public class Utente {
         FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
-    public Utente(String idUtente,String nickname, String mail, String password, String idPartita) {
+    public Utente(String idUtente,String nickname, String mail, String idPartita, String password) {
         this.idUtente = idUtente;
         this.nickname = nickname;
         this.mail = mail;
-        this.password = password;
         partite.add(idPartita);
+        this.password = password;
     }
     public String getMail() {
         return mail;

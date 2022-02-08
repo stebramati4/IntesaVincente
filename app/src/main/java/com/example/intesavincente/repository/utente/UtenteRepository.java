@@ -40,7 +40,9 @@ public class UtenteRepository {
                 for (DataSnapshot keyNode : snapshot.getChildren()) {
                     keys.add(keyNode.getKey());
                     if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        //keyNode.child("partite").child(String.valueOf(new int[1])).getRef().setValue(partitaID);
                         Utente utente = (Utente) keyNode.getValue(Utente.class);
+                        //String idPartita= keyNode.child("partite").child(String.valueOf()).getValue())
                         utente.setPartite(partitaID);
                         String idUtente = keyNode.getKey().toString();
                         System.out.println(idUtente);

@@ -47,8 +47,8 @@ public class GruppoRepository {
                         Log.d(TAG, "Utente stampa query if " + keyNode.child("idUtente"));
                         Log.d(TAG, "Utente chiave  if " + keyNode.getKey());
                         Log.d(TAG, "Utente nome if" + keyNode.child("nickname").getValue());
-                        Log.d(TAG, "Utente indovinatore if" + keyNode.child("indovinatore").getValue());
-                        Log.d(TAG, "Utente stampa query if " + keyNode.child("gruppi").child("utenti"));
+                        //Log.d(TAG, "Utente indovinatore if" + keyNode.child("indovinatore").getValue());
+                        //Log.d(TAG, "Utente stampa query if " + keyNode.child("gruppi").child("utenti"));
                         Log.d(TAG, " gruppo id" + gruppoID);
                         Log.d(TAG, " nome" + nome);
                         //Log.d(TAG, " utente " + utente.toString1());

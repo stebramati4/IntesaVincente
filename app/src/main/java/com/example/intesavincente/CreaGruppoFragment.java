@@ -105,13 +105,8 @@ public class CreaGruppoFragment extends Fragment {
         creaGruppoButton.setOnClickListener(view -> {
            // addGroup();
             //cambia activity
-
-
-
-
-
-    //crea il gruppo e lo aggiunge al database
-    //private void addGroup() {
+            //crea il gruppo e lo aggiunge al database
+            //private void addGroup() {
         db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
         String nome = nomeGruppo.getText().toString();
         if(!TextUtils.isEmpty(nome)) {
@@ -124,12 +119,13 @@ public class CreaGruppoFragment extends Fragment {
             Log.d(TAG,"fuori chiamata1");
             GruppoRepository g= new GruppoRepository();
             g.inserisciGruppo(gruppoID,nome);
+            Log.d(TAG,"fuori chiamata2");
             snackbarCreaGruppo = Snackbar.make(v, "GRUPPO " + nome + " CREATO", Snackbar.LENGTH_SHORT);
             snackbarCreaGruppo.show();
 
             PartitaRepository p =new PartitaRepository();
             p.inserisciGruppoInPartita(gruppoID);
-
+            p.inserisciPartitaInUtente(gruppoID);
             Navigation.findNavController(v).navigate(R.id.action_creaGruppoFragment_to_scegliRuoloFragment);
 
 

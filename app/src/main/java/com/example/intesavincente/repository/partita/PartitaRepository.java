@@ -80,8 +80,17 @@ public class PartitaRepository {
                                                         ArrayList <String> partite=new ArrayList<>();
                                                         partite= (ArrayList<String>) keyNode.child("partite").getValue();
                                                         Utente u=new Utente(utenteID,nickname,mail,password);
-                                                        u.aggiungiPartita(chiave);
-                                                        u.setPartite(partite);
+                                                        if(partite.size()==1&&partite.get(0).equals("prova")){
+                                                            Log.d(TAG, "dentro if22" );
+                                                            partite.remove(0);
+                                                            partite.add(0,chiave);
+                                                            u.setPartite(partite);
+                                                        }
+                                                        else{
+                                                            Log.d(TAG, "dentro if223" );
+                                                            u.setPartite(partite);
+                                                            u.aggiungiPartita(chiave);
+                                                        }
                                                         Log.d(TAG, "valori utente"+ u.toString1());
                                                         Log.d(TAG, "valori utente"+ u.getPartite());
                                                         String idUtente = keyNode.getKey().toString();

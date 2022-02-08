@@ -11,7 +11,7 @@ public class Utente {
     private String mail;
     private String password;
     public Statistica statistica;
-    private ArrayList<String> partite ;
+    private ArrayList<String> partite =new ArrayList<>();
 
     public Utente(){
 

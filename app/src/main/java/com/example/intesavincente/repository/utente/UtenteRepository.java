@@ -49,16 +49,23 @@ public class UtenteRepository {
                         String mail= (String)keyNode.child("mail").getValue();
                         String password= (String) keyNode.child("password").getValue();
                         ArrayList <String> partite=new ArrayList<>();
+                        Log.d(TAG, "fuori if22" );
                         partite= (ArrayList<String>) keyNode.child("partite").getValue();
+                        Log.d(TAG, "fuori if223" );
                         Utente u = new Utente(utenteID, nickname, mail, password);
+                        Log.d(TAG, "fuori if224" );
                         if(partite.size()==1&&partite.get(0).equals("prova")){
+                            Log.d(TAG, "dentro if22" );
                             partite.remove(0);
                             partite.add(0,partitaID);
+                            u.setPartite(partite);
                         }
                         else{
+                            Log.d(TAG, "dentro if223" );
+                            u.setPartite(partite);
                             u.aggiungiPartita(partitaID);
-                        }
-                        u.setPartite(partite);
+                            }
+
 
                         Log.d(TAG, "valori utente"+ u.toString1());
                         Log.d(TAG, "valori utente"+ u.getPartite());

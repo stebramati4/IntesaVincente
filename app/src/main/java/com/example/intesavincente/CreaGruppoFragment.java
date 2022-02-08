@@ -125,7 +125,9 @@ public class CreaGruppoFragment extends Fragment {
 
             PartitaRepository p =new PartitaRepository();
             p.inserisciGruppoInPartita(gruppoID);
+            Log.d(TAG,"fuori chiamata3");
             p.inserisciPartitaInUtente(gruppoID);
+            Log.d(TAG,"fuori chiamata4");
             Navigation.findNavController(v).navigate(R.id.action_creaGruppoFragment_to_scegliRuoloFragment);
 
 

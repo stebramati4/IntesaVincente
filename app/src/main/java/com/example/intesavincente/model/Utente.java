@@ -1,6 +1,7 @@
 package com.example.intesavincente.model;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.internal.bind.ArrayTypeAdapter;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class Utente {
         this.nickname = nickname;
         this.mail = mail;
         this.password = password;
-        this.partite = null;
+        //this.partite = null;
     }
     public void setId(String idUtente){
         FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -65,7 +66,9 @@ public class Utente {
     public ArrayList<String> getPartite() {
         return partite;
     }
-
+    public void aggiungiPartita(ArrayList<String> partite){
+        this.partite=partite;
+    }
     public void setPartite(String partitaID) {
         partite.add(partitaID);
     }

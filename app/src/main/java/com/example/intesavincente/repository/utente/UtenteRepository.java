@@ -41,12 +41,25 @@ public class UtenteRepository {
                     keys.add(keyNode.getKey());
                     if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         //keyNode.child("partite").child(String.valueOf(new int[1])).getRef().setValue(partitaID);
-                        Utente utente = (Utente) keyNode.getValue(Utente.class);
+                        //Utente utente = (Utente) keyNode.getValue(Utente.class);
+                        Log.d(TAG, "tipo Partite" + keyNode.child("partite").getValue().getClass());
+                        String utenteID= FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        Log.d(TAG, "tipo Partite" + keyNode.child("idUtente").getClass());
+                        String nickname= (String) keyNode.child("nickname").getValue();
+                        String mail= (String)keyNode.child("mail").getValue();
+                        String password= (String) keyNode.child("password").getValue();
+                        ArrayList <String> partite=new ArrayList<>();
+                        partite= (ArrayList<String>) keyNode.child("partite").getValue();
+                        Utente u=new Utente(utenteID,nickname,mail,password);
+                        u.aggiungiPartita(partite);
+
+                        Log.d(TAG, "valori utente"+ u.toString1());
+                        Log.d(TAG, "valori utente"+ u.getPartite());
                         //String idPartita= keyNode.child("partite").child(String.valueOf()).getValue())
-                        utente.setPartite(partitaID);
+                        //utente.setPartite(partitaID);
                         String idUtente = keyNode.getKey().toString();
                         System.out.println(idUtente);
-                        dbUtenti.child(idUtente).setValue(utente);
+                        dbUtenti.child(idUtente).setValue(u);
                     }
                 }
             }

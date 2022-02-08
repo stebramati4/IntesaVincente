@@ -52,6 +52,7 @@ public class UtenteRepository {
                         partite= (ArrayList<String>) keyNode.child("partite").getValue();
                         Utente u=new Utente(utenteID,nickname,mail,password);
                         u.aggiungiPartita(partite);
+                        u.setPartite(partitaID);
 
                         Log.d(TAG, "valori utente"+ u.toString1());
                         Log.d(TAG, "valori utente"+ u.getPartite());

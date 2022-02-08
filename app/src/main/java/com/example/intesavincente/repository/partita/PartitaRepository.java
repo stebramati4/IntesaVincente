@@ -66,22 +66,39 @@ public class PartitaRepository {
                                     keysUtenti.add(keyNode.getKey());
                                     if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                         keysUtenti.add(keyNode.getKey());
+                                        Log.d(TAG, "KeysPartite " + keysPartite.size());
                                         for (int i = 0; i < keysPartite.size(); i++) {
-                                            //if(keyNode.child("partite").child(String.valueOf(i)).getValue(String.class).equals(chiave))
-                                            if(!keysPartite.get(i).equals(chiave)) {
-                                                //  break;
-                                                // else{
-                                                //if (keyNode.child("partite").child(String.valueOf(i)).getValue(String.class) == null) {
-                                                if (keysPartite.get(i) == null) {
-                                                    Utente utente = (Utente) keyNode.getValue(Utente.class);
-                                                    utente.setPartite(chiave);
-                                                    String idUtente = keyNode.getKey().toString();
-                                                    dbUtenti.child(idUtente).setValue(utente);
+                                            //if(!keysPartite.get(i).equals(chiave)) {
+                                               // if (keyNode.child("partite").child(String.valueOf(i)).getValue(String.class) == null) {
+                                                    if(!keyNode.child("partite").child(String.valueOf(i)).getValue(String.class).equals(chiave)){
+                                                        //if (keysPartite.get(i) == null) {
+                                                        String utenteID= FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                        Log.d(TAG, "tipo Partite" + keyNode.child("idUtente").getClass());
+                                                        String nickname= (String) keyNode.child("nickname").getValue();
+                                                        String mail= (String)keyNode.child("mail").getValue();
+                                                        String password= (String) keyNode.child("password").getValue();
+                                                        ArrayList <String> partite=new ArrayList<>();
+                                                        partite= (ArrayList<String>) keyNode.child("partite").getValue();
+                                                        Utente u=new Utente(utenteID,nickname,mail,password);
+                                                        u.aggiungiPartita(partite);
+                                                        u.setPartite(chiave);
+                                                        Log.d(TAG, "valori utente"+ u.toString1());
+                                                        Log.d(TAG, "valori utente"+ u.getPartite());
+                                                        String idUtente = keyNode.getKey().toString();
+                                                        System.out.println(idUtente);
+                                                        dbUtenti.child(idUtente).setValue(u);
+
+
+
+                                                   // Utente utente = (Utente) keyNode.getValue(Utente.class);
+                                                    //utente.setPartite(chiave);
+                                                    //String idUtente = keyNode.getKey().toString();
+                                                    //dbUtenti.child(idUtente).setValue(utente);
                                                    //Log.d(TAG, "partiteid " + keyNode.child("partite").child(String.valueOf(i)).getValue(String.class));
                                                     //keyNode.child("partite").child(String.valueOf(i)).getRef().setValue(chiave);
                                                   //  keyNode.child("partite").child(String.valueOf(i)).setValue(chiave);
                                                     break;
-                                                }
+                                                    // }
                                             }
                                             //}
 

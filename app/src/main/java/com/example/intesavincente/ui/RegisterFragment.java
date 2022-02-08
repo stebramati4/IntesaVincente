@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 
 public class RegisterFragment extends Fragment {
 
@@ -55,13 +57,15 @@ public class RegisterFragment extends Fragment {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
                 String nickname = nicknameText.getText().toString();
-
+                ArrayList <String> partite=new ArrayList();
+                partite.add("prova");
+                //partite.add(null);
                 mUserViewModel.signUpWithEmail(email, password).observe(getViewLifecycleOwner(), authenticationResponse -> {
                     if (authenticationResponse != null) {
                         if (authenticationResponse.isSuccess()) {
                                 if(nickname!=null){
                                     String utenteID = db.push().getKey();
-                                    Utente u=new Utente(FirebaseAuth.getInstance().getCurrentUser().getUid(), nickname, email, password);
+                                    Utente u=new Utente(FirebaseAuth.getInstance().getCurrentUser().getUid(), nickname, email, password,partite);
 
                                     db.child("utenti").child(utenteID).setValue(u);
                                     Navigation.findNavController(v).navigate(R.id.mainActivity);

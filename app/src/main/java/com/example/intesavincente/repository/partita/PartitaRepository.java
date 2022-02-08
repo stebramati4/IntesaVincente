@@ -80,8 +80,8 @@ public class PartitaRepository {
                                                         ArrayList <String> partite=new ArrayList<>();
                                                         partite= (ArrayList<String>) keyNode.child("partite").getValue();
                                                         Utente u=new Utente(utenteID,nickname,mail,password);
-                                                        u.aggiungiPartita(partite);
-                                                        u.setPartite(chiave);
+                                                        u.aggiungiPartita(chiave);
+                                                        u.setPartite(partite);
                                                         Log.d(TAG, "valori utente"+ u.toString1());
                                                         Log.d(TAG, "valori utente"+ u.getPartite());
                                                         String idUtente = keyNode.getKey().toString();

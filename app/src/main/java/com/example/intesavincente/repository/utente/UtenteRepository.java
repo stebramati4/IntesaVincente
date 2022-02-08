@@ -50,9 +50,15 @@ public class UtenteRepository {
                         String password= (String) keyNode.child("password").getValue();
                         ArrayList <String> partite=new ArrayList<>();
                         partite= (ArrayList<String>) keyNode.child("partite").getValue();
-                        Utente u=new Utente(utenteID,nickname,mail,password);
-                        u.aggiungiPartita(partite);
-                        u.setPartite(partitaID);
+                        Utente u = new Utente(utenteID, nickname, mail, password);
+                        if(partite.size()==1&&partite.get(0).equals("prova")){
+                            partite.remove(0);
+                            partite.add(0,partitaID);
+                        }
+                        else{
+                            u.aggiungiPartita(partitaID);
+                        }
+                        u.setPartite(partite);
 
                         Log.d(TAG, "valori utente"+ u.toString1());
                         Log.d(TAG, "valori utente"+ u.getPartite());

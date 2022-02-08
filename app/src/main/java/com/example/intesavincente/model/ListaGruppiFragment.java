@@ -154,7 +154,7 @@ public class ListaGruppiFragment extends Fragment {
                             keysUtenti.add(keyNode.getKey());
                             if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 keysUtenti.add(keyNode.getKey());
-                                mPartitaRepository.inserisciPartitaInUtente(gruppo.getID());
+
                                 //Utente utente = (Utente) keyNode.getValue(Utente.class);
                                 //Log.d(TAG, "Utente " + utente.toString1());
                                // Log.d(TAG, "Reference " + dbGruppi.getRef());
@@ -196,6 +196,7 @@ public class ListaGruppiFragment extends Fragment {
                                                         //snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
                                                         snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE  INSERITO", Snackbar.LENGTH_SHORT);
                                                         snackbarUniscitiGruppo.show();
+                                                        mPartitaRepository.inserisciPartitaInUtente(gruppo.getID());
                                                         Navigation.findNavController(v).navigate(R.id.action_ListaGruppiFragment_to_scegliRuoloFragment);
 
 

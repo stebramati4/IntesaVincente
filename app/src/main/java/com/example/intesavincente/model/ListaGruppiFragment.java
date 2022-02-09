@@ -29,7 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ListaGruppiFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -73,8 +72,7 @@ public class ListaGruppiFragment extends Fragment {
     DatabaseReference dbGruppi;
     DatabaseReference dbUtenti;
     DatabaseReference db;
-    PartitaRepository mPartitaRepository =new PartitaRepository();
-    GruppoRepository mGruppoRepository = new GruppoRepository();
+    PartitaRepository mPartitaRepository=new PartitaRepository();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,7 +90,7 @@ public class ListaGruppiFragment extends Fragment {
         dbGruppi = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
         dbGruppi.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) { 
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 arrayGruppi.clear();
                 List<String> keys= new ArrayList<>();
                 for(DataSnapshot keyNode : snapshot.getChildren()) {
@@ -108,14 +106,16 @@ public class ListaGruppiFragment extends Fragment {
                     //Gruppo gruppo1=new Gruppo(keyNode.child("nome").getValue(),keyNode.getKey(),null);
                     Log.d(TAG, "Nome Gruppo: " + keyNode.getValue());
                     Log.d(TAG, "Class: " + keyNode.child("componenti").getValue().getClass());
+                    Log.d(TAG, "Tipo componente: " + keyNode.child("componenti").child("0").getValue(Utente.class).getClass());
 
                     String gruppoId = keyNode.getKey();
                     String nomeGruppo = (String) keyNode.child("nome").getValue();
-                    ArrayList<String> componenti = new ArrayList<String>();
+                    ArrayList<Utente> componenti = new ArrayList<Utente>();
 
                     for (int i = 0; i < 3; i++) {
-                        if (keyNode.child("componenti").child(String.valueOf(i)).getValue() != null) {
-                            String componente = keyNode.child("componenti").child(String.valueOf(i)).getValue().toString();
+                        if (keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
+                            Utente componente = keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
+                            Log.d(TAG, "Componente: " + componente.toString1());
                             componenti.add(componente);
                         }
                     }
@@ -138,8 +138,6 @@ public class ListaGruppiFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Gruppo gruppo = (Gruppo) listaGruppi.getItemAtPosition(i);
-                Log.d(TAG, "gruppo00 " +gruppo.getID());
-
                 Log.d(TAG, "Gruppo selezionato " + listaGruppi.getItemAtPosition(i).toString());
                 Log.d(TAG, "Tipo " + listaGruppi.getItemAtPosition(i).getClass());
 
@@ -154,35 +152,34 @@ public class ListaGruppiFragment extends Fragment {
                             keysUtenti.add(keyNode.getKey());
                             if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 keysUtenti.add(keyNode.getKey());
-
-                                //Utente utente = (Utente) keyNode.getValue(Utente.class);
-                                //Log.d(TAG, "Utente " + utente.toString1());
-                               // Log.d(TAG, "Reference " + dbGruppi.getRef());
+                                Utente utente = (Utente) keyNode.getValue(Utente.class);
+                                Log.d(TAG, "Utente " + utente.toString1());
+                                Log.d(TAG, "Reference " + dbGruppi.getRef());
                                 dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        ArrayList<String> listaComponenti = new ArrayList();
+                                        ArrayList<Utente> listaComponenti = new ArrayList<Utente>();
                                         List<String> keysGruppi = new ArrayList<>();
                                         for (DataSnapshot keyNodeGruppi : dataSnapshot.getChildren()) {
                                             keysGruppi.add(keyNodeGruppi.getKey());
                                             Log.d(TAG, "KeyNode " + keyNodeGruppi);
                                             Log.d(TAG, "Class KeyNode " + keyNodeGruppi.getValue().getClass());
-                                            //Log.d(TAG, "GruppoID " + keyNodeGruppi.child("componenti").getValue().getClass());
+                                            Log.d(TAG, "GruppoID " + keyNodeGruppi.child("componenti").getValue().getClass());
                                             if(gruppo.getID().equals(keyNodeGruppi.getKey())){
                                                 Boolean isInserito = false;
 
                                                 for (int i = 0; i < 3; i++) {
-                                                    if (keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(String.class) != null) {
-                                                        String componente = keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(String.class);
+                                                    if (keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class) != null) {
+                                                        Utente componente = keyNodeGruppi.child("componenti").child(String.valueOf(i)).getValue(Utente.class);
                                                         listaComponenti.add(componente);
 
                                                     }
                                                 }
 
                                                 for(int i = 0; i < listaComponenti.size(); i++){
-                                                   // Log.d(TAG, "Utente " + utente.getNickname());
-                                                    Log.d(TAG, "Componente " + listaComponenti.get(i));
-                                                    if(keyNode.child("idUtente").getValue().equals(listaComponenti.get(i))){
+                                                    Log.d(TAG, "Utente " + utente.getNickname());
+                                                    Log.d(TAG, "Componente " + listaComponenti.get(i).getNickname());
+                                                    if(utente.getNickname().equals(listaComponenti.get(i).getNickname())){
                                                         isInserito = true;
                                                     }
                                                 }
@@ -192,13 +189,11 @@ public class ListaGruppiFragment extends Fragment {
                                                 }
                                                 else {
                                                     if (listaComponenti.size() < 3) {
-                                                        dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                                        //snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
-                                                        snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE  INSERITO", Snackbar.LENGTH_SHORT);
+                                                        dbGruppi.child(gruppo.getID()).child("componenti").child(String.valueOf(listaComponenti.size())).setValue(utente);
+                                                        snackbarUniscitiGruppo = Snackbar.make(v, "UTENTE " + utente.getNickname() + " INSERITO", Snackbar.LENGTH_SHORT);
                                                         snackbarUniscitiGruppo.show();
                                                         mPartitaRepository.inserisciPartitaInUtente(gruppo.getID());
                                                         Navigation.findNavController(v).navigate(R.id.action_ListaGruppiFragment_to_scegliRuoloFragment);
-
 
                                                     }
                                                     else{
@@ -241,4 +236,6 @@ public class ListaGruppiFragment extends Fragment {
 
 }
 
+
 // piccola modifica inutile 2
+

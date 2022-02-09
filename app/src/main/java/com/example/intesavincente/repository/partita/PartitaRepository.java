@@ -87,7 +87,7 @@ public class PartitaRepository {
                                                             u.setPartite(partite);
                                                         }
                                                         else{
-                                                            Log.d(TAG, "dentro if223" );
+                                                            Log.d(TAG, "dentro if223");
                                                             u.setPartite(partite);
                                                             u.aggiungiPartita(chiave);
                                                         }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Gruppo {
     private String ID;
     private String nome;
-    private ArrayList<String> componenti = new ArrayList<String>();
+    private ArrayList<Utente> componenti = new ArrayList<>();
 
     public Gruppo(){
 
@@ -15,13 +15,13 @@ public class Gruppo {
         this.nome = nome;
     }
 
-    public Gruppo(String ID, String  nome, String utente) {
+    public Gruppo(String ID, String  nome, Utente utente) {
         this.ID=ID;
         this.nome=nome;
         componenti.add(utente);
     }
 
-    public Gruppo(String ID, String  nome, ArrayList<String> componenti) {
+    public Gruppo(String ID, String  nome, ArrayList<Utente> componenti) {
         this.ID=ID;
         this.nome=nome;
         this.componenti = componenti;
@@ -43,7 +43,7 @@ public class Gruppo {
         this.nome = nome;
     }
 
-    public ArrayList<String> getComponenti() {
+    public ArrayList<Utente> getComponenti() {
         return componenti;
     }
 
@@ -66,15 +66,14 @@ public class Gruppo {
                 ", componenti=" + stampaLista()+
                 '}';
     }
-
     public String stampaLista(){     //Modificato in modo tale che prenda già i componenti del gruppo
         String stampa = "";
         for(int i=0;i<componenti.size();i++){
             if(componenti.get(i) != null){
                 if(i == 0)
-                    stampa = componenti.get(i);
+                    stampa = componenti.get(i).toString1();
                 else
-                    stampa = stampa + ", " + componenti.get(i);
+                    stampa = stampa + ", " + componenti.get(i).toString1();
             }
             else
                 return stampa;
@@ -82,5 +81,33 @@ public class Gruppo {
         return stampa;
     }
 
+    public String stampaNomeComponenti(){
+        String stampa = "";
+        System.out.println("Tipo: " + componenti.getClass());
+        System.out.println("Size: " + componenti.size());
+        for(int i=0;i<componenti.size();i++){
+            Utente utente = (Utente) componenti.get(i);
+            System.out.println("Utente: " + componenti.get(i));
+            System.out.println("Tipo: " + utente.getClass());
+            System.out.println("Condizione: " + (componenti.get(i) != null));
+            if(componenti.get(i) != null){
+                if(i == 0) {
+                    System.out.println("Nickname utente if: ");
+                    stampa = componenti.get(i).getNickname();
+
+                }
+                else {
+                    System.out.println("Nickname utente else: ");
+                    stampa = stampa + ", " + componenti.get(i).getNickname();
+
+                }
+            }
+            else {
+                System.out.println("Else del primo If");
+                return stampa;
+            }
+        }
+        return stampa;
+    }
 }
 

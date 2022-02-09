@@ -21,14 +21,12 @@ import androidx.annotation.Nullable;
 /**
  * * Custom Adapter that extends ArrayAdapter to show the groups in a ListView.
  */
+
 public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
 
     private static final String TAG ="ListaGruppiAdapter" ;
 
     private ArrayList<Gruppo> mArrayGruppi;
-    private ArrayList<String> mArrayIdComponenti;
-    private ArrayList<String> mArrayUtenti;
-    private UtenteRepository mUtenteRepository = new UtenteRepository();
     private int mLayout;
 
 
@@ -47,64 +45,12 @@ public class ListaGruppiAdapter extends ArrayAdapter<Gruppo> {
 
         TextView textViewNomeGruppo = convertView.findViewById(R.id.nome_gruppo);
         textViewNomeGruppo.setText(mArrayGruppi.get(position).getNome());
-        Log.d(TAG, "Nome Gruppo : "+mArrayGruppi.get(position).getNome());
-
-        mArrayIdComponenti = mArrayGruppi.get(position).getComponenti();
-        Log.d(TAG, "ArrayIdComponenti : "+mArrayIdComponenti.toString());
-
+        Log.d(TAG, "Componenti : "+mArrayGruppi.get(position).getNome());
         TextView textViewComponenti = convertView.findViewById(R.id.componenti);
-
-        mUtenteRepository.getListaUtenti(new FirebaseCallback() {
-            @Override
-            public void onResponse(ArrayList<String> listaNomi) {
-                Log.d(TAG, "Nome componente1 : "+listaNomi.toString());
-                    //Modificato in modo tale che prenda già i componenti del gruppo
-                    String stampa = "";
-                    for(int i=0;i<listaNomi.size();i++){
-                        if(listaNomi.get(i) != null){
-                            if(i == 0)
-                                stampa = listaNomi.get(i);
-                            else
-                                stampa = stampa + ", " + listaNomi.get(i);
-                        }
-                        else
-                            stampa="";
-                    }
-                    textViewComponenti.setText(stampa);
-
-            }
-        });
+        textViewComponenti.setText(mArrayGruppi.get(position).stampaNomeComponenti());
+        Log.d(TAG, "Componenti : "+mArrayGruppi.get(position).stampaNomeComponenti());
 
         return convertView;
     }
-
-    public String stampaNomeComponenti(ArrayList<String> listaNomi){
-        String stampa = "";
-        System.out.println("Tipo: " + listaNomi.getClass());
-        System.out.println("Size: " + listaNomi.size());
-        for(int i=0;i<listaNomi.size();i++){
-            String nomeUtente = listaNomi.get(i);
-            System.out.println("Utente: " + listaNomi.get(i));
-            System.out.println("Condizione: " + (listaNomi.get(i) != null));
-            if(listaNomi.get(i) != null){
-                if(i == 0) {
-                    System.out.println("Nickname utente if: ");
-                    stampa = listaNomi.get(i);
-
-                }
-                else {
-                    System.out.println("Nickname utente else: ");
-                    stampa = stampa + ", " + listaNomi.get(i);
-
-                }
-            }
-            else {
-                System.out.println("Else del primo If");
-                return stampa;
-            }
-        }
-        return stampa;
-    }
-
 }
 

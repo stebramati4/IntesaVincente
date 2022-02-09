@@ -13,9 +13,12 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.intesavincente.model.Partita;
+import com.example.intesavincente.repository.partita.PartitaRepository;
+import com.example.intesavincente.repository.partita.PartitaResponse;
 import com.google.firebase.database.DatabaseReference;
 
-public class ScegliRuoloFragment extends Fragment {
+public class ScegliRuoloFragment extends Fragment implements PartitaResponse {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class ScegliRuoloFragment extends Fragment {
     }
 
     private static final String TAG ="ScegliRuoloFragment" ;
+    private PartitaRepository mPartitaRepository;
     Button avantiButton;
     RadioGroup radioGroup;
     RadioButton radioButton;
@@ -59,6 +63,8 @@ public class ScegliRuoloFragment extends Fragment {
                 avantiButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //mPartitaRepository = new PartitaRepository(requireContext(), this);
+                        //mPartitaRepository.trovaPartita();
                         if(selectedText.equals("SUGGERITORE")) {
                             Navigation.findNavController(v).navigate(R.id.action_scegliRuoloFragment_to_suggeritoreActivity);
                         }
@@ -71,5 +77,11 @@ public class ScegliRuoloFragment extends Fragment {
         });
 
        return v;
+    }
+
+    @Override
+    public Partita onDataFound(Partita partita) {
+        partita.setAttiva(true);
+        return partita;
     }
 }

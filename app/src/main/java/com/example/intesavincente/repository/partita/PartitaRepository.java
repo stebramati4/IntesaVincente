@@ -162,24 +162,37 @@ public class PartitaRepository implements IPartitaRepository{
                 //Partita p = null;
                 for (DataSnapshot keyNode : snapshot.getChildren()) {
                     keys.add(keyNode.getKey());
-                    Log.d(TAG,"trovaPartita3"+keyNode.getKey());
+                    Log.d(TAG, "trovaPartita3" + keyNode.getKey());
                     for (int i = 0; i < 3; i++) {
                         //Log.d(TAG, "idutente1"+keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class).getIdUtente() );
-                        Log.d(TAG, "idutente12"+FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        if(keyNode.child("componenti").child(String.valueOf(i)).exists()){
+                        Log.d(TAG, "idutente12" + FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        if (keyNode.child("componenti").child(String.valueOf(i)).exists()) {
                             if (keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class).getIdUtente().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                                 chiaveGruppo.add(keyNode.getKey());
                                 singolachiave = keyNode.getKey();
                                 String finalSingolachiave = singolachiave;
-                                Log.d(TAG, "chiave gruppo a cui appartiene l'utente"+singolachiave );
-                                Log.d(TAG, "chiave gruppo a cui appartiene l'utente1"+finalSingolachiave );}}}
+                                Log.d(TAG, "chiave gruppo a cui appartiene l'utente" + singolachiave);
+                                Log.d(TAG, "chiave gruppo a cui appartiene l'utente1" + finalSingolachiave);
+                            }
+                        }
+                    }
+                }
+            }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                                 dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         Log.d(TAG, "dbpartite");
+                                        ArrayList <Partita> arrPartite=new ArrayList<>();
                                         List<String> keys = new ArrayList<>();
                                         for (DataSnapshot keyNode1 : snapshot.getChildren()) {
                                             keys.add(keyNode1.getKey());
+                                            //arrPartite.add(keyNode1.getValue(Partita.class));
+                                            //Log.d(TAG, "arraypartite"+arrPartite.toString());
                                             Log.d(TAG, "fuori if"+chiaveGruppo.size());
                                             //Log.d(TAG, "gruppo"+keyNode.child("gruppoID").getValue());
                                             String chiavePartita= keyNode1.child("gruppoID").getValue().toString();
@@ -187,9 +200,13 @@ public class PartitaRepository implements IPartitaRepository{
                                             for(int j=0;j<chiaveGruppo.size();j++){
                                                 Log.d(TAG, "kgruppo"+chiaveGruppo.toString());
                                                 Log.d(TAG, "1kgruppo"+keyNode1.child("gruppoID").getValue());
+                                                Log.d(TAG, "chiavep1"+chiavePartita);
                                                 //if ((keyNode.child("gruppoID").getValue().equals(chiaveGruppo.get(j)))) {
-                                                if ((chiavePartita.equals(chiaveGruppo.get(j)))) {
+                                                Log.d(TAG, "chiaveGruppo"+keyNode1.child("attiva").getValue().equals("true"));
+                                                Log.d(TAG, "type"+keyNode1.child("attiva").getValue().getClass());
+                                                if ((chiavePartita.equals(chiaveGruppo.get(j)))&&((Boolean)keyNode1.child("attiva").getValue()==true)) {
                                                     // &&(keyNode.child("attiva").getValue().equals("true"))
+
                                                     Log.d(TAG, "chiaveGruppo"+chiaveGruppo.get(j));
                                                     //Log.d(TAG, "chiavePartita"+keyNode.child("gruppoID").getValue());
                                                     Log.d(TAG, "chiavePartita"+chiavePartita);
@@ -216,18 +233,14 @@ public class PartitaRepository implements IPartitaRepository{
 
                                     }
                                 });
-                            }
-                        }
+
+
 
                     /*}
                 }
             }*/
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+            ;
         //return pa.get(0);
     //return p;
     }

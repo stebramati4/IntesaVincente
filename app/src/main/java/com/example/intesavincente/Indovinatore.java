@@ -46,6 +46,7 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
         System.out.println("partita1");
         //partita=mPartitaRepository.trovaPartita();
         mPartitaRepository.trovaPartita();
+       // partita.
         System.out.println("partita123"+ partita.toString());
         mIWordsRepository = new WordsRepository(this.getApplication(), this);
         TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
@@ -88,6 +89,7 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
     public void onResponse(String parola) {
         TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
         parolaDaIndovinare.setText(parola);
+        System.out.println("par "+parola);
     }
 
     @Override

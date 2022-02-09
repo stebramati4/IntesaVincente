@@ -169,14 +169,20 @@ public class PartitaRepository {
                                         for (DataSnapshot keyNode : snapshot.getChildren()) {
                                             keys.add(keyNode.getKey());
                                             Log.d(TAG, "fuori if");
-                                            if ((keyNode.child("gruppoID").equals(finalSingolachiave))) {
-                                                // && (keyNode.child("attiva").equals("true"))
-                                                Log.d(TAG, "partitaEsiste");
-                                                Partita po = (Partita) keyNode.getValue(Partita.class);
-                                                // return po;
-                                                pa.add(po);
-                                                Log.d(TAG, "partita " + pa.get(0).toString());
+
+                                            for(int j=0;j<chiaveGruppo.size();j++){
+                                                Log.d(TAG, "kgruppo"+chiaveGruppo.toString());
+                                                Log.d(TAG, "1kgruppo"+keyNode.child("gruppoID"));
+                                                if ((keyNode.child("gruppoID").getValue().equals(chiaveGruppo.get(j)))) {
+                                                    // && (keyNode.child("attiva").equals("true"))
+                                                    Log.d(TAG, "partitaEsiste");
+                                                    Partita po = (Partita) keyNode.getValue(Partita.class);
+                                                    // return po;
+                                                    pa.add(po);
+                                                    Log.d(TAG, "partita " + pa.get(0).toString());
+                                                }
                                             }
+
 
                                         }
                                     }

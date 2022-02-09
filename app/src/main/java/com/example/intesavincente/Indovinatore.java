@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.intesavincente.model.Partita;
 import com.example.intesavincente.model.WordsResponse;
 import com.example.intesavincente.repository.partita.PartitaRepository;
+import com.example.intesavincente.repository.partita.PartitaResponse;
 import com.example.intesavincente.repository.words.IWordsRepository;
 import com.example.intesavincente.repository.words.WordsRepository;
 import com.example.intesavincente.utils.ResponseCallback;
@@ -21,11 +22,11 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class Indovinatore extends AppCompatActivity implements ResponseCallback {
+public class Indovinatore extends AppCompatActivity implements ResponseCallback, PartitaResponse {
 
     private String parola;
     private IWordsRepository mIWordsRepository;
-    private PartitaRepository mPartitaRepository= new PartitaRepository();
+    private PartitaRepository mPartitaRepository;
     private Partita partita=new Partita();
 
     private static final long START_TIME_IN_MILLIS = 600000;
@@ -45,9 +46,11 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
         setContentView(R.layout.activity_indovinatore);
         System.out.println("partita1");
         //partita=mPartitaRepository.trovaPartita();
+        mPartitaRepository = new PartitaRepository(this.getApplication(), this);
         mPartitaRepository.trovaPartita();
-       // partita.
+
         System.out.println("partita123"+ partita.toString());
+        System.out.println("partita123"+ partita);
         mIWordsRepository = new WordsRepository(this.getApplication(), this);
         TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
         buzz = findViewById(R.id.buzz);
@@ -130,5 +133,12 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
             pauseTimer();
             System.out.println("PARTITA FINITA");
         }
+    }
+
+    @Override
+    public void onDataFound(Partita partitaTrue) {
+            System.out.println("par1221"+partitaTrue);
+            this.partita=partitaTrue;
+            System.out.println("par12"+partitaTrue);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.intesavincente.repository.partita;
 
+import android.app.Application;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import com.example.intesavincente.model.Utente;
 import com.example.intesavincente.repository.user.UserRepository;
 import com.example.intesavincente.repository.utente.UtenteRepository;
 import com.example.intesavincente.utils.Constants;
+import com.example.intesavincente.utils.ResponseCallback;
+import com.example.intesavincente.utils.ServiceLocator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PartitaRepository {
+public class PartitaRepository implements IPartitaRepository{
 
     private static final String TAG = "PartitaRepository";
     DatabaseReference dbGruppi;
@@ -32,9 +35,18 @@ public class PartitaRepository {
     private EditText nomeGruppo;
     private Snackbar snackbarCreaGruppo;
     private UtenteRepository mUtenteRepository = new UtenteRepository();
-    public void PartitaRepository(){
+    private PartitaResponse mPartitaResponse;
+    private Application mApplication;
+
+    public PartitaRepository(Application application, PartitaResponse mPartitaResponse) {
+       this.mApplication = application;
+       this.mPartitaResponse = mPartitaResponse;
+    }
+
+    public PartitaRepository() {
 
     }
+
     public void inserisciGruppoInPartita(String gruppoID) {
         Partita p=new Partita(gruppoID);
         dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
@@ -160,26 +172,38 @@ public class PartitaRepository {
                                 singolachiave = keyNode.getKey();
                                 String finalSingolachiave = singolachiave;
                                 Log.d(TAG, "chiave gruppo a cui appartiene l'utente"+singolachiave );
-                                Log.d(TAG, "chiave gruppo a cui appartiene l'utente1"+finalSingolachiave );
+                                Log.d(TAG, "chiave gruppo a cui appartiene l'utente1"+finalSingolachiave );}}}
                                 dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         Log.d(TAG, "dbpartite");
                                         List<String> keys = new ArrayList<>();
-                                        for (DataSnapshot keyNode : snapshot.getChildren()) {
-                                            keys.add(keyNode.getKey());
-                                            Log.d(TAG, "fuori if");
-
+                                        for (DataSnapshot keyNode1 : snapshot.getChildren()) {
+                                            keys.add(keyNode1.getKey());
+                                            Log.d(TAG, "fuori if"+chiaveGruppo.size());
+                                            //Log.d(TAG, "gruppo"+keyNode.child("gruppoID").getValue());
+                                            String chiavePartita= keyNode1.child("gruppoID").getValue().toString();
+                                            Log.d(TAG, "kpartita"+keyNode1.child("gruppoID").getValue());
                                             for(int j=0;j<chiaveGruppo.size();j++){
                                                 Log.d(TAG, "kgruppo"+chiaveGruppo.toString());
-                                                Log.d(TAG, "1kgruppo"+keyNode.child("gruppoID"));
-                                                if ((keyNode.child("gruppoID").getValue().equals(chiaveGruppo.get(j)))) {
-                                                    // && (keyNode.child("attiva").equals("true"))
-                                                    Log.d(TAG, "partitaEsiste");
-                                                    Partita po = (Partita) keyNode.getValue(Partita.class);
+                                                Log.d(TAG, "1kgruppo"+keyNode1.child("gruppoID").getValue());
+                                                //if ((keyNode.child("gruppoID").getValue().equals(chiaveGruppo.get(j)))) {
+                                                if ((chiavePartita.equals(chiaveGruppo.get(j)))) {
+                                                    // &&(keyNode.child("attiva").getValue().equals("true"))
+                                                    Log.d(TAG, "chiaveGruppo"+chiaveGruppo.get(j));
+                                                    //Log.d(TAG, "chiavePartita"+keyNode.child("gruppoID").getValue());
+                                                    Log.d(TAG, "chiavePartita"+chiavePartita);
+                                                    Partita po = (Partita) keyNode1.getValue(Partita.class);
                                                     // return po;
                                                     pa.add(po);
-                                                    Log.d(TAG, "partita " + pa.get(0).toString());
+                                                    //onDataFound(po);
+                                                    if(po!=null){
+                                                        Log.d(TAG, "partita " + po);
+                                                        mPartitaResponse.onDataFound(po);
+                                                        //break;
+                                                    }
+
+
                                                 }
                                             }
 
@@ -195,9 +219,9 @@ public class PartitaRepository {
                             }
                         }
 
-                    }
+                    /*}
                 }
-            }
+            }*/
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -236,4 +260,6 @@ public class PartitaRepository {
             }
         });
     }
+
+
 }

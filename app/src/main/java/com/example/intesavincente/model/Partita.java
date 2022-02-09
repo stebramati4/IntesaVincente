@@ -12,13 +12,13 @@ public class Partita{
     public Partita(){
         this.passo = 3;
         this.parole_indovinate = 0;
-        this.isAttiva = true;
+        this.isAttiva = false;
     }
     public Partita(String gruppo) {
         this.gruppoID = gruppo;
         this.passo = 3;
         this.parole_indovinate = 0;
-        this.isAttiva = true;
+        this.isAttiva = false;
     }
 
     public String getGruppoID() {

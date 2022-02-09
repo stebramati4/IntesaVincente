@@ -35,6 +35,9 @@ public class Utente {
         FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
+    public String getIdUtente(){
+        return idUtente;
+    }
     public Utente(String idUtente,String nickname, String mail, String idPartita, String password) {
         this.idUtente = idUtente;
         this.nickname = nickname;

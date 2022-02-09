@@ -66,18 +66,7 @@ public class Gruppo {
                 ", componenti=" + stampaLista()+
                 '}';
     }
-    public String stampaLista(){     //Modificato in modo tale che prenda già i componenti del gruppo
-        String stampa = "";
-        for(int i=0;i<componenti.size();i++){
-            if(componenti.get(i) != null){
-                if(i == 0)
-                    stampa = componenti.get(i).toString1();
-                else
-                    stampa = stampa + ", " + componenti.get(i).toString1();
-            }
-            else
-                return stampa;
-        } public String stampaLista(){     //Modificato in modo tale che prenda già i componenti del gruppo
+        public String stampaLista(){     //Modificato in modo tale che prenda già i componenti del gruppo
         String stampa = "";
         for(int i=0;i<componenti.size();i++){
             if(componenti.get(i) != null){
@@ -92,36 +81,6 @@ public class Gruppo {
         return stampa;
     }
 
-    public String stampaNomeComponenti(){
-        String stampa = "";
-        System.out.println("Tipo: " + componenti.getClass());
-        System.out.println("Size: " + componenti.size());
-        for(int i=0;i<componenti.size();i++){
-            Utente utente = (Utente) componenti.get(i);
-            System.out.println("Utente: " + componenti.get(i));
-            System.out.println("Tipo: " + utente.getClass());
-            System.out.println("Condizione: " + (componenti.get(i) != null));
-            if(componenti.get(i) != null){
-                if(i == 0) {
-                    System.out.println("Nickname utente if: ");
-                    stampa = componenti.get(i).getNickname();
-
-                }
-                else {
-                    System.out.println("Nickname utente else: ");
-                    stampa = stampa + ", " + componenti.get(i).getNickname();
-
-                }
-            }
-            else {
-                System.out.println("Else del primo If");
-                return stampa;
-            }
-        }
-        return stampa;
-    }
-        return stampa;
-    }
 
     public String stampaNomeComponenti(){
         String stampa = "";

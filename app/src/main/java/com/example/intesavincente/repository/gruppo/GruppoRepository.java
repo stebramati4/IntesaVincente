@@ -42,7 +42,7 @@ public class GruppoRepository {
                     keys.add(keyNode.getKey());
                     if (keyNode.child("idUtente").getValue().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         keys.add(keyNode.getKey());
-                        Utente utente = keyNode.child("idUtente").getValue(Utente.class);
+                        Utente utente =(Utente) keyNode.getValue(Utente.class);
                         //Log.d(TAG, " utente " + keyNode.getValue(Utente.class));
                         Log.d(TAG, "Utente stampa query if " + keyNode.child("idUtente"));
                         Log.d(TAG, "Utente chiave  if " + keyNode.getKey());

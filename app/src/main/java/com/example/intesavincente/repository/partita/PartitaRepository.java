@@ -152,39 +152,42 @@ public class PartitaRepository {
                     keys.add(keyNode.getKey());
                     Log.d(TAG,"trovaPartita3"+keyNode.getKey());
                     for (int i = 0; i < 3; i++) {
-                        if (keyNode.child("componenti").child(String.valueOf(i)).getValue(String.class).equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                            chiaveGruppo.add(keyNode.getKey());
-                            singolachiave = keyNode.getKey();
-                            String finalSingolachiave = singolachiave;
-                            Log.d(TAG, "chiave gruppo a cui appartiene l'utente"+singolachiave );
-                            Log.d(TAG, "chiave gruppo a cui appartiene l'utente1"+finalSingolachiave );
-                            dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    Log.d(TAG, "dbpartite");
-                                    List<String> keys = new ArrayList<>();
-                                    for (DataSnapshot keyNode : snapshot.getChildren()) {
-                                        keys.add(keyNode.getKey());
-                                        Log.d(TAG, "fuori if");
-                                        if ((keyNode.child("gruppoID").equals(finalSingolachiave))) {
-                                            // && (keyNode.child("attiva").equals("true"))
-                                            Log.d(TAG, "partitaEsiste");
-                                            Partita po = (Partita) keyNode.getValue(Partita.class);
-                                           // return po;
-                                            pa.add(po);
-                                            Log.d(TAG, "partita " + pa.get(0).toString());
+                        //Log.d(TAG, "idutente1"+keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class).getIdUtente() );
+                        Log.d(TAG, "idutente12"+FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        if(keyNode.child("componenti").child(String.valueOf(i)).exists()){
+                            if (keyNode.child("componenti").child(String.valueOf(i)).getValue(Utente.class).getIdUtente().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                                chiaveGruppo.add(keyNode.getKey());
+                                singolachiave = keyNode.getKey();
+                                String finalSingolachiave = singolachiave;
+                                Log.d(TAG, "chiave gruppo a cui appartiene l'utente"+singolachiave );
+                                Log.d(TAG, "chiave gruppo a cui appartiene l'utente1"+finalSingolachiave );
+                                dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Log.d(TAG, "dbpartite");
+                                        List<String> keys = new ArrayList<>();
+                                        for (DataSnapshot keyNode : snapshot.getChildren()) {
+                                            keys.add(keyNode.getKey());
+                                            Log.d(TAG, "fuori if");
+                                            if ((keyNode.child("gruppoID").equals(finalSingolachiave))) {
+                                                // && (keyNode.child("attiva").equals("true"))
+                                                Log.d(TAG, "partitaEsiste");
+                                                Partita po = (Partita) keyNode.getValue(Partita.class);
+                                                // return po;
+                                                pa.add(po);
+                                                Log.d(TAG, "partita " + pa.get(0).toString());
+                                            }
+
                                         }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
                                     }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
+                                });
+                            }
                         }
-
 
                     }
                 }

@@ -87,9 +87,10 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback 
 
     @Override
     public void onResponse(String parola) {
+        System.out.println("par223 "+parola);
         TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
         parolaDaIndovinare.setText(parola);
-        System.out.println("par "+parola);
+
     }
 
     @Override

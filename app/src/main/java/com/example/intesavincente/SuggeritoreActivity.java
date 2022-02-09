@@ -4,16 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.intesavincente.repository.words.IWordsRepository;
+import com.example.intesavincente.repository.words.WordsRepository;
 import com.example.intesavincente.utils.ResponseCallback;
 
 public class SuggeritoreActivity extends AppCompatActivity implements ResponseCallback {
 
     TextView parolaDaIndovinare;
-
+    private IWordsRepository mIWordsRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggeritore);
+        mIWordsRepository = new WordsRepository(this.getApplication(), this);
+        mIWordsRepository.fetchWords();
     }
 
     @Override

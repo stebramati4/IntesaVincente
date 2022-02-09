@@ -17,6 +17,7 @@ import com.example.intesavincente.repository.words.IWordsRepository;
 import com.example.intesavincente.repository.words.WordsRepository;
 import com.example.intesavincente.utils.ResponseCallback;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -27,7 +28,7 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
     private String parola;
     private IWordsRepository mIWordsRepository;
     private PartitaRepository mPartitaRepository;
-    private Partita partita=new Partita();
+    public Partita partita=new Partita();
 
     private static final long START_TIME_IN_MILLIS = 600000;
     private TextView timer;
@@ -36,7 +37,7 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
     private CountDownTimer countDownTimer;
     private boolean timerRunning;
     private long timeLeftMillis = START_TIME_IN_MILLIS;
-
+    public ArrayList<Partita> p= new ArrayList<>();
     private int npasso;
 
 
@@ -44,13 +45,11 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indovinatore);
-        System.out.println("partita1");
-        //partita=mPartitaRepository.trovaPartita();
         mPartitaRepository = new PartitaRepository(this.getApplication(), this);
         mPartitaRepository.trovaPartita();
 
         System.out.println("partita123"+ partita.toString());
-        System.out.println("partita123"+ partita);
+        System.out.println("partita1234"+ p.toString());
         mIWordsRepository = new WordsRepository(this.getApplication(), this);
         TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
         buzz = findViewById(R.id.buzz);
@@ -84,6 +83,7 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
                 }
             }
         });
+
     }
 
     public Indovinatore(){}
@@ -136,9 +136,11 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
     }
 
     @Override
-    public void onDataFound(Partita partitaTrue) {
-            System.out.println("par1221"+partitaTrue);
-            this.partita=partitaTrue;
-            System.out.println("par12"+partitaTrue);
+    public Partita onDataFound(Partita partitaTrue) {
+        System.out.println("par1221"+partitaTrue);
+        this.partita=partitaTrue;
+        p.add(partitaTrue);
+        System.out.println("par12"+p.toString());
+        return partita;
     }
 }

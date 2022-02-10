@@ -2,6 +2,7 @@ package com.example.intesavincente;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.intesavincente.model.Partita;
-import com.example.intesavincente.model.WordsResponse;
 import com.example.intesavincente.repository.partita.PartitaRepository;
 import com.example.intesavincente.repository.partita.PartitaResponse;
 import com.example.intesavincente.repository.words.IWordsRepository;
@@ -20,14 +20,14 @@ import com.example.intesavincente.utils.ResponseCallback;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import retrofit2.Call;
-import retrofit2.Response;
+public class Indovinatore extends AppCompatActivity implements ResponseCallback, PartitaResponse, IIndovinatore {
 
-public class Indovinatore extends AppCompatActivity implements ResponseCallback, PartitaResponse {
-
+    private final Application mApplication;
     private String parola;
     private IWordsRepository mIWordsRepository;
     private PartitaRepository mPartitaRepository;
+    private IndovinatoreResponse mIndovinatoreResponse;
+    private IIndovinatore mIIndovinatoreRepository;
     public Partita partita=new Partita();
 
     private static final long START_TIME_IN_MILLIS = 600000;
@@ -64,7 +64,8 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
                     startActivity(i);
                 } else {
                     startTimer();
-                    mIWordsRepository.fetchWords();
+                    salva();
+
                    // parolaDaIndovinare.setText();
                 }
 
@@ -86,13 +87,22 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
 
     }
 
-    public Indovinatore(){}
+    public Indovinatore(Application mApplication) {
 
+        this.mApplication = mApplication;
+    }
+
+
+    public Indovinatore(Application mApplication, IndovinatoreResponse mIndovinatoreResponse) {
+        this.mApplication = mApplication;
+        this.mIndovinatoreResponse = mIndovinatoreResponse;
+    }
     @Override
     public void onResponse(String parola) {
         System.out.println("par223 "+parola);
-        TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
-        parolaDaIndovinare.setText(parola);
+        mIndovinatoreResponse.saveParola(parola);
+        //TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
+        //parolaDaIndovinare.setText(parola);
 
     }
 
@@ -141,6 +151,11 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
         this.partita=partitaTrue;
         p.add(partitaTrue);
         System.out.println("par12"+p.toString());
-        return partita;
+        return partitaTrue;
     }
+
+    public void salva(){
+        mIWordsRepository.fetchWords();
+    }
+
 }

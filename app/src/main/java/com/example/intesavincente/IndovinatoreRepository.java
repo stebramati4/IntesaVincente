@@ -2,6 +2,7 @@ package com.example.intesavincente;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
 import com.example.intesavincente.model.Partita;
 import com.example.intesavincente.repository.partita.PartitaRepository;
@@ -11,7 +12,7 @@ import com.example.intesavincente.repository.words.WordsRepository;
 import com.example.intesavincente.utils.ResponseCallback;
 
 public class IndovinatoreRepository implements ResponseCallback, PartitaResponse, IIndovinatore {
-    private final Application mApplication;
+    private Application mApplication;
     private String parola;
     private IWordsRepository mIWordsRepository;
     private PartitaRepository mPartitaRepository;
@@ -19,18 +20,26 @@ public class IndovinatoreRepository implements ResponseCallback, PartitaResponse
     private IIndovinatore mIIndovinatoreRepository;
     private Partita partita=new Partita();
     public Activity activity;
+
     public IndovinatoreRepository(Application mApplication, IndovinatoreResponse mIndovinatoreResponse) {
         this.mApplication = mApplication;
         this.mIndovinatoreResponse = mIndovinatoreResponse;
     }
-    public IndovinatoreRepository(Activity activity){
-        this.activity=activity;
+    public IndovinatoreRepository(Application mApplication) {
+        this.mApplication = mApplication;
     }
+
+    //public IndovinatoreRepository(Activity activity){
+      //  this.activity=activity;
+    //}
+    //public IndovinatoreRepository(){
+
+    //}
     public void prendiParola(){
-        mIWordsRepository = new WordsRepository(this.activity.getApplication(), this);
+        mIWordsRepository = new WordsRepository((Application) MyApplication.getAppContext(), this);
     }
     public void prendiPartita(){
-        mPartitaRepository = new PartitaRepository(this.activity.getApplication(), this);
+        mPartitaRepository = new PartitaRepository((Application) MyApplication.getAppContext(), this);
         mPartitaRepository.trovaPartita();
     }
 
@@ -39,6 +48,7 @@ public class IndovinatoreRepository implements ResponseCallback, PartitaResponse
 
     @Override
     public void salva() {
+        //prendiParola();
         mIWordsRepository.fetchWords();
     }
 

@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public class Indovinatore extends AppCompatActivity  {
 
-    private final Application mApplication;
+    //private final Application mApplication;
     private String parola;
     private IWordsRepository mIWordsRepository;
     private PartitaRepository mPartitaRepository;
@@ -39,7 +39,7 @@ public class Indovinatore extends AppCompatActivity  {
     private long timeLeftMillis = START_TIME_IN_MILLIS;
     public ArrayList<Partita> p= new ArrayList<>();
     private int npasso;
-    private IndovinatoreRepository mIndovinatoreRepository=new IndovinatoreRepository(this);
+    private IndovinatoreRepository mIndovinatoreRepository=new IndovinatoreRepository((Application) MyApplication.getAppContext());
 
     /*public Indovinatore(Application mApplication, IndovinatoreResponse indovinatoreResponse) {
         this.mApplication = mApplication;
@@ -48,6 +48,7 @@ public class Indovinatore extends AppCompatActivity  {
 */
 
     public Indovinatore() {
+
     }
 
 
@@ -57,11 +58,14 @@ public class Indovinatore extends AppCompatActivity  {
         setContentView(R.layout.activity_indovinatore);
         //mPartitaRepository = new PartitaRepository(this.getApplication(), this);
         //mPartitaRepository.trovaPartita();
+        System.out.println("stampa1");
         mIndovinatoreRepository.prendiPartita();
+        System.out.println("stampa2");
         System.out.println("partita123"+ partita.toString());
         System.out.println("partita1234"+ p.toString());
         //mIWordsRepository = new WordsRepository(this.getApplication(), this);
         mIndovinatoreRepository.prendiParola();
+        System.out.println("stampa3");
 
         TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
         buzz = findViewById(R.id.buzz);

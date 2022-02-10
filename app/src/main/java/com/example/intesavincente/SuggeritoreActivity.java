@@ -2,6 +2,7 @@ package com.example.intesavincente;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
 import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -23,7 +24,8 @@ public class SuggeritoreActivity extends AppCompatActivity implements ResponseCa
         //mIWordsRepository = new WordsRepository(this.getApplication(), this);
         //mIWordsRepository.fetchWords();
         //System.out.println("prova2");
-        mIIndovinatore=new IndovinatoreRepository(this.getApplication(), this);
+        //mIIndovinatore=new IndovinatoreRepository(this.getApplication(), this);
+        mIIndovinatore=new IndovinatoreRepository((Application) MyApplication.getAppContext(), this);
         mIIndovinatore.salva();
         System.out.println("prova3");
     }
@@ -42,7 +44,7 @@ public class SuggeritoreActivity extends AppCompatActivity implements ResponseCa
 
     @Override
     public void saveParola(String parola) {
-        System.out.println("ProvaGiusta" + parola);
+        System.out.println("parolaDaIndovinatore" + parola);
         parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
         parolaDaIndovinare.setText(parola);
     }

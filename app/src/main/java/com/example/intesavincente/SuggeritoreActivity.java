@@ -19,10 +19,11 @@ public class SuggeritoreActivity extends AppCompatActivity implements ResponseCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggeritore);
+        mIIndovinatore=new IndovinatoreRepository(this.getApplication(), this);
+        mIIndovinatore.salva();
         mIWordsRepository = new WordsRepository(this.getApplication(), this);
         mIWordsRepository.fetchWords();
-        mIIndovinatore=new Indovinatore(this.getApplication(), this);
-        mIIndovinatore.salva();
+
     }
 
     @Override

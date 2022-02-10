@@ -20,7 +20,7 @@ import com.example.intesavincente.utils.ResponseCallback;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Indovinatore extends AppCompatActivity implements ResponseCallback, PartitaResponse, IIndovinatore {
+public class Indovinatore extends AppCompatActivity  {
 
     private final Application mApplication;
     private String parola;
@@ -39,18 +39,30 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
     private long timeLeftMillis = START_TIME_IN_MILLIS;
     public ArrayList<Partita> p= new ArrayList<>();
     private int npasso;
+    private IndovinatoreRepository mIndovinatoreRepository=new IndovinatoreRepository(this);
+
+    /*public Indovinatore(Application mApplication, IndovinatoreResponse indovinatoreResponse) {
+        this.mApplication = mApplication;
+        this.mIndovinatoreResponse = indovinatoreResponse;
+    }
+*/
+
+    public Indovinatore() {
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indovinatore);
-        mPartitaRepository = new PartitaRepository(this.getApplication(), this);
-        mPartitaRepository.trovaPartita();
-
+        //mPartitaRepository = new PartitaRepository(this.getApplication(), this);
+        //mPartitaRepository.trovaPartita();
+        mIndovinatoreRepository.prendiPartita();
         System.out.println("partita123"+ partita.toString());
         System.out.println("partita1234"+ p.toString());
-        mIWordsRepository = new WordsRepository(this.getApplication(), this);
+        //mIWordsRepository = new WordsRepository(this.getApplication(), this);
+        mIndovinatoreRepository.prendiParola();
+
         TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
         buzz = findViewById(R.id.buzz);
         timer = findViewById(R.id.timer);
@@ -64,7 +76,7 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
                     startActivity(i);
                 } else {
                     startTimer();
-                    salva();
+                    mIndovinatoreRepository.salva();
 
                    // parolaDaIndovinare.setText();
                 }
@@ -87,29 +99,9 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
 
     }
 
-    public Indovinatore(Application mApplication) {
-
-        this.mApplication = mApplication;
-    }
 
 
-    public Indovinatore(Application mApplication, IndovinatoreResponse mIndovinatoreResponse) {
-        this.mApplication = mApplication;
-        this.mIndovinatoreResponse = mIndovinatoreResponse;
-    }
-    @Override
-    public void onResponse(String parola) {
-        System.out.println("par223 "+parola);
-        mIndovinatoreResponse.saveParola(parola);
-        //TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
-        //parolaDaIndovinare.setText(parola);
 
-    }
-
-    @Override
-    public void onFailure(String errorMessage) {
-
-    }
 
     public void startTimer() {
         countDownTimer = new CountDownTimer(timeLeftMillis, 1000) {
@@ -144,18 +136,29 @@ public class Indovinatore extends AppCompatActivity implements ResponseCallback,
             System.out.println("PARTITA FINITA");
         }
     }
-
+    /*
     @Override
     public Partita onDataFound(Partita partitaTrue) {
         System.out.println("par1221"+partitaTrue);
         this.partita=partitaTrue;
-        p.add(partitaTrue);
-        System.out.println("par12"+p.toString());
         return partitaTrue;
     }
+    @Override
+    public void onResponse(String parola) {
+        System.out.println("par223 "+parola);
+        mIndovinatoreResponse.saveParola(parola);
+    }
 
-    public void salva(){
+    @Override
+    public void onFailure(String errorMessage) {
+
+    }
+
+
+    @Override
+    public void salva() {
         mIWordsRepository.fetchWords();
     }
+    */
 
 }

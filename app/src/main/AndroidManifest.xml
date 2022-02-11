@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IntesaVincente"
-        android:name=".MyApplication">
+        android:name="com.example.intesavincente.MyApplication">
 
         <activity
             android:name=".SuggeritoreActivity"

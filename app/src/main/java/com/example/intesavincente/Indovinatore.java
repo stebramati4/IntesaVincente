@@ -1,26 +1,40 @@
 package com.example.intesavincente;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.intesavincente.model.Partita;
+import com.example.intesavincente.model.Utente;
 import com.example.intesavincente.repository.partita.PartitaRepository;
 import com.example.intesavincente.repository.partita.PartitaResponse;
 import com.example.intesavincente.repository.words.IWordsRepository;
 import com.example.intesavincente.repository.words.WordsRepository;
+import com.example.intesavincente.utils.Constants;
 import com.example.intesavincente.utils.ResponseCallback;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
-public class Indovinatore extends AppCompatActivity  {
+public class Indovinatore extends AppCompatActivity implements PartitaResponse, ResponseCallback, IndovinatoreRepository.Listener {
+
 
     //private final Application mApplication;
     private String parola;
@@ -28,7 +42,8 @@ public class Indovinatore extends AppCompatActivity  {
     private PartitaRepository mPartitaRepository;
     private IndovinatoreResponse mIndovinatoreResponse;
     private IIndovinatore mIIndovinatoreRepository;
-    public Partita partita=new Partita();
+
+
 
     private static final long START_TIME_IN_MILLIS = 600000;
     private TextView timer;
@@ -37,10 +52,15 @@ public class Indovinatore extends AppCompatActivity  {
     private CountDownTimer countDownTimer;
     private boolean timerRunning;
     private long timeLeftMillis = START_TIME_IN_MILLIS;
-    public ArrayList<Partita> p= new ArrayList<>();
+    //public ArrayList<Partita> p= new ArrayList<>();
     private int npasso;
-    private IndovinatoreRepository mIndovinatoreRepository=new IndovinatoreRepository((Application) MyApplication.getAppContext());
-
+    //private IndovinatoreRepository mIndovinatoreRepository=new IndovinatoreRepository((Application) MyApplication.getAppContext(), mIndovinatoreResponse);
+    private IndovinatoreRepository mIndovinatoreRepository;
+            //=new IndovinatoreRepository((Application) MyApplication.getAppContext(),this.mIndovinatoreResponse);
+    private TextView parolaDaIndovinare;
+    String TAG ="Indovinatore" ;
+    SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+    SharedPreferences.Editor editor = pref.edit();
     /*public Indovinatore(Application mApplication, IndovinatoreResponse indovinatoreResponse) {
         this.mApplication = mApplication;
         this.mIndovinatoreResponse = indovinatoreResponse;
@@ -50,39 +70,43 @@ public class Indovinatore extends AppCompatActivity  {
     public Indovinatore() {
 
     }
-
+    @Override
+    public void takePartita(Partita partita) {
+        System.out.println("par45"+partita);
+        System.out.println("par451"+partita.getIdPartita());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indovinatore);
-        //mPartitaRepository = new PartitaRepository(this.getApplication(), this);
-        //mPartitaRepository.trovaPartita();
-        System.out.println("stampa1");
-        mIndovinatoreRepository.prendiPartita();
-        System.out.println("stampa2");
-        System.out.println("partita123"+ partita.toString());
-        System.out.println("partita1234"+ p.toString());
-        //mIWordsRepository = new WordsRepository(this.getApplication(), this);
-        mIndovinatoreRepository.prendiParola();
-        System.out.println("stampa3");
 
-        TextView parolaDaIndovinare = findViewById(R.id.parolaDaIndovinare);
+        mIWordsRepository = new WordsRepository((Application) MyApplication.getAppContext(), this);
+        mPartitaRepository = new PartitaRepository(this.getApplication(), this);
+        mPartitaRepository.trovaPartita();
+        String idPartita=pref.getString("idpartita", null);
+        String idGruppo=pref.getString("idgruppo", null);
+        int parolaInd=pref.getInt("parola_indovinate", 0);
+        int passo1=pref.getInt("numeroPasso", 0);
+        Partita partita=new Partita(idGruppo,passo1,parolaInd,idPartita);
         buzz = findViewById(R.id.buzz);
         timer = findViewById(R.id.timer);
         buzz.setOnClickListener(new View.OnClickListener() {
             @Override
-           public void onClick(View v) {
-                //partita= new Partita();
+            public void onClick(View v) {
                 if(timerRunning) {
                     pauseTimer();
+                    String parola=pref.getString("name", null);
                     Intent i = new Intent(Indovinatore.this, InserisciParola.class);
+                    i.putExtra("parola",parola);
                     startActivity(i);
                 } else {
                     startTimer();
-                    mIndovinatoreRepository.salva();
-
-                   // parolaDaIndovinare.setText();
+                    mIWordsRepository.fetchWords();
+                    String parola=pref.getString("name", null);
+                    Log.d(TAG, "parolaEstratta"+parola);
+                    caricaParola(parola,partita.getIdPartita());
+                    // parolaDaIndovinare.setText();
                 }
 
                 //parolaDaIndovinare.setText();
@@ -101,8 +125,9 @@ public class Indovinatore extends AppCompatActivity  {
             }
         });
 
-    }
 
+
+    }
 
 
 
@@ -140,17 +165,23 @@ public class Indovinatore extends AppCompatActivity  {
             System.out.println("PARTITA FINITA");
         }
     }
-    /*
+
+
     @Override
-    public Partita onDataFound(Partita partitaTrue) {
-        System.out.println("par1221"+partitaTrue);
-        this.partita=partitaTrue;
-        return partitaTrue;
+    public void onDataFound(Partita partita) {
+        System.out.println("par89"+partita);
+        System.out.println("par891"+partita.getIdPartita());
+        editor.putString("idpartita", partita.getIdPartita());
+        editor.putString("idgruppo", partita.getGruppoID());
+        editor.putInt("parola_indovinate", partita.getParole_indovinate());
+        editor.putInt("numeroPasso", partita.getPasso());
     }
+
     @Override
     public void onResponse(String parola) {
-        System.out.println("par223 "+parola);
-        mIndovinatoreResponse.saveParola(parola);
+        System.out.println("dentroResponse"+parola);
+        editor.putString("name", parola);
+        editor.apply();
     }
 
     @Override
@@ -158,11 +189,23 @@ public class Indovinatore extends AppCompatActivity  {
 
     }
 
+    public void caricaParola(String parola, String idPartita){
+        DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    keys.add(keyNode.getKey());
+                    if (keyNode.child("idPartita").getValue().equals(idPartita))
+                        db.child(keyNode.getKey()).child("parola").setValue(parola);
+                }}
 
-    @Override
-    public void salva() {
-        mIWordsRepository.fetchWords();
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
-    */
 
 }

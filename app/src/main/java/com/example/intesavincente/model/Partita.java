@@ -7,18 +7,60 @@ public class Partita{
     private int passo;
     private int parole_indovinate;
     private Boolean isAttiva;
+    private String idPartita;
+    private String parola;
+
+    public String getParola() {
+        return parola;
+    }
+
+    public void setParola(String parola) {
+        this.parola = parola;
+    }
+
+    public Partita(String gruppoID, int passo, int parole_indovinate, String idPartita) {
+        this.gruppoID = gruppoID;
+        this.passo = passo;
+        this.parole_indovinate = parole_indovinate;
+        this.idPartita = idPartita;
+        this.isAttiva = true;
+        this.parola="prova";
+    }
 
     //prova
     public Partita(){
         this.passo = 3;
         this.parole_indovinate = 0;
         this.isAttiva = false;
+        this.parola="prova";
     }
-    public Partita(String gruppo) {
+    /*public Partita(String gruppo) {
         this.gruppoID = gruppo;
         this.passo = 3;
         this.parole_indovinate = 0;
         this.isAttiva = false;
+    }*/
+    public Partita(String gruppo,String idPartita) {
+        this.gruppoID = gruppo;
+        this.idPartita=idPartita;
+        this.passo = 3;
+        this.parole_indovinate = 0;
+        this.isAttiva = false;
+        this.parola="prova";
+    }
+    public Partita(String idPartita) {
+        this.idPartita=idPartita;
+        this.passo = 3;
+        this.parole_indovinate = 0;
+        this.isAttiva = true;
+        this.parola="prova";
+    }
+    public String getIdPartita() {
+        return idPartita;
+    }
+
+    public void setIdPartita(String idPartita) {
+        this.idPartita = idPartita;
     }
 
     public String getGruppoID() {

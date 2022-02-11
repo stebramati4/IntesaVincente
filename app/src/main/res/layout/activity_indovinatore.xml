@@ -175,5 +175,15 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout_passo"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/parolaNascosta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="2dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

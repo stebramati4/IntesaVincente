@@ -1,4 +1,8 @@
 <resources>
+    <string name="home">HOME</string>
+    <string name="statistiche">STATISTICHE</string>
+    <string name="amici">AMICI</string>
+
     <string name="app_name">IntesaVincente</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="giocaSquadre">GIOCA A SQUADRE</string>
@@ -16,7 +20,7 @@
 
     <string name="inserisci_nome_gruppo">Inserisci Nome Gruppo</string>
 
-    <string name="modificaProfilo">Modifica Il Tuo Profilo</string>
+    <string name="modificaProfilo">MODIFICA IL TUO PROFILO</string>
     <string name="nickname">Nickname</string>
     <string name="form_email_address">Email</string>
     <string name="form_password">Password</string>

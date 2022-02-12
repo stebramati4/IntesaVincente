@@ -80,8 +80,7 @@ public class ScegliRuoloFragment extends Fragment implements PartitaResponse {
     }
 
     @Override
-    public Partita onDataFound(Partita partita) {
+    public void onDataFound(Partita partita) {
         partita.setAttiva(true);
-        return partita;
     }
 }

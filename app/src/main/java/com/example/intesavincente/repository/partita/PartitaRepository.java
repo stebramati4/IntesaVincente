@@ -48,10 +48,11 @@ public class PartitaRepository implements IPartitaRepository{
     }
 
     public void inserisciGruppoInPartita(String gruppoID) {
-        Partita p=new Partita(gruppoID);
+
         dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
         String TAG ="CreaGruppoFragment" ;
         String partitaID=dbPartite.push().getKey();
+        Partita p=new Partita(gruppoID,partitaID);
         dbPartite.child(partitaID).setValue(p);
         mUtenteRepository.aggiungiIDPartita(partitaID);
     }
@@ -217,6 +218,7 @@ public class PartitaRepository implements IPartitaRepository{
                                                     if(po!=null){
                                                         Log.d(TAG, "partita " + po);
                                                         mPartitaResponse.onDataFound(po);
+
                                                         //break;
                                                     }
 
@@ -244,7 +246,6 @@ public class PartitaRepository implements IPartitaRepository{
         //return pa.get(0);
     //return p;
     }
-
 
 
 

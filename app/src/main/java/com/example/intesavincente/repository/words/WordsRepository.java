@@ -51,8 +51,9 @@ public class WordsRepository implements IWordsRepository {
                     System.out.println("parola" + response.toString());
 
                 System.out.println("parola1 " + response.body().toString());
+                String parola1=response.body().toString().substring(0, response.body().toString().length()-1);
                 System.out.println("parola2 " + response.body());
-                mResponseCallback.onResponse(response.body().toString());
+                mResponseCallback.onResponse(parola1);
             }
 
 

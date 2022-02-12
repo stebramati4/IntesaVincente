@@ -110,6 +110,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
                     pauseTimer();
                     //mIWordsRepository.fetchWords();
                     String parola=pref.getString("name", null);
+                    Log.d(TAG, "parolaEstratta"+parola);
                     Intent i = new Intent(Indovinatore.this, InserisciParola.class);
                     i.putExtra("parola",getParola());
                     i.putExtra("partita",partita.getIdPartita());

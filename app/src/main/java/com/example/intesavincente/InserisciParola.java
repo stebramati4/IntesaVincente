@@ -24,10 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InserisciParola extends AppCompatActivity {
-    EditText parolaInserita;
-    Partita partita= new Partita();
-    SharedPreferences prefParola = MyApplication.getAppContext().getSharedPreferences("MyPrefSuggeritore", MODE_PRIVATE);
-    SharedPreferences.Editor editorParola = prefParola.edit();
+    private EditText parolaInserita;
+    private Partita partita= new Partita();
+    private SharedPreferences prefParola = MyApplication.getAppContext().getSharedPreferences("MyPrefSuggeritore", MODE_PRIVATE);
+    private SharedPreferences.Editor editorParola = prefParola.edit();
+    private String parola=null;
+    private String partitaID=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,17 +38,20 @@ public class InserisciParola extends AppCompatActivity {
         Button conferma= findViewById(R.id.button_conferma);
         //PartitaRepository mPartitaRepository = new PartitaRepository(this.getApplication(), this);
         //mPartitaRepository.trovaPartita();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            parola = extras.getString("parola");
+            partitaID = extras.getString("partita");
+            System.out.println("partitaid66" + partitaID);
+            System.out.println("parolaInserita" + parolaInserita.getText().toString());
+            System.out.println("parolaDB" + parola);
+            System.out.println("parolaDB tipo" + parola.getClass());
+        }
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle extras = getIntent().getExtras();
-                if (extras != null) {
-                    String parola = extras.getString("parola");
-                    String partitaID=extras.getString("partita");
-                    System.out.println("partitaid66"+partitaID);
-                    System.out.println("parolaInserita"+parolaInserita.getText().toString());
-                    System.out.println("parolaDB"+parola);
-                    System.out.println("parolaDB tipo"+parola.getClass());
+                System.out.println("parolaInserita1" + parolaInserita.getText().toString());
+                System.out.println("parolaDB1" + parola);
                     if(parolaInserita.getText().toString().equals(parola)){
                         Snackbar parolaIndovinata = Snackbar.make(v, "PAROLA INDOVINATA!", Snackbar.LENGTH_SHORT);
                         parolaIndovinata.show();
@@ -63,7 +68,7 @@ public class InserisciParola extends AppCompatActivity {
                         finish();
                     }
 
-                }
+
             }
         });
 

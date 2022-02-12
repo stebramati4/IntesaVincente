@@ -40,6 +40,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
     private String parola;
     private IWordsRepository mIWordsRepository;
     private PartitaRepository mPartitaRepository;
+    private ResponseCallback mResponseCallback;
     private IndovinatoreResponse mIndovinatoreResponse;
     private IIndovinatore mIIndovinatoreRepository;
 
@@ -59,8 +60,18 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
             //=new IndovinatoreRepository((Application) MyApplication.getAppContext(),this.mIndovinatoreResponse);
     private TextView parolaDaIndovinare;
     String TAG ="Indovinatore" ;
-    SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-    SharedPreferences.Editor editor = pref.edit();
+    private SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+    private SharedPreferences.Editor editor = pref.edit();
+
+    public String getParola() {
+        return parola;
+    }
+
+    public void setParola(String parola) {
+        this.parola = parola;
+    }
+
+    private String parolaParola;
     /*public Indovinatore(Application mApplication, IndovinatoreResponse indovinatoreResponse) {
         this.mApplication = mApplication;
         this.mIndovinatoreResponse = indovinatoreResponse;
@@ -80,11 +91,12 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indovinatore);
-
         mIWordsRepository = new WordsRepository((Application) MyApplication.getAppContext(), this);
+
         mPartitaRepository = new PartitaRepository(this.getApplication(), this);
         mPartitaRepository.trovaPartita();
         String idPartita=pref.getString("idpartita", null);
+        Log.d(TAG, "idpartita56"+idPartita);
         String idGruppo=pref.getString("idgruppo", null);
         int parolaInd=pref.getInt("parola_indovinate", 0);
         int passo1=pref.getInt("numeroPasso", 0);
@@ -96,16 +108,19 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
             public void onClick(View v) {
                 if(timerRunning) {
                     pauseTimer();
+                    //mIWordsRepository.fetchWords();
                     String parola=pref.getString("name", null);
                     Intent i = new Intent(Indovinatore.this, InserisciParola.class);
-                    i.putExtra("parola",parola);
+                    i.putExtra("parola",getParola());
+                    i.putExtra("partita",partita.getIdPartita());
                     startActivity(i);
                 } else {
                     startTimer();
                     mIWordsRepository.fetchWords();
                     String parola=pref.getString("name", null);
+                    setParola(parola);
                     Log.d(TAG, "parolaEstratta"+parola);
-                    caricaParola(parola,partita.getIdPartita());
+                    caricaParola(getParola(),partita.getIdPartita());
                     // parolaDaIndovinare.setText();
                 }
 
@@ -175,6 +190,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
         editor.putString("idgruppo", partita.getGruppoID());
         editor.putInt("parola_indovinate", partita.getParole_indovinate());
         editor.putInt("numeroPasso", partita.getPasso());
+        editor.apply();
     }
 
     @Override

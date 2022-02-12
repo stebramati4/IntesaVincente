@@ -24,7 +24,6 @@ public class Partita{
         this.parole_indovinate = parole_indovinate;
         this.idPartita = idPartita;
         this.isAttiva = true;
-        this.parola="prova";
     }
 
     //prova
@@ -45,7 +44,7 @@ public class Partita{
         this.idPartita=idPartita;
         this.passo = 3;
         this.parole_indovinate = 0;
-        this.isAttiva = false;
+        this.isAttiva = true;
         this.parola="prova";
     }
     public Partita(String idPartita) {

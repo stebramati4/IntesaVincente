@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InserisciParola extends AppCompatActivity implements PartitaResponse {
+public class InserisciParola extends AppCompatActivity {
     EditText parolaInserita;
     Partita partita= new Partita();
     SharedPreferences prefParola = MyApplication.getAppContext().getSharedPreferences("MyPrefSuggeritore", MODE_PRIVATE);
@@ -34,19 +34,26 @@ public class InserisciParola extends AppCompatActivity implements PartitaRespons
         setContentView(R.layout.activity_inserisci_parola);
         parolaInserita = findViewById(R.id.editText_InserisciParola);
         Button conferma= findViewById(R.id.button_conferma);
-        PartitaRepository mPartitaRepository = new PartitaRepository(this.getApplication(), this);
-        mPartitaRepository.trovaPartita();
+        //PartitaRepository mPartitaRepository = new PartitaRepository(this.getApplication(), this);
+        //mPartitaRepository.trovaPartita();
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle extras = getIntent().getExtras();
                 if (extras != null) {
                     String parola = extras.getString("parola");
-                    if(parolaInserita.equals(parola)){
-                        String partitaId= prefParola.getString("idpartita1", null);
-                        incrementaParole(partitaId);
+                    String partitaID=extras.getString("partita");
+                    System.out.println("partitaid66"+partitaID);
+                    System.out.println("parolaInserita"+parolaInserita.getText().toString());
+                    System.out.println("parolaDB"+parola);
+                    System.out.println("parolaDB tipo"+parola.getClass());
+                    if(parolaInserita.getText().toString().equals(parola)){
                         Snackbar parolaIndovinata = Snackbar.make(v, "PAROLA INDOVINATA!", Snackbar.LENGTH_SHORT);
                         parolaIndovinata.show();
+                        //String partitaId= prefParola.getString("idpartita1", null);
+                        System.out.println("partitaid33"+partitaID);
+                        incrementaParole(partitaID);
+
                         finish();
                     }
                     else{
@@ -63,12 +70,6 @@ public class InserisciParola extends AppCompatActivity implements PartitaRespons
 
     }
 
-    @Override
-    public void onDataFound(Partita partita) {
-        System.out.println("idPartita12"+partita.getIdPartita());
-        editorParola.putString("idpartita1", partita.getIdPartita());
-        editorParola.apply();
-    }
     public void incrementaParole(String partitaid){
         DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
         db.addListenerForSingleValueEvent(new ValueEventListener() {

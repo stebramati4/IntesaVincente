@@ -4,44 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue"
     tools:context=".InserisciParola">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="413dp"
-        android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/intesavincente_piatto_logo"
-        android:contentDescription="TODO" />
-
-    <TextView
-        android:id="@+id/textView_inserisciParola"
+    <Button
+        android:id="@+id/button_conferma"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/inserisciParpla"
-        android:textColor="@color/black"
-        android:textSize="34sp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/orange"
+        android:elevation="8dp"
+        android:text="@string/conferma"
+        android:textSize="20sp"
+        app:cornerRadius="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_InserisciParola"
+        app:layout_constraintVertical_bias="0.225" />
 
     <EditText
         android:id="@+id/editText_InserisciParola"
@@ -51,6 +31,7 @@
         android:hint="@string/suggerimento"
         android:inputType="textPersonName"
         android:textSize="20sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -59,18 +40,16 @@
         app:layout_constraintVertical_bias="0.137"
         tools:ignore="TextContrastCheck" />
 
-    <Button
-        android:id="@+id/button_conferma"
-        android:layout_width="155dp"
-        android:layout_height="58dp"
-        android:backgroundTint="@color/orange"
-        android:text="@string/conferma"
-        android:textColor="@color/purple_700"
-        android:textSize="20sp"
+    <TextView
+        android:id="@+id/textView_inserisciParola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/inserisciParpla"
+        android:textColor="@color/white"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_InserisciParola"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35000002" />
 </androidx.constraintlayout.widget.ConstraintLayout>

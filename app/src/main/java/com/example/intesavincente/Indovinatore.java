@@ -48,6 +48,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
 
     private static final long START_TIME_IN_MILLIS = 600000;
     private TextView timer;
+    private TextView numeroPasso;
     private Button buzz;
     private Button passo;
     private CountDownTimer countDownTimer;
@@ -101,8 +102,11 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
         int parolaInd=pref.getInt("parola_indovinate", 0);
         int passo1=pref.getInt("numeroPasso", 0);
         Partita partita=new Partita(idGruppo,passo1,parolaInd,idPartita);
+
         buzz = findViewById(R.id.buzz);
         timer = findViewById(R.id.timer);
+        numeroPasso = findViewById(R.id.passo);
+
         buzz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +120,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
                     i.putExtra("partita",partita.getIdPartita());
                     startActivity(i);
                 } else {
-                    startTimer();
+                    startTimer(idPartita);
                     mIWordsRepository.fetchWords();
                     String parola=pref.getString("name", null);
                     setParola(parola);
@@ -135,25 +139,18 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
             public void onClick(View view) {
                 if(timerRunning) {
                     pauseTimer();
-                    npasso = partita.getPasso();
-                    partita.setPasso(npasso--);
+                    aggiornaPasso(idPartita);
                 }
             }
         });
-
-
-
     }
 
-
-
-
-    public void startTimer() {
+    public void startTimer(String idPartita) {
         countDownTimer = new CountDownTimer(timeLeftMillis, 1000) {
             @Override
             public void onTick(long l) {
                 timeLeftMillis = l;
-                updateCountDowText();
+                updateCountDowText(idPartita);
             }
 
             @Override
@@ -169,7 +166,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
         timerRunning = false;
     }
 
-    public void updateCountDowText() {
+    public void updateCountDowText(String idPartita) {
         int seconds = (int) (timeLeftMillis / 1000) % 60;
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d", seconds);
@@ -178,7 +175,9 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
 
         if(timeLeftFormatted.equals("00")){
             pauseTimer();
-            System.out.println("PARTITA FINITA");
+            Log.d(TAG, "If timer 00");
+            finePartita(idPartita);
+            Log.d(TAG, "PARTITA FINITA");
         }
     }
 
@@ -216,6 +215,52 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
                     keys.add(keyNode.getKey());
                     if (keyNode.child("idPartita").getValue().equals(idPartita))
                         db.child(keyNode.getKey()).child("parola").setValue(parola);
+                }}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void finePartita(String idPartita){
+        DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    keys.add(keyNode.getKey());
+                    if (keyNode.child("idPartita").getValue().equals(idPartita))
+                        db.child(keyNode.getKey()).child("attiva").setValue(false);
+                }}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void aggiornaPasso(String idPartita){
+        DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    keys.add(keyNode.getKey());
+                    if (keyNode.child("idPartita").getValue().equals(idPartita)){
+                        int nPasso=keyNode.child("passo").getValue(Integer.class);
+                        System.out.println("numero passo "+nPasso);
+                        if(nPasso != 0){
+                            nPasso--;
+                            db.child(keyNode.getKey()).child("passo").setValue(nPasso);
+                            numeroPasso.setText(String.valueOf(nPasso));
+                        }
+                    }
+
                 }}
 
             @Override

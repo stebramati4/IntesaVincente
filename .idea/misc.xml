@@ -73,6 +73,7 @@
         <entry key="..\:/Users/stebr/AndroidStudioProjects/IntesaVincente/app/src/main/res/menu/navigation_menu.xml" value="0.2546875" />
         <entry key="..\:/Users/stebr/AndroidStudioProjects/IntesaVincente/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2462962962962963" />
         <entry key="..\:/Users/stebr/AndroidStudioProjects/IntesaVincente/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2462962962962963" />
+        <entry key="app/src/main/res/drawable/bottomnav_bg.xml" value="0.3394871794871795" />
         <entry key="app/src/main/res/drawable/buzz_button.xml" value="0.3394871794871795" />
         <entry key="app/src/main/res/drawable/custom_button.xml" value="0.34479166666666666" />
         <entry key="app/src/main/res/drawable/custom_textview_suggeritore.xml" value="0.3394871794871795" />
@@ -92,7 +93,7 @@
         <entry key="app/src/main/res/layout/fragment_nickname.xml" value="0.15982776089159068" />
         <entry key="app/src/main/res/layout/fragment_profilo.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.296195652173913" />
-        <entry key="app/src/main/res/layout/fragment_scegli_ruolo.xml" value="0.18342391304347827" />
+        <entry key="app/src/main/res/layout/fragment_scegli_ruolo.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_statistiche.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/gruppi_list_item.xml" value="0.3605072463768116" />
         <entry key="app/src/main/res/layout/launch_screen.xml" value="0.1" />

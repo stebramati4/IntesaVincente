@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#1a75ff</color>
     <color name="blue_list_item">#3385ff</color>
+    <color name="blue_bottomnav">#3385ff</color>
     <color name="orange">#ee7316</color>
     <color name="red">#FF0000</color>
     <color name="red_passo">#FF3333</color>

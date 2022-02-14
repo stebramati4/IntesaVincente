@@ -30,5 +30,5 @@
         android:id="@+id/mainActivity"
         android:name="com.example.intesavincente.MainActivity"
         android:label="activity_preferences_linear_layout"
-        tools:layout="@layout/fragment_profilo" />
+        tools:layout="@layout/fragment_crea_unisciti" />
 </navigation>

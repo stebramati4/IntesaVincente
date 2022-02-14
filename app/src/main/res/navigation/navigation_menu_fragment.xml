@@ -3,17 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_menu_fragment"
-    app:startDestination="@id/profilo_menu">
+    app:startDestination="@id/creaUniscitiFragment2">
 
-    <fragment
-        android:id="@+id/profilo_menu"
-        android:name="com.example.intesavincente.ProfiloFragment"
-        android:label="fragment_profilo"
-        tools:layout="@layout/fragment_profilo" >
-        <action
-            android:id="@+id/action_profilo_menu_to_creaUniscitiFragment2"
-            app:destination="@id/creaUniscitiFragment2" />
-    </fragment>
+
     <fragment
         android:id="@+id/statistiche_menu"
         android:name="com.example.intesavincente.StatisticheFragment"

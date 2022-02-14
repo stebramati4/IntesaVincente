@@ -49,6 +49,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
     private static final long START_TIME_IN_MILLIS = 600000;
     private TextView timer;
     private TextView numeroPasso;
+    private TextView paroleIndovinate;
     private Button buzz;
     private Button passo;
     private CountDownTimer countDownTimer;
@@ -63,6 +64,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
     String TAG ="Indovinatore" ;
     private SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("MyPref", MODE_PRIVATE);
     private SharedPreferences.Editor editor = pref.edit();
+
 
     public String getParola() {
         return parola;
@@ -92,8 +94,8 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indovinatore);
+        editor.clear();
         mIWordsRepository = new WordsRepository((Application) MyApplication.getAppContext(), this);
-
         mPartitaRepository = new PartitaRepository(this.getApplication(), this);
         mPartitaRepository.trovaPartita();
         String idPartita=pref.getString("idpartita", null);
@@ -102,7 +104,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
         int parolaInd=pref.getInt("parola_indovinate", 0);
         int passo1=pref.getInt("numeroPasso", 0);
         Partita partita=new Partita(idGruppo,passo1,parolaInd,idPartita);
-
+        paroleIndovinate= findViewById(R.id.parole);
         buzz = findViewById(R.id.buzz);
         timer = findViewById(R.id.timer);
         numeroPasso = findViewById(R.id.passo);
@@ -119,6 +121,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
                     i.putExtra("parola",getParola());
                     i.putExtra("partita",partita.getIdPartita());
                     startActivity(i);
+                    aggiornaParola(partita.getIdPartita());
                 } else {
                     startTimer(idPartita);
                     mIWordsRepository.fetchWords();
@@ -177,24 +180,39 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
             pauseTimer();
             Log.d(TAG, "If timer 00");
             finePartita(idPartita);
+            //Intent i = new Intent(Indovinatore.this, InserisciParola.class);
+            //startActivity(i);
             Log.d(TAG, "PARTITA FINITA");
+            deleteAll();
         }
     }
 
-
+    public void deleteAll() {
+        pref.edit().clear().apply();
+    }
+    /*@Override
+    public void onResume(Partita partita){
+        super.onResume();
+        pref.getString("idpartita",partita.getIdPartita());
+        System.out.println("par8989"+partita.getIdPartita());
+        // And put the SharedPreferences test here
+    }*/
     @Override
     public void onDataFound(Partita partita) {
+        //SharedPreferences.Editor editor = pref.edit();
+        //editor.clear();
         System.out.println("par89"+partita);
         System.out.println("par891"+partita.getIdPartita());
         editor.putString("idpartita", partita.getIdPartita());
         editor.putString("idgruppo", partita.getGruppoID());
         editor.putInt("parola_indovinate", partita.getParole_indovinate());
         editor.putInt("numeroPasso", partita.getPasso());
-        editor.apply();
+        editor.commit();
     }
 
     @Override
     public void onResponse(String parola) {
+        //SharedPreferences.Editor editor = pref.edit();
         System.out.println("dentroResponse"+parola);
         editor.putString("name", parola);
         editor.apply();
@@ -242,7 +260,29 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
             }
         });
     }
+    public void aggiornaParola(String idPartita){
+        DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keys = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    keys.add(keyNode.getKey());
+                    if (keyNode.child("idPartita").getValue().equals(idPartita)){
+                        int pIndovinate=keyNode.child("parole_indovinate").getValue(Integer.class);
+                        System.out.println("parole_indovinate"+pIndovinate);
+                        paroleIndovinate.setText(String.valueOf(pIndovinate));
+                    }
 
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     public void aggiornaPasso(String idPartita){
         DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
         db.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -261,7 +301,8 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
                         }
                     }
 
-                }}
+                }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

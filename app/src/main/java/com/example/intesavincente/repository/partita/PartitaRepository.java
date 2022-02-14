@@ -154,7 +154,7 @@ public class PartitaRepository implements IPartitaRepository{
         dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
         ArrayList<String> chiaveGruppo = new ArrayList<>();
         ArrayList <Partita> pa=new ArrayList<>();
-        dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbGruppi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> keys = new ArrayList<>();
@@ -184,7 +184,7 @@ public class PartitaRepository implements IPartitaRepository{
 
                     }
                 });
-                                dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
+                                dbPartite.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         Log.d(TAG, "dbpartite");

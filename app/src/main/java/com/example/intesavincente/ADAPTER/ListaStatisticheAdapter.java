@@ -1,6 +1,8 @@
 package com.example.intesavincente.ADAPTER;
 
+import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.intesavincente.MyApplication;
 import com.example.intesavincente.R;
 import com.example.intesavincente.model.Gruppo;
 import com.example.intesavincente.model.Partita;
@@ -41,6 +44,8 @@ public class ListaStatisticheAdapter extends ArrayAdapter<Partita> {
 
     private DatabaseReference dbGruppi;
 
+    private SharedPreferences prefStatistiche = MyApplication.getAppContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+    private SharedPreferences.Editor editorStatistiche = prefStatistiche.edit();
 
     public ListaStatisticheAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Partita> objects) {
         super(context, resource, objects);
@@ -59,28 +64,36 @@ public class ListaStatisticheAdapter extends ArrayAdapter<Partita> {
         nParoleIndovinate = mArrayPartite.get(position).getParole_indovinate();
         nPassoUsati = mArrayPartite.get(position).getPasso();
 
-        //trovaNomeGruppo(idGruppo);
-
+        textViewNomeGruppo=convertView.findViewById(R.id.nome_gruppo_stat);
+        trovaNomeGruppo(idGruppo);
+        String nomeG=prefStatistiche.getString("nomeGruppo", null);
+        textViewNomeGruppo.setText(nomeG);
+        System.out.println("nomegruppo2312"+ nomeG);
         textViewParoleIndovinate = convertView.findViewById(R.id.parole_indovinate);
-        textViewParoleIndovinate.setText("NUMERO PAROLE INDOVINATE: " + String.valueOf(nParoleIndovinate));
+        textViewParoleIndovinate.setText(String.valueOf(nParoleIndovinate));
         Log.d(TAG, "Numero parole indovinate : "+nParoleIndovinate);
         textViewNumPasso = convertView.findViewById(R.id.nPasso_usati);
-        textViewNumPasso.setText("NUMERO PASSO RIMASTI: " + String.valueOf(nPassoUsati));
+        textViewNumPasso.setText(String.valueOf(nPassoUsati));
         Log.d(TAG, "Componenti : "+nPassoUsati);
 
         return convertView;
     }
 
     public void trovaNomeGruppo(String idGruppo){
+        System.out.println("trovanome"+ idGruppo);
         dbGruppi = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
         dbGruppi.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> keys= new ArrayList<>();
                 for(DataSnapshot keyNode : snapshot.getChildren()) {
+                    System.out.println("nodo1"+ keyNode.getKey());
                     if(keyNode.getKey().equals(idGruppo)){
-                        String nomeGruppo = keyNode.child(keyNode.getKey()).child("nome").getValue(String.class);
-                        textViewNomeGruppo.setText(nomeGruppo);
+                        String nomeGruppo = keyNode.child("nome").getValue(String.class);
+                        System.out.println("nomegruppo23"+ nomeGruppo);
+                        //textViewNomeGruppo.setText("NOME GRUPPO: " +nomeGruppo);
+                        editorStatistiche.putString("nomeGruppo", nomeGruppo);
+                        editorStatistiche.commit();
                     }
                 }
 

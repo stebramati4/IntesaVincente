@@ -94,7 +94,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indovinatore);
-        editor.clear();
+        //editor.clear();
         mIWordsRepository = new WordsRepository((Application) MyApplication.getAppContext(), this);
         mPartitaRepository = new PartitaRepository(this.getApplication(), this);
         mPartitaRepository.trovaPartita();
@@ -183,7 +183,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
             //Intent i = new Intent(Indovinatore.this, InserisciParola.class);
             //startActivity(i);
             Log.d(TAG, "PARTITA FINITA");
-            deleteAll();
+            //deleteAll();
         }
     }
 
@@ -207,7 +207,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
         editor.putString("idgruppo", partita.getGruppoID());
         editor.putInt("parola_indovinate", partita.getParole_indovinate());
         editor.putInt("numeroPasso", partita.getPasso());
-        editor.commit();
+        editor.apply();
     }
 
     @Override

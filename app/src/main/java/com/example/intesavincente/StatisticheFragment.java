@@ -90,7 +90,7 @@ public class StatisticheFragment extends Fragment {
         ArrayList<String> partiteUtente= new ArrayList<String>();
 
         dbUtenti = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
-        dbUtenti.addValueEventListener(new ValueEventListener() {
+        dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 arrayPartite.clear();
@@ -115,7 +115,7 @@ public class StatisticheFragment extends Fragment {
         });
 
         dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
-        dbPartite.addValueEventListener(new ValueEventListener() {
+        dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<String> keysPartite = new ArrayList<>();

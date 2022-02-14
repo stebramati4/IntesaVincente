@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import com.example.intesavincente.model.Gruppo;
 import com.example.intesavincente.R;
-import com.example.intesavincente.repository.utente.UtenteRepository;
-import com.example.intesavincente.utils.FirebaseCallback;
+import com.example.intesavincente.model.Partita;
 
 import java.util.ArrayList;
 

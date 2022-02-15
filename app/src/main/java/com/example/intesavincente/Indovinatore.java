@@ -12,3 +12,5 @@ public class Indovinatore extends AppCompatActivity {
         setContentView(R.layout.activity_indovinatore);
     }
 }
+
+//prova sincronizzazione

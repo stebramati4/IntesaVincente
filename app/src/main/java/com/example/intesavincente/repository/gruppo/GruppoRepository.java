@@ -33,7 +33,7 @@ public class GruppoRepository {
         Log.d(TAG,"fuori chiamata");
         db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("utenti");
         DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
-        db1.addValueEventListener(new ValueEventListener() {
+        db1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //arrayGruppi.clear();
@@ -89,7 +89,7 @@ public class GruppoRepository {
         db1 = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
         DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference();
         String TAG ="GruppoRepository" ;
-        db1.addValueEventListener(new ValueEventListener() {
+        db1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> keys = new ArrayList<>();

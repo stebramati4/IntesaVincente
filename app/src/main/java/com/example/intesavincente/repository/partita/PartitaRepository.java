@@ -52,10 +52,39 @@ public class PartitaRepository implements IPartitaRepository{
         dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
         String TAG ="CreaGruppoFragment" ;
         String partitaID=dbPartite.push().getKey();
+        //controlloAttive(gruppoID);
         Partita p=new Partita(gruppoID,partitaID);
         dbPartite.child(partitaID).setValue(p);
         mUtenteRepository.aggiungiIDPartita(partitaID);
     }
+    /*public void controlloAttive(){
+
+        DatabaseReference dbUtenti = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
+        dbUtenti.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keysUtenti = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    if (keyNode.getKey().toString().equals(idGruppo)){
+                        for (int i = 0; i < 3; i++) {
+                            Log.d(TAG, "componenti1 fuori" + String.valueOf(i));
+                            if (keyNode.child("componenti").child(String.valueOf(i)).getValue() != null) {
+                                Log.d(TAG, "componentiDI" + String.valueOf(i));
+                                idComponenti.add(String.valueOf(i));
+
+                            }
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled (@NonNull DatabaseError error){
+
+                }
+            }
+        });
+    }*/
     public void inserisciPartitaInUtente(String gruppoID){
         DatabaseReference dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
         dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -154,7 +183,7 @@ public class PartitaRepository implements IPartitaRepository{
         dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
         ArrayList<String> chiaveGruppo = new ArrayList<>();
         ArrayList <Partita> pa=new ArrayList<>();
-        dbGruppi.addValueEventListener(new ValueEventListener() {
+        dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> keys = new ArrayList<>();
@@ -184,7 +213,7 @@ public class PartitaRepository implements IPartitaRepository{
 
                     }
                 });
-                                dbPartite.addValueEventListener(new ValueEventListener() {
+                                dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         Log.d(TAG, "dbpartite");
@@ -257,13 +286,15 @@ public class PartitaRepository implements IPartitaRepository{
         dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<String> keys = new ArrayList<>();
-                for (DataSnapshot keyNode : snapshot.getChildren()) {
-                    keys.add(keyNode.getKey());
-                    if (keyNode.getKey().toString().equals(idPartita)) {
-                        Partita p = (Partita) keyNode.getValue(Partita.class);
-                        p.setAttiva(false);
-                        dbPartite.child(idPartita).setValue(p);
+                if (snapshot.getValue() != null) {
+                    List<String> keys = new ArrayList<>();
+                    for (DataSnapshot keyNode : snapshot.getChildren()) {
+                        keys.add(keyNode.getKey());
+                        if (keyNode.getKey().toString().equals(idPartita)) {
+                            Partita p = (Partita) keyNode.getValue(Partita.class);
+                            p.setAttiva(false);
+                            dbPartite.child(idPartita).setValue(p);
+                        }
                     }
                 }
             }

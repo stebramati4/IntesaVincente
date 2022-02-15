@@ -43,8 +43,19 @@ public class SuggeritoreActivity extends AppCompatActivity implements PartitaRes
         mPartitaRepository = new PartitaRepository(this.getApplication(), this);
         mPartitaRepository.trovaPartita();
 
-        String idPartita=prefSuggeritore.getString("idpartita1", null);
-        System.out.println("idpartita2"+idPartita);
+        //String idPartita=prefSuggeritore.getString("idpartita1", null);
+       //System.out.println("idpartita2"+idPartita);
+
+
+    }
+
+    @Override
+    public void onDataFound(Partita partita) {
+        System.out.println("idPartita12"+partita.getIdPartita());
+        TextView parolaDaIndovinare=findViewById(R.id.parolaDaIndovinare);
+        //editorSuggeritore.clear();
+        //editorSuggeritore.putString("idpartita1", partita.getIdPartita());
+        //editorSuggeritore.apply();
         DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -52,7 +63,7 @@ public class SuggeritoreActivity extends AppCompatActivity implements PartitaRes
                 List<String> keys = new ArrayList<>();
                 for (DataSnapshot keyNode : snapshot.getChildren()) {
                     keys.add(keyNode.getKey());
-                    if (keyNode.child("idPartita").getValue().equals(idPartita)){
+                    if (keyNode.child("idPartita").getValue().equals(partita.getIdPartita())){
 
                         String par= keyNode.child("parola").getValue().toString();
                         System.out.println("partitaIf"+par);
@@ -66,13 +77,5 @@ public class SuggeritoreActivity extends AppCompatActivity implements PartitaRes
 
             }
         });
-
-    }
-
-    @Override
-    public void onDataFound(Partita partita) {
-        System.out.println("idPartita12"+partita.getIdPartita());
-        editorSuggeritore.putString("idpartita1", partita.getIdPartita());
-        editorSuggeritore.apply();
     }
 }

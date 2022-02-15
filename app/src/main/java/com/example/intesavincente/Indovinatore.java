@@ -64,7 +64,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
     String TAG ="Indovinatore" ;
     private SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("MyPref", MODE_PRIVATE);
     private SharedPreferences.Editor editor = pref.edit();
-
+    public Partita partita1;
 
     public String getParola() {
         return parola;
@@ -96,14 +96,19 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
         setContentView(R.layout.activity_indovinatore);
         //editor.clear();
         mIWordsRepository = new WordsRepository((Application) MyApplication.getAppContext(), this);
-        mPartitaRepository = new PartitaRepository(this.getApplication(), this);
+        mPartitaRepository = new PartitaRepository((Application) MyApplication.getAppContext(), this);
         mPartitaRepository.trovaPartita();
+        //Log.d(TAG, "idpartita567"+partita1.getIdPartita());
         String idPartita=pref.getString("idpartita", null);
         Log.d(TAG, "idpartita56"+idPartita);
         String idGruppo=pref.getString("idgruppo", null);
         int parolaInd=pref.getInt("parola_indovinate", 0);
         int passo1=pref.getInt("numeroPasso", 0);
-        Partita partita=new Partita(idGruppo,passo1,parolaInd,idPartita);
+        Partita partita1=new Partita(idGruppo,passo1,parolaInd,idPartita);
+
+
+
+
         paroleIndovinate= findViewById(R.id.parole);
         buzz = findViewById(R.id.buzz);
         timer = findViewById(R.id.timer);
@@ -119,16 +124,16 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
                     Log.d(TAG, "parolaEstratta"+parola);
                     Intent i = new Intent(Indovinatore.this, InserisciParola.class);
                     i.putExtra("parola",getParola());
-                    i.putExtra("partita",partita.getIdPartita());
+                    i.putExtra("partita",partita1.getIdPartita());
                     startActivity(i);
-                    aggiornaParola(partita.getIdPartita());
+                    aggiornaParola(partita1.getIdPartita());
                 } else {
-                    startTimer(idPartita);
+                    startTimer(partita1.getIdPartita());
                     mIWordsRepository.fetchWords();
                     String parola=pref.getString("name", null);
                     setParola(parola);
                     Log.d(TAG, "parolaEstratta"+parola);
-                    caricaParola(getParola(),partita.getIdPartita());
+                    caricaParola(getParola(),partita1.getIdPartita());
                     // parolaDaIndovinare.setText();
                 }
 
@@ -142,7 +147,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
             public void onClick(View view) {
                 if(timerRunning) {
                     pauseTimer();
-                    aggiornaPasso(idPartita);
+                    aggiornaPasso(partita1.getIdPartita());
                 }
             }
         });
@@ -201,13 +206,14 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
     public void onDataFound(Partita partita) {
         //SharedPreferences.Editor editor = pref.edit();
         //editor.clear();
-        System.out.println("par89"+partita);
-        System.out.println("par891"+partita.getIdPartita());
+        Log.d(TAG, "par89"+partita);
+        Log.d(TAG, "par891"+partita.getIdPartita());
         editor.putString("idpartita", partita.getIdPartita());
         editor.putString("idgruppo", partita.getGruppoID());
         editor.putInt("parola_indovinate", partita.getParole_indovinate());
         editor.putInt("numeroPasso", partita.getPasso());
         editor.apply();
+
     }
 
     @Override
@@ -262,7 +268,7 @@ public class Indovinatore extends AppCompatActivity implements PartitaResponse, 
     }
     public void aggiornaParola(String idPartita){
         DatabaseReference db = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
-        db.addValueEventListener(new ValueEventListener() {
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> keys = new ArrayList<>();

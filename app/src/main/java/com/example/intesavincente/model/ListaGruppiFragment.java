@@ -88,7 +88,7 @@ public class ListaGruppiFragment extends Fragment {
         listaGruppi = v.findViewById(R.id.Gruppi_listView);
 
         dbGruppi = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
-        dbGruppi.addValueEventListener(new ValueEventListener() {
+        dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 arrayGruppi.clear();

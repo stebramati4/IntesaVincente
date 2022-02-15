@@ -1,5 +1,6 @@
 package com.example.intesavincente;
 
+import android.app.Application;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,9 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.intesavincente.model.Gruppo;
+import com.example.intesavincente.model.Partita;
 import com.example.intesavincente.model.Utente;
 import com.example.intesavincente.repository.gruppo.GruppoRepository;
 import com.example.intesavincente.repository.partita.PartitaRepository;
+import com.example.intesavincente.repository.partita.PartitaResponse;
 import com.example.intesavincente.utils.Constants;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +38,7 @@ import java.util.List;
  * Use the {@link CreaGruppoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreaGruppoFragment extends Fragment {
+public class CreaGruppoFragment extends Fragment implements PartitaResponse {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -123,7 +126,9 @@ public class CreaGruppoFragment extends Fragment {
             snackbarCreaGruppo = Snackbar.make(v, "GRUPPO " + nome + " CREATO", Snackbar.LENGTH_SHORT);
             snackbarCreaGruppo.show();
 
-            PartitaRepository p =new PartitaRepository();
+            //PartitaRepository p =new PartitaRepository();
+            PartitaRepository p = new PartitaRepository((Application) MyApplication.getAppContext(), this);
+            p.trovaPartita();
             p.inserisciGruppoInPartita(gruppoID);
             Log.d(TAG,"fuori chiamata3");
             //p.inserisciPartitaInUtente(gruppoID);
@@ -137,6 +142,31 @@ public class CreaGruppoFragment extends Fragment {
 }
 
 
+    @Override
+    public void onDataFound(Partita partita) {
+        Log.d(TAG,"fuori partita"+partita.getIdPartita());
+        //partita.setAttiva(false);
+        DatabaseReference dbPartite = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("partite");
+        dbPartite.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> keysPartite = new ArrayList<>();
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    Log.d(TAG, "KeyNode " + keyNode);
+                    keysPartite.add(keyNode.getKey());
+                    if(partita.getIdPartita().equals(keyNode.getKey())){
+                        Log.d(TAG,"dentro partita"+partita.getIdPartita());
+                        dbPartite.child(keyNode.getKey()).child("attiva").setValue(false);
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }
 
     // Write a message to the database

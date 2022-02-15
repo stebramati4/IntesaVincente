@@ -81,8 +81,9 @@ public class ListaStatisticheAdapter extends ArrayAdapter<Partita> {
 
     public void trovaNomeGruppo(String idGruppo){
         System.out.println("trovanome"+ idGruppo);
+        editorStatistiche.clear();
         dbGruppi = FirebaseDatabase.getInstance(Constants.FIREBASE_DATABASE_URL).getReference("gruppi");
-        dbGruppi.addValueEventListener(new ValueEventListener() {
+        dbGruppi.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> keys= new ArrayList<>();
@@ -93,7 +94,7 @@ public class ListaStatisticheAdapter extends ArrayAdapter<Partita> {
                         System.out.println("nomegruppo23"+ nomeGruppo);
                         //textViewNomeGruppo.setText("NOME GRUPPO: " +nomeGruppo);
                         editorStatistiche.putString("nomeGruppo", nomeGruppo);
-                        editorStatistiche.commit();
+                        editorStatistiche.apply();
                     }
                 }
 
